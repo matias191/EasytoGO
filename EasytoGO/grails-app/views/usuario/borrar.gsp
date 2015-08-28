@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Theme Template for Bootstrap</title>
+    <title>Easy To Go</title>
 
     <!-- Bootstrap core CSS -->
     <!--  <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -50,6 +50,8 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="http://localhost:8080/EasytoGO/">Principal</a></li>
             <li><a href="http://localhost:8080/EasytoGO/Usuario/create">Registrarme</a></li>
+            <li><a href="http://localhost:8080/EasytoGO/Marca">ABM Marca</a></li>
+            <li><a href="http://localhost:8080/EasytoGO/Modelo">ABM Modelo</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
