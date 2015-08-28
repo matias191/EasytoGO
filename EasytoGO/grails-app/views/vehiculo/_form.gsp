@@ -16,7 +16,7 @@
 		<g:message code="vehiculo.modelo.label" default="Modelo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="modelo" name="modelo.id" from="${easytogo.Modelo.list()}" optionKey="id" required="" value="${vehiculoInstance?.modelo?.id}" class="many-to-one"/>
+	<g:select id="modelo" name="modelo.id" from="${}" optionKey="id" required="" value="${vehiculoInstance?.modelo?.id}" class="many-to-one"/>
 
 </div>
          
@@ -41,7 +41,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	
-	<g:select name="anio" from="${1930..2015}" value="${vehiculoInstance.anio}" required="" />
+	<g:select name="anio" from="${2015..1930}" value="${vehiculoInstance.anio}" required="" />
 
 </div>
 
