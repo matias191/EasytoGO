@@ -20,7 +20,8 @@ class VehiculoController {
     }
 
     def create() {
-        respond new Vehiculo(params)
+		//def usuario = Usuario.findById(params.usuario.id)
+        respond new Vehiculo(params)/*,model:[usuarioInstance: usuario]*/
     }
 	
 	def form() {

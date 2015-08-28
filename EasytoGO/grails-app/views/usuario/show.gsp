@@ -54,7 +54,9 @@
 				<li class="fieldcontain">
 					<span id="sexo-label" class="property-label"><g:message code="usuario.sexo.label" default="Sexo" /></span>
 					
-						<span class="property-value" aria-labelledby="sexo-label"><g:fieldValue bean="${usuarioInstance}" field="sexo"  /></span>
+						<span class="property-value" aria-labelledby="sexo-label">${usuarioInstance.sexo == 1 ? 'Masculino' : 'Femenino'}</span>
+					
+					
 					
 				</li>
 				</g:if>

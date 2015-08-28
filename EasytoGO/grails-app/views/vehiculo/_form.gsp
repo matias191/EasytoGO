@@ -81,14 +81,14 @@
 
 </div>
 
-
+<!-- style="display:none"-->
 
 <div class="fieldcontain ${hasErrors(bean: vehiculoInstance, field: 'usuario', 'error')} required">
 	<label for="usuario">
 		<g:message code="vehiculo.usuario.label" default="Usuario" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="usuario" name="usuario.id" from="${easytogo.Usuario.list()}" optionKey="id" required="" value="${vehiculoInstance?.usuario?.id}" class="many-to-one"/>
+	<g:select id="usuario"  name="usuario.id" from="${easytogo.Usuario.findById(params.usuario.id)}" optionKey="id" required="" value="${vehiculoInstance?.usuario?.id}" class="many-to-one"/>
 
 </div>
 
