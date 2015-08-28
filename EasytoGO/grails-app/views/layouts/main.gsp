@@ -34,6 +34,8 @@
 		<a href="http://grails.org"><asset:image src="easy_to_go.png"
 				alt="Grails" /></a>
 	<span><a href="http://localhost:8080/EasytoGO/Usuario/create">Registrarme</a></span>
+	<span><a href="http://localhost:8080/EasytoGO/Marca">ABM Marca</a></span>
+	<span><a href="http://localhost:8080/EasytoGO/Modelo">ABM Modelo</a></span>
 	<span>
 	<form class="navbar-form navbar-right">
             <div class="form-group">
