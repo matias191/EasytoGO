@@ -36,9 +36,10 @@
 	</label>
 	<!-- <g:field name="sexo" type="number" value="${usuarioInstance.sexo}" required=""/> -->
 	
-         
-    <g:select name="usuario.sexo" type="number" from="${['Masculino', 'Femenino']}" required="" value="${usuarioInstance.sexo}"  optionKey="${[0, 1]}" /> 
-    
+          
+    <g:select id="sexo" name="sexo" value="${usuarioInstance.sexo}"
+          from="${['1': 'Masculino', '2': 'Femenino']}"
+          optionKey="key" optionValue="value" />
 
 </div>
 
@@ -101,16 +102,17 @@
 		<g:message code="usuario.vehiculos.label" default="Vehiculos" />
 		
 	</label>
-	
+
 <ul class="one-to-many">
 <g:each in="${usuarioInstance?.vehiculos?}" var="v">
-    <li><g:link controller="vehiculo" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
+    <li><g:link controller="vehiculo" action="show" id="${v.id}">${v?.modelo.marca.nombre.encodeAsHTML()} ${v?.modelo.nombre.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
 <g:link controller="vehiculo" action="create" params="['usuario.id': usuarioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'vehiculo.label', default: 'Vehiculo')])}</g:link>
 </li>
 </ul>
-
+ 
 
 </div>
+
 

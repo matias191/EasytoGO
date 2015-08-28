@@ -40,7 +40,8 @@
 		<g:message code="vehiculo.anio.label" default="Año" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="anio" type="number" value="${vehiculoInstance.anio}" required=""/>
+	
+	<g:select name="anio" from="${1930..2015}" value="${vehiculoInstance.anio}" required="" />
 
 </div>
 
@@ -50,6 +51,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="color" required="" value="${vehiculoInstance?.color}"/>
+	
 
 </div>
 
@@ -58,7 +60,13 @@
 		<g:message code="vehiculo.combustible.label" default="Combustible" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="combustible" type="number" value="${vehiculoInstance.combustible}" required=""/>
+	<!-- <g:field name="combustible" type="number" value="${vehiculoInstance.combustible}" required=""/> -->
+	
+<g:select id="combustible" name="combustible" value="${vehiculoInstance.combustible}"
+          from="${['1': 'Nafta', '2': 'Gasoil', '3': 'GNC']}"
+          optionKey="key" optionValue="value" />
+
+
 
 </div>
 
@@ -72,6 +80,8 @@
 	<g:checkBox name="seguro" value="${vehiculoInstance?.seguro}" />
 
 </div>
+
+
 
 <div class="fieldcontain ${hasErrors(bean: vehiculoInstance, field: 'usuario', 'error')} required">
 	<label for="usuario">

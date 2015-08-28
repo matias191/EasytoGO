@@ -25,6 +25,10 @@ class UsuarioController {
 	def borrar() {
 		//respond new Usuario(params)
 	}
+	
+	def addcar() {
+	//respond new Usuario(params)
+}
 
     @Transactional
     def save(Usuario usuarioInstance) {

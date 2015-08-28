@@ -43,9 +43,9 @@
 			
 				<g:if test="${usuarioInstance?.fecNac}">
 				<li class="fieldcontain">
-					<span id="fecNac-label" class="property-label"><g:message code="usuario.fecNac.label" default="Fec Nac" /></span>
+					<span id="fecNac-label" class="property-label"><g:message code="usuario.fecNac.label" default="Fecha de Nacimiento" /></span>
 					
-						<span class="property-value" aria-labelledby="fecNac-label"><g:formatDate date="${usuarioInstance?.fecNac}" /></span>
+						<span class="property-value" aria-labelledby="fecNac-label"><g:formatDate date="${usuarioInstance?.fecNac}" format="yyyy-MM-dd" /></span>
 					
 				</li>
 				</g:if>
@@ -54,7 +54,7 @@
 				<li class="fieldcontain">
 					<span id="sexo-label" class="property-label"><g:message code="usuario.sexo.label" default="Sexo" /></span>
 					
-						<span class="property-value" aria-labelledby="sexo-label"><g:fieldValue bean="${usuarioInstance}" field="sexo"/></span>
+						<span class="property-value" aria-labelledby="sexo-label"><g:fieldValue bean="${usuarioInstance}" field="sexo"  /></span>
 					
 				</li>
 				</g:if>
@@ -70,7 +70,7 @@
 			
 				<g:if test="${usuarioInstance?.telefono}">
 				<li class="fieldcontain">
-					<span id="telefono-label" class="property-label"><g:message code="usuario.telefono.label" default="Telefono" /></span>
+					<span id="telefono-label" class="property-label"><g:message code="usuario.telefono.label" default="Teléfono" /></span>
 					
 						<span class="property-value" aria-labelledby="telefono-label"><g:fieldValue bean="${usuarioInstance}" field="telefono"/></span>
 					
@@ -79,7 +79,7 @@
 			
 				<g:if test="${usuarioInstance?.direccion}">
 				<li class="fieldcontain">
-					<span id="direccion-label" class="property-label"><g:message code="usuario.direccion.label" default="Direccion" /></span>
+					<span id="direccion-label" class="property-label"><g:message code="usuario.direccion.label" default="Dirección" /></span>
 					
 						<span class="property-value" aria-labelledby="direccion-label"><g:fieldValue bean="${usuarioInstance}" field="direccion"/></span>
 					
@@ -88,9 +88,9 @@
 			
 				<g:if test="${usuarioInstance?.fecVencCarnet}">
 				<li class="fieldcontain">
-					<span id="fecVencCarnet-label" class="property-label"><g:message code="usuario.fecVencCarnet.label" default="Fec Venc Carnet" /></span>
+					<span id="fecVencCarnet-label" class="property-label"><g:message code="usuario.fecVencCarnet.label" default="Vencimiento carnet de conducir" /></span>
 					
-						<span class="property-value" aria-labelledby="fecVencCarnet-label"><g:formatDate date="${usuarioInstance?.fecVencCarnet}" /></span>
+						<span class="property-value" aria-labelledby="fecVencCarnet-label"><g:formatDate date="${usuarioInstance?.fecVencCarnet}" format="yyyy-MM"/></span>
 					
 				</li>
 				</g:if>
@@ -106,19 +106,19 @@
 			
 				<g:if test="${usuarioInstance?.pass}">
 				<li class="fieldcontain">
-					<span id="pass-label" class="property-label"><g:message code="usuario.pass.label" default="Pass" /></span>
+					<span id="pass-label" class="property-label"><g:message code="usuario.pass.label" default="Password" /></span>
 					
-						<span class="property-value" aria-labelledby="pass-label"><g:fieldValue bean="${usuarioInstance}" field="pass"/></span>
+						<span class="property-value"  aria-labelledby="pass-label"><g:fieldValue bean="${usuarioInstance}" field="pass"/></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${usuarioInstance?.vehiculos}">
 				<li class="fieldcontain">
-					<span id="vehiculos-label" class="property-label"><g:message code="usuario.vehiculos.label" default="Vehiculos" /></span>
+					<span id="vehiculos-label" class="property-label"><g:message code="usuario.vehiculos.label" default="Vehículos" /></span>
 					
 						<g:each in="${usuarioInstance.vehiculos}" var="v">
-						<span class="property-value" aria-labelledby="vehiculos-label"><g:link controller="vehiculo" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vehiculos-label"><g:link controller="vehiculo" action="show" id="${v.id}">${v?.modelo.marca.nombre.encodeAsHTML()} ${v?.modelo.nombre.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
