@@ -16,7 +16,7 @@
 		<g:message code="usuario.apellido.label" default="Apellido" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="apellido" required="" value="${usuarioInstance?.apellido}"/>
+	<g:textField name="apellido" required="" value="${usuarioInstance?.apellido}" />
 
 </div>
 

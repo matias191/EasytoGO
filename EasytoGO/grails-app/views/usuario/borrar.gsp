@@ -88,26 +88,49 @@
         <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
       </div>
 
-<form>
+<form class="form-horizontal">
+<div class="form-group" ${hasErrors(bean: usuarioInstance, field: 'nombre', 'error')} required">
+	<label for="nombre" class="col-sm-2 control-label">
+		<g:message code="usuario.nombre.label" default="Nombre" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+      
+      <g:textField name="nombre" class="form-control" placeholder="Nombre" required="" value="${usuarioInstance?.nombre}"/>
+    </div>
+	
+</div>
+
+<div class="form-group ${hasErrors(bean: usuarioInstance, field: 'apellido', 'error')} required">
+	<label for="apellido" class="col-sm-2 control-label">
+		<g:message code="usuario.apellido.label" default="Apellido" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+	<g:textField name="apellido" class="form-control" required="" placeholder="Nombre" value="${usuarioInstance?.apellido}" />
+	</div>
+</div>
+ 
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+    </div>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Example block-level help text here.</p>
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Crear</button>
+    </div>
   </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
 
