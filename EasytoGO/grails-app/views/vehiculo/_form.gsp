@@ -81,7 +81,7 @@
 
 </div>
 
-<!-- style="display:none"-->
+
 
 <div class="fieldcontain ${hasErrors(bean: vehiculoInstance, field: 'usuario', 'error')} required">
 	<label for="usuario">

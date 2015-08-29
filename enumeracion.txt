@@ -1,0 +1,8 @@
+Usuario.sexo
+1: Masculino
+2: Femenino
+
+Vehiculo.combustible
+1: Nafta
+2: Gasoil
+3: GNC

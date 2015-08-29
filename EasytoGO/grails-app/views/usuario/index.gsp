@@ -53,7 +53,9 @@
 					
 						<td><g:formatDate date="${usuarioInstance.fecNac}" format="yyyy-MM-dd"  /></td>
 					
-						<td>${fieldValue(bean: usuarioInstance, field: "sexo")}</td>
+						<!--  <td>${fieldValue(bean: usuarioInstance, field: "sexo")}</td>-->
+						
+						<td>${usuarioInstance.sexo == 1 ? 'Masculino' : 'Femenino'}</td>
 					
 						<td>${fieldValue(bean: usuarioInstance, field: "mail")}</td>
 					

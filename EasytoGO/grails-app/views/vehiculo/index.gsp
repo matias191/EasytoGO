@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<!-- <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li> Link a crear vehículo que nunca se va usar-->
 			</ul>
 		</div>
 		<div id="list-vehiculo" class="content scaffold-list" role="main">
@@ -24,13 +24,15 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="anio" title="${message(code: 'vehiculo.anio.label', default: 'Anio')}" />
+						<th><g:message code="vehiculo.modelo.marca.label" default="Marca" /></th>
+						
+						<th><g:message code="vehiculo.modelo.label" default="Modelo" /></th>
+					
+						<g:sortableColumn property="anio" title="${message(code: 'vehiculo.anio.label', default: 'Año')}" />
 					
 						<g:sortableColumn property="color" title="${message(code: 'vehiculo.color.label', default: 'Color')}" />
 					
 						<g:sortableColumn property="combustible" title="${message(code: 'vehiculo.combustible.label', default: 'Combustible')}" />
-					
-						<th><g:message code="vehiculo.modelo.label" default="Modelo" /></th>
 					
 						<g:sortableColumn property="seguro" title="${message(code: 'vehiculo.seguro.label', default: 'Seguro')}" />
 					
@@ -42,15 +44,17 @@
 				<g:each in="${vehiculoInstanceList}" status="i" var="vehiculoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
+						<td>${fieldValue(bean: vehiculoInstance.modelo.marca, field: "nombre")}</td>
+						
+						<td>${fieldValue(bean: vehiculoInstance, field: "modelo")}</td>
+					
 						<td><g:link action="show" id="${vehiculoInstance.id}">${fieldValue(bean: vehiculoInstance, field: "anio")}</g:link></td>
 					
 						<td>${fieldValue(bean: vehiculoInstance, field: "color")}</td>
 					
-						<td>${fieldValue(bean: vehiculoInstance, field: "combustible")}</td>
+						<td>${vehiculoInstance.combustible == 1 ? 'Nafta' : vehiculoInstance.combustible == 2 ? 'Gasoil' : 'GNC'}</td>
 					
-						<td>${fieldValue(bean: vehiculoInstance, field: "modelo")}</td>
-					
-						<td><g:formatBoolean boolean="${vehiculoInstance.seguro}" /></td>
+						<td>${vehiculoInstance.seguro.equals(true) ? 'SI' : 'NO'}</td>
 					
 						<td>${fieldValue(bean: vehiculoInstance, field: "usuario")}</td>
 					
