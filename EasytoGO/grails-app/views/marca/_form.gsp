@@ -1,12 +1,12 @@
-<%@ page import="easytogo.Marca" %>
+<%@ page import="easytogo.Marca"%>
 
 
-<div class="fieldcontain ${hasErrors(bean: marcaInstance, field: 'nombre', 'error')} required">
-	<label for="nombre">
-		<g:message code="marca.nombre.label" default="Nombre" />
-		<span class="required-indicator">*</span>
+<div
+	class="fieldcontain ${hasErrors(bean: marcaInstance, field: 'nombre', 'error')} required">
+	<label for="nombre"> <g:message code="marca.nombre.label"
+			default="Nombre" /> <span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nombre" required="" value="${marcaInstance?.nombre}"/>
+	<g:textField name="nombre" required="" value="${marcaInstance?.nombre}" />
 
 </div>
 <!-- 

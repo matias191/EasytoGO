@@ -8,122 +8,134 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class VehiculoController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+  static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Vehiculo.list(params), model:[vehiculoInstanceCount: Vehiculo.count()]
+  def index(Integer max) {
+    params.max = Math.min(max ?: 10, 100)
+    respond Vehiculo.list(params), model:[vehiculoInstanceCount: Vehiculo.count()]
+  }
+
+  def show(Vehiculo vehiculoInstance) {
+    respond vehiculoInstance
+  }
+
+  def create() {
+    //def usuario = Usuario.findById(params.usuario.id)
+    respond new Vehiculo(params)/*,model:[usuarioInstance: usuario]*/
+  }
+
+  def form() {
+  }
+
+  def marcaChanged(long marcaId) {
+    Marca marca = Marca.get(marcaId)
+    def modelos = []
+    if ( marca != null ) {
+      modelos = Modelo.findAllByMarca(marca, [order:'name'])
+    }
+    render g.select(id:'modelo', name:'modelo.id',
+    from:modelos, optionKey:'id', noSelection:[null:' ']
+    )
+  }
+
+
+  @Transactional
+  def save(Vehiculo vehiculoInstance) {
+    if (vehiculoInstance == null) {
+      notFound()
+      return
     }
 
-    def show(Vehiculo vehiculoInstance) {
-        respond vehiculoInstance
+    if (vehiculoInstance.hasErrors()) {
+      respond vehiculoInstance.errors, view:'create'
+      return
     }
 
-    def create() {
-		//def usuario = Usuario.findById(params.usuario.id)
-        respond new Vehiculo(params)/*,model:[usuarioInstance: usuario]*/
+    vehiculoInstance.save flush:true
+
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.created.message', args: [
+          message(code: 'vehiculo.label', default: 'Vehiculo'),
+          vehiculoInstance.id
+        ])
+        redirect vehiculoInstance
+      }
+      '*' { respond vehiculoInstance, [status: CREATED] }
     }
-	
-	def form() {
-	}
-	
-	def marcaChanged(long marcaId) {
-		Marca marca = Marca.get(marcaId)
-		def modelos = []
-		if ( marca != null ) {
-			modelos = Modelo.findAllByMarca(marca, [order:'name'])
-		}
-		render g.select(id:'modelo', name:'modelo.id',
-			from:modelos, optionKey:'id', noSelection:[null:' ']
-		)
-	}
-	
+  }
 
-    @Transactional
-    def save(Vehiculo vehiculoInstance) {
-        if (vehiculoInstance == null) {
-            notFound()
-            return
-        }
+  def edit(Vehiculo vehiculoInstance) {
+    respond vehiculoInstance
+  }
 
-        if (vehiculoInstance.hasErrors()) {
-            respond vehiculoInstance.errors, view:'create'
-            return
-        }
-
-        vehiculoInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'vehiculo.label', default: 'Vehiculo'), vehiculoInstance.id])
-                redirect vehiculoInstance
-            }
-            '*' { respond vehiculoInstance, [status: CREATED] }
-        }
+  @Transactional
+  def update(Vehiculo vehiculoInstance) {
+    if (vehiculoInstance == null) {
+      notFound()
+      return
     }
 
-    def edit(Vehiculo vehiculoInstance) {
-        respond vehiculoInstance
+    if (vehiculoInstance.hasErrors()) {
+      respond vehiculoInstance.errors, view:'edit'
+      return
     }
 
-    @Transactional
-    def update(Vehiculo vehiculoInstance) {
-        if (vehiculoInstance == null) {
-            notFound()
-            return
-        }
+    vehiculoInstance.save flush:true
 
-        if (vehiculoInstance.hasErrors()) {
-            respond vehiculoInstance.errors, view:'edit'
-            return
-        }
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.updated.message', args: [
+          message(code: 'Vehiculo.label', default: 'Vehiculo'),
+          vehiculoInstance.id
+        ])
+        redirect vehiculoInstance
+      }
+      '*'{ respond vehiculoInstance, [status: OK] }
+    }
+  }
 
-        vehiculoInstance.save flush:true
+  @Transactional
+  def delete(Vehiculo vehiculoInstance) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Vehiculo.label', default: 'Vehiculo'), vehiculoInstance.id])
-                redirect vehiculoInstance
-            }
-            '*'{ respond vehiculoInstance, [status: OK] }
-        }
+    if (vehiculoInstance == null) {
+      notFound()
+      return
     }
 
-    @Transactional
-    def delete(Vehiculo vehiculoInstance) {
+    vehiculoInstance.delete flush:true
 
-        if (vehiculoInstance == null) {
-            notFound()
-            return
-        }
-
-        vehiculoInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Vehiculo.label', default: 'Vehiculo'), vehiculoInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.deleted.message', args: [
+          message(code: 'Vehiculo.label', default: 'Vehiculo'),
+          vehiculoInstance.id
+        ])
+        redirect action:"index", method:"GET"
+      }
+      '*'{ render status: NO_CONTENT }
     }
+  }
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'vehiculo.label', default: 'Vehiculo'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+  protected void notFound() {
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.not.found.message', args: [
+          message(code: 'vehiculo.label', default: 'Vehiculo'),
+          params.id
+        ])
+        redirect action: "index", method: "GET"
+      }
+      '*'{ render status: NOT_FOUND }
     }
+  }
 }
 
 
 
 
-  
-  
+
+
 
 
 

@@ -89,18 +89,18 @@
       </div>
 
 <form class="form-horizontal">
+<!-- NOMBRE -->
 <div class="form-group" ${hasErrors(bean: usuarioInstance, field: 'nombre', 'error')} required">
 	<label for="nombre" class="col-sm-2 control-label">
 		<g:message code="usuario.nombre.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<div class="col-sm-10">
-      
+	<div class="col-sm-10">      
       <g:textField name="nombre" class="form-control" placeholder="Nombre" required="" value="${usuarioInstance?.nombre}"/>
-    </div>
-	
+    </div>	
 </div>
 
+<!-- APELLIDO -->
 <div class="form-group ${hasErrors(bean: usuarioInstance, field: 'apellido', 'error')} required">
 	<label for="apellido" class="col-sm-2 control-label">
 		<g:message code="usuario.apellido.label" default="Apellido" />
@@ -110,6 +110,18 @@
 	<g:textField name="apellido" class="form-control" required="" placeholder="Nombre" value="${usuarioInstance?.apellido}" />
 	</div>
 </div>
+ 
+ <!-- FECHA DE NACIMIENTO -->
+ <div class="form-group ${hasErrors(bean: usuarioInstance, field: 'fecNac', 'error')} required">
+	<label for="fecNac" class="col-sm-2 control-label">
+		<g:message code="usuario.fecNac.label" default="Fecha de nacimiento" />		
+		<span class="required-indicator">*</span>		
+	</label>
+	<div class="col-sm-10">
+	<g:datePicker name="fecNac" class="form-control" precision="day"  value="${usuarioInstance?.fecNac}"  />
+	</div>
+</div>
+ 
  
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>

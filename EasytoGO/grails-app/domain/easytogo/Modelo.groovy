@@ -1,13 +1,13 @@
 package easytogo
 
 class Modelo {
-String nombre	
-String toString(){
-	"${nombre}"
-}
+  String nombre
+  String toString(){
+    "${nombre}"
+  }
 
-static hasOne = [marca: Marca]
-static hasMany = [vehiculos: Vehiculo]
-    static constraints = {
-    }
+  static hasOne = [marca: Marca]
+  static hasMany = [vehiculos: Vehiculo]
+  static constraints = {
+  }
 }

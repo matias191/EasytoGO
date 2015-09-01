@@ -8,104 +8,116 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UsuarioController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+  static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
+  def index(Integer max) {
+    params.max = Math.min(max ?: 10, 100)
+    respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
+  }
+
+  def show(Usuario usuarioInstance) {
+    respond usuarioInstance
+  }
+
+  def create() {
+    respond new Usuario(params)
+  }
+  def borrar() {
+    //respond new Usuario(params)
+  }
+
+  def addcar() {
+    //respond new Usuario(params)
+  }
+
+  @Transactional
+  def save(Usuario usuarioInstance) {
+    if (usuarioInstance == null) {
+      notFound()
+      return
     }
 
-    def show(Usuario usuarioInstance) {
-        respond usuarioInstance
+    if (usuarioInstance.hasErrors()) {
+      respond usuarioInstance.errors, view:'create'
+      return
     }
 
-    def create() {
-        respond new Usuario(params)
+    usuarioInstance.save flush:true
+
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.created.message', args: [
+          message(code: 'usuario.label', default: 'Usuario'),
+          usuarioInstance.id
+        ])
+        redirect usuarioInstance
+      }
+      '*' { respond usuarioInstance, [status: CREATED] }
     }
-	def borrar() {
-		//respond new Usuario(params)
-	}
-	
-	def addcar() {
-	//respond new Usuario(params)
-}
+  }
 
-    @Transactional
-    def save(Usuario usuarioInstance) {
-        if (usuarioInstance == null) {
-            notFound()
-            return
-        }
+  def edit(Usuario usuarioInstance) {
+    respond usuarioInstance
+  }
 
-        if (usuarioInstance.hasErrors()) {
-            respond usuarioInstance.errors, view:'create'
-            return
-        }
-
-        usuarioInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect usuarioInstance
-            }
-            '*' { respond usuarioInstance, [status: CREATED] }
-        }
+  @Transactional
+  def update(Usuario usuarioInstance) {
+    if (usuarioInstance == null) {
+      notFound()
+      return
     }
 
-    def edit(Usuario usuarioInstance) {
-        respond usuarioInstance
+    if (usuarioInstance.hasErrors()) {
+      respond usuarioInstance.errors, view:'edit'
+      return
     }
 
-    @Transactional
-    def update(Usuario usuarioInstance) {
-        if (usuarioInstance == null) {
-            notFound()
-            return
-        }
+    usuarioInstance.save flush:true
 
-        if (usuarioInstance.hasErrors()) {
-            respond usuarioInstance.errors, view:'edit'
-            return
-        }
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.updated.message', args: [
+          message(code: 'Usuario.label', default: 'Usuario'),
+          usuarioInstance.id
+        ])
+        redirect usuarioInstance
+      }
+      '*'{ respond usuarioInstance, [status: OK] }
+    }
+  }
 
-        usuarioInstance.save flush:true
+  @Transactional
+  def delete(Usuario usuarioInstance) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect usuarioInstance
-            }
-            '*'{ respond usuarioInstance, [status: OK] }
-        }
+    if (usuarioInstance == null) {
+      notFound()
+      return
     }
 
-    @Transactional
-    def delete(Usuario usuarioInstance) {
+    usuarioInstance.delete flush:true
 
-        if (usuarioInstance == null) {
-            notFound()
-            return
-        }
-
-        usuarioInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.deleted.message', args: [
+          message(code: 'Usuario.label', default: 'Usuario'),
+          usuarioInstance.id
+        ])
+        redirect action:"index", method:"GET"
+      }
+      '*'{ render status: NO_CONTENT }
     }
+  }
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'usuario.label', default: 'Usuario'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
+  protected void notFound() {
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.not.found.message', args: [
+          message(code: 'usuario.label', default: 'Usuario'),
+          params.id
+        ])
+        redirect action: "index", method: "GET"
+      }
+      '*'{ render status: NOT_FOUND }
     }
+  }
 }

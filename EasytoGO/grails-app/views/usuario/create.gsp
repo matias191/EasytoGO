@@ -10,7 +10,7 @@
 		<div class="nav" role="navigation"> <!-- Barrita abajo del logo -->
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>  <!-- link "Principal" -->
-				<li><g:link class="list" action="index">Lista de Usuarios</g:link></li> <!-- link a Lista de Usuarios -->
+				<li><g:link class="list" action="index">Lista de Usuarios(esto vuela de acá mas adelante)</g:link></li> <!-- link a Lista de Usuarios -->
 			</ul>
 		</div>
 		<div id="create-usuario" class="content scaffold-create" role="main">

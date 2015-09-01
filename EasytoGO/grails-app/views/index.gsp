@@ -86,8 +86,10 @@ p {
 		<h1>Qué deseas hacer?</h1>
 		<ul>
 			<li><a href="http://localhost:8080/EasytoGO/Usuario/create">Registrarme</a></li>
-			<li><a href="http://localhost:8080/EasytoGO/Marca/">ABM Marca</a></li>
-			<li><a href="http://localhost:8080/EasytoGO/Modelo/">ABM Modelo</a></li>
+			<li><a href="http://localhost:8080/EasytoGO/Marca/">ABM
+					Marca</a></li>
+			<li><a href="http://localhost:8080/EasytoGO/Modelo/">ABM
+					Modelo</a></li>
 		</ul>
 	</div>
 

@@ -8,97 +8,109 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class MarcaController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+  static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Marca.list(params), model:[marcaInstanceCount: Marca.count()]
+  def index(Integer max) {
+    params.max = Math.min(max ?: 10, 100)
+    respond Marca.list(params), model:[marcaInstanceCount: Marca.count()]
+  }
+
+  def show(Marca marcaInstance) {
+    respond marcaInstance
+  }
+
+  def create() {
+    respond new Marca(params)
+  }
+
+  @Transactional
+  def save(Marca marcaInstance) {
+    if (marcaInstance == null) {
+      notFound()
+      return
     }
 
-    def show(Marca marcaInstance) {
-        respond marcaInstance
+    if (marcaInstance.hasErrors()) {
+      respond marcaInstance.errors, view:'create'
+      return
     }
 
-    def create() {
-        respond new Marca(params)
+    marcaInstance.save flush:true
+
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.created.message', args: [
+          message(code: 'marca.label', default: 'Marca'),
+          marcaInstance.id
+        ])
+        redirect marcaInstance
+      }
+      '*' { respond marcaInstance, [status: CREATED] }
+    }
+  }
+
+  def edit(Marca marcaInstance) {
+    respond marcaInstance
+  }
+
+  @Transactional
+  def update(Marca marcaInstance) {
+    if (marcaInstance == null) {
+      notFound()
+      return
     }
 
-    @Transactional
-    def save(Marca marcaInstance) {
-        if (marcaInstance == null) {
-            notFound()
-            return
-        }
-
-        if (marcaInstance.hasErrors()) {
-            respond marcaInstance.errors, view:'create'
-            return
-        }
-
-        marcaInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'marca.label', default: 'Marca'), marcaInstance.id])
-                redirect marcaInstance
-            }
-            '*' { respond marcaInstance, [status: CREATED] }
-        }
+    if (marcaInstance.hasErrors()) {
+      respond marcaInstance.errors, view:'edit'
+      return
     }
 
-    def edit(Marca marcaInstance) {
-        respond marcaInstance
+    marcaInstance.save flush:true
+
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.updated.message', args: [
+          message(code: 'Marca.label', default: 'Marca'),
+          marcaInstance.id
+        ])
+        redirect marcaInstance
+      }
+      '*'{ respond marcaInstance, [status: OK] }
+    }
+  }
+
+  @Transactional
+  def delete(Marca marcaInstance) {
+
+    if (marcaInstance == null) {
+      notFound()
+      return
     }
 
-    @Transactional
-    def update(Marca marcaInstance) {
-        if (marcaInstance == null) {
-            notFound()
-            return
-        }
+    marcaInstance.delete flush:true
 
-        if (marcaInstance.hasErrors()) {
-            respond marcaInstance.errors, view:'edit'
-            return
-        }
-
-        marcaInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Marca.label', default: 'Marca'), marcaInstance.id])
-                redirect marcaInstance
-            }
-            '*'{ respond marcaInstance, [status: OK] }
-        }
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.deleted.message', args: [
+          message(code: 'Marca.label', default: 'Marca'),
+          marcaInstance.id
+        ])
+        redirect action:"index", method:"GET"
+      }
+      '*'{ render status: NO_CONTENT }
     }
+  }
 
-    @Transactional
-    def delete(Marca marcaInstance) {
-
-        if (marcaInstance == null) {
-            notFound()
-            return
-        }
-
-        marcaInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Marca.label', default: 'Marca'), marcaInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+  protected void notFound() {
+    request.withFormat {
+      form multipartForm {
+        flash.message = message(code: 'default.not.found.message', args: [
+          message(code: 'marca.label', default: 'Marca'),
+          params.id
+        ])
+        redirect action: "index", method: "GET"
+      }
+      '*'{ render status: NOT_FOUND }
     }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'marca.label', default: 'Marca'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+  }
 }
