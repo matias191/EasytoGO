@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="layout" content="main" />
-<title>Welcome to Grails</title>
+<title>Easy to GO</title>
 <style type="text/css" media="screen">
 #status {
 	background-color: #eee;
@@ -96,6 +96,7 @@ p {
 	<div id="page-body" role="main">
 		<h1>Bienvenido a Easy to Go</h1>
 		<p>Viaja en forma económica, seguro, ecológica y divertida...</p>
+		
 
 		<!--
 			  <div id="controller-list" role="navigation">
