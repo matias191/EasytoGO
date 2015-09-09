@@ -81,11 +81,11 @@
 				</li>
 				</g:if>
 			<!-- 
-				<g:if test="${vehiculoInstance?.usuario}">
+				<g:if test="${vehiculoInstance?.user}">
 				<li class="fieldcontain">
-					<span id="usuario-label" class="property-label"><g:message code="vehiculo.usuario.label" default="Usuario" /></span>
+					<span id="user-label" class="property-label"><g:message code="vehiculo.user.label" default="User" /></span>
 					
-						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${vehiculoInstance?.usuario?.id}">${vehiculoInstance?.usuario?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${vehiculoInstance?.user?.id}">${vehiculoInstance?.user?.encodeAsHTML()}kjhk</g:link></span>
 					
 				</li>
 				</g:if>

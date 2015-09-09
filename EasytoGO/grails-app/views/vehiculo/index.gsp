@@ -36,7 +36,7 @@
 					
 						<g:sortableColumn property="seguro" title="${message(code: 'vehiculo.seguro.label', default: 'Seguro')}" />
 					
-						<th><g:message code="vehiculo.usuario.label" default="Usuario" /></th>
+						<th><g:message code="vehiculo.user.label" default="Usuario" /></th>
 					
 					</tr>
 				</thead>
@@ -56,7 +56,7 @@
 					
 						<td>${vehiculoInstance.seguro.equals(true) ? 'SI' : 'NO'}</td>
 					
-						<td>${fieldValue(bean: vehiculoInstance, field: "usuario")}</td>
+						<td>${fieldValue(bean: vehiculoInstance, field: "user")}</td>
 					
 					</tr>
 				</g:each>

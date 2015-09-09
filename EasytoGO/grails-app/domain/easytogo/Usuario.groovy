@@ -16,7 +16,7 @@ class Usuario {
     "${apellido}"
   }
 
-  static hasMany = [vehiculos: Vehiculo]
+  
 
   static constraints = {
     nombre()

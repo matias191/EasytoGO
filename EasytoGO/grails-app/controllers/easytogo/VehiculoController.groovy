@@ -4,8 +4,10 @@ package easytogo
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
+@Secured(['permitAll'])
 class VehiculoController {
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -20,8 +22,8 @@ class VehiculoController {
   }
 
   def create() {
-    //def usuario = Usuario.findById(params.usuario.id)
-    respond new Vehiculo(params)/*,model:[usuarioInstance: usuario]*/
+    //def user = User.findById(params.user.id)
+    respond new Vehiculo(params)/*,model:[usuarioInstance: user]*/
   }
 
   def form() {

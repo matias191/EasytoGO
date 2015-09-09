@@ -6,7 +6,10 @@ class Vehiculo {
   Boolean seguro
   int combustible
 
-  static hasOne = [modelo: Modelo, usuario: Usuario]
+  
+    static hasOne = [modelo: Modelo, user: User]
+    
+   
 
   static constraints = {
   }

@@ -33,11 +33,13 @@
 	<div id="grailsLogo" role="banner">
 		<a href="http://grails.org"><asset:image src="easy_to_go.png"
 				alt="Grails" /></a>
-	<span><a href="http://localhost:8080/EasytoGO/Usuario/create">Registrarme</a></span>
+	
+	<span><a href="http://localhost:8080/EasytoGO/User/create">Registrarme</a></span>
+	
 	<span><a href="http://localhost:8080/EasytoGO/Marca">ABM Marca</a></span>
 	<span><a href="http://localhost:8080/EasytoGO/Modelo">ABM Modelo</a></span>
-	<span>
-	<form class="navbar-form navbar-right">
+	<!-- <span>
+	 <form class="navbar-form navbar-right">
             <div class="form-group">
               <input type="text" placeholder="Email" class="form-control">
             </div>
@@ -47,6 +49,20 @@
             <button type="submit" class="btn btn-success">Entrar</button>
           </form>
 	</span>
+	 -->
+
+<!--  para saber que usuario inicio sesion -->
+<!-- value="${sec.username()}
+value="${sec.loggedInUserInfo(field: 'username')}
+ -->
+
+<span class="property-value" aria-labelledby="usuario-label">${sec.username() ? 'Logueado como:': ''}</span>
+<g:if test="${ sec }">
+    ${ sec.username() }
+    <g:remoteLink class="logout" controller="logout">Salir</g:remoteLink>
+</g:if>
+
+
 	
 	</div>
 	  

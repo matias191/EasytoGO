@@ -95,6 +95,11 @@ environments {
     }
 }
 
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'easytogo.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'easytogo.UserRol'
+grails.plugin.springsecurity.authority.className = 'easytogo.Rol'
+
 // log4j configuration
 log4j.main = {
     // Example of changing the log pattern for the default console appender:
@@ -115,3 +120,18 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+    '/dbconsole/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll']
+]
+

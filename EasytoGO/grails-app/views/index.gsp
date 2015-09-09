@@ -85,7 +85,8 @@ p {
 	<div id="status" role="complementary">
 		<h1>Qué deseas hacer?</h1>
 		<ul>
-			<li><a href="http://localhost:8080/EasytoGO/Usuario/create">Registrarme</a></li>
+			
+			<li><a href="http://localhost:8080/EasytoGO/User/create">Registrarme</a></li>
 			<li><a href="http://localhost:8080/EasytoGO/Marca/">ABM
 					Marca</a></li>
 			<li><a href="http://localhost:8080/EasytoGO/Modelo/">ABM
@@ -95,7 +96,7 @@ p {
 
 	<div id="page-body" role="main">
 		<h1>Bienvenido a Easy to Go</h1>
-		<p>Viaja en forma económica, seguro, ecológica y divertida...</p>
+		<p>Viaja en forma económica, segura, ecológica y divertida...</p>
 		
 
 		<!--
