@@ -1,7 +1,18 @@
 package easytogo
 
+/**
+ * Clase Modelo
+ *
+ * Contiene informacion sobre el Modelo de un Vehiculo
+ * 
+ *
+ * @author MatiMore
+ */
+
 class Modelo {
+  
   String nombre
+  
   String toString(){
     "${nombre}"
   }

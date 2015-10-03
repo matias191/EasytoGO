@@ -87,10 +87,15 @@ p {
 		<ul>
 			
 			<li><a href="http://localhost:8080/EasytoGO/User/create">Registrarme</a></li>
-			<li><a href="http://localhost:8080/EasytoGO/Marca/">ABM
-					Marca</a></li>
-			<li><a href="http://localhost:8080/EasytoGO/Modelo/">ABM
-					Modelo</a></li>
+			<sec:ifLoggedIn>
+	
+		<sec:ifAllGranted roles="ROLE_ADMIN">
+				<li><g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link></li>
+				<li><g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link></li>
+		</sec:ifAllGranted>
+	</sec:ifLoggedIn>
+	
+			<li></li>
 		</ul>
 	</div>
 

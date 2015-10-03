@@ -145,4 +145,6 @@ class LoginController {
 	def ajaxDenied() {
 		render([error: 'access denied'] as JSON)
 	}
+  
+  
 }

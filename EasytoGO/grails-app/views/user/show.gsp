@@ -108,15 +108,14 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.password}">
+				<%--<g:if test="${userInstance?.password}">
 				<li class="fieldcontain">
 					<span id="password-label" class="property-label"><g:message code="user.password.label" default="Password" /></span>
 					
 						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${userInstance}" field="password"/></span>
 					
 				</li>
-				</g:if>
-			
+				</g:if>--%>
 				
 			<g:if test="${userInstance?.vehiculos}">
 				<li class="fieldcontain">
@@ -137,6 +136,7 @@
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${userInstance}"><g:message code="default.button.edit.label" default="Edit" />/Agregar Vehículo</g:link>
+					<g:link class="edit" action="updatePassword" resource="${userInstance}">Cambiar contraseña</g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

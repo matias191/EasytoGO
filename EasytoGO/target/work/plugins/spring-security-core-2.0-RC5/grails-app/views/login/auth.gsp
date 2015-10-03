@@ -87,7 +87,7 @@
 <body>
 <div id='login'>
 	<div class='inner'>
-		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
+		<div class='fheader'>Inicia sesión en Easy to GO</div>
 
 		<g:if test='${flash.message}'>
 			<div class='login_message'>${flash.message}</div>
@@ -110,7 +110,7 @@
 			</p>
 
 			<p>
-				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
+				<input type='submit' id="submit" value='Entrar'/>
 			</p>
 		</form>
 	</div>

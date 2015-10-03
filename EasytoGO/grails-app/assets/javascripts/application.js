@@ -18,3 +18,19 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+function initAutocomplete() {
+	 // Create the autocomplete object, restricting the search to geographical
+	 // location types.
+	 autocomplete2 = new google.maps.places.Autocomplete(
+	     (document.getElementById('pac-input2')),
+	     {});
+
+	 autocomplete = new google.maps.places.Autocomplete(
+	     (document.getElementById('pac-input')),
+	     {});
+
+	 // When the user selects an address from the dropdown, populate the address
+	 // fields in the form.
+	 //autocomplete.addListener('place_changed', fillInAddress);
+	}

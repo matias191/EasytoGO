@@ -20,6 +20,7 @@ import org.springframework.security.access.annotation.Secured
 
 @Secured('permitAll')
 class LogoutController {
+ 
 
 	/**
 	 * Index action. Redirects to the Spring security logout uri.

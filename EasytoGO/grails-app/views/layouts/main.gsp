@@ -34,10 +34,10 @@
 		<a href="http://grails.org"><asset:image src="easy_to_go.png"
 				alt="Grails" /></a>
 	
-	<span><a href="http://localhost:8080/EasytoGO/User/create">Registrarme</a></span>
+<%--	<span><a href="http://localhost:8080/EasytoGO/User/create">Registrarme</a></span>--%>
 	
-	<span><a href="http://localhost:8080/EasytoGO/Marca">ABM Marca</a></span>
-	<span><a href="http://localhost:8080/EasytoGO/Modelo">ABM Modelo</a></span>
+<%--	<span><a href="http://localhost:8080/EasytoGO/Marca">ABM Marca</a></span>--%>
+<%--	<span><a href="http://localhost:8080/EasytoGO/Modelo">ABM Modelo</a></span>--%>
 	<!-- <span>
 	 <form class="navbar-form navbar-right">
             <div class="form-group">
@@ -50,21 +50,53 @@
           </form>
 	</span>
 	 -->
+	 
+	 <%--
 
-<!--  para saber que usuario inicio sesion -->
-<!-- value="${sec.username()}
+para saber que usuario inicio sesion
+value="${sec.username()}
 value="${sec.loggedInUserInfo(field: 'username')}
- -->
+<sec:loggedInUserInfo field="username"/>
+ 
 
-<span class="property-value" aria-labelledby="usuario-label">${sec.username() ? 'Logueado como:': ''}</span>
+	--%>
+	
+<%--<span class="property-value" aria-labelledby="usuario-label">${sec.username() ? 'Logueado como:': ''}</span>
 <g:if test="${ sec }">
-    ${ sec.username() }
+   
     <g:remoteLink class="logout" controller="logout">Salir</g:remoteLink>
 </g:if>
 
+--%>
 
+<span class="property-value" aria-labelledby="usuario-label">
+	<sec:ifLoggedIn>
+		<g:link class="editar" controller='User' action= 'show' id="${sec.loggedInUserInfo(field:'id') }" >Editar</g:link>
 	
-	</div>
+		<sec:ifAllGranted roles="ROLE_ADMIN">
+				<g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link>
+				<g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link>
+				<g:link>Reportes</g:link>
+		</sec:ifAllGranted>
+		
+		Bienvenido  <sec:username/>!
+		(<g:link class="logout" controller='logout' action= 'index' method="POST">Salir</g:link>)
+		<%--(<g:link class="logout" controller='Logout' action= 'index'>Salir</g:link>)--%>
+		<%--(<g:remoteLink class="logout" controller='Logout' action= 'index'>Salir</g:remoteLink>)--%>
+		
+	</sec:ifLoggedIn>
+
+	<sec:ifNotLoggedIn>
+		<g:link controller='User' action='create'>Registrarme</g:link>
+		<g:link controller='login' action='auth'>Login</g:link>
+		
+	</sec:ifNotLoggedIn>
+	
+	<g:link class="viaje" controller='Viaje' action= 'create'>Publica tu viaje!</g:link>
+	<g:link class="reserva" controller='Viaje' action= 'buscaViaje'>Busca tu viaje!</g:link>
+</span>	
+
+</div>
 	  
 	 
 	 

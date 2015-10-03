@@ -2,6 +2,14 @@ package easytogo
 
 import java.util.Date;
 
+/**
+ * Dominio User
+ * 
+ * Contiene informacion de los Usuario del sistema
+ * 
+ * @author MatiMore
+ */
+
 class User implements Serializable {
 
   private static final long serialVersionUID = 1
@@ -13,20 +21,52 @@ class User implements Serializable {
   String username
   String password
   Date fecNac
+  /** Opcional. Solo necesario cuando el usuario da de alta un viaje. */
   Date fecVencCarnet
   String direccion
   String mail
   String telefono
+  /** 
+   * Código único generado para validar al usuario
+   *  cuando se registra. Se envia el código incrustado en un link
+   *  a su cuenta de correo para activar la cuenta.
+   */
+  String confirmCode
   int sexo
   boolean enabled = true
   boolean accountExpired
   boolean accountLocked
   boolean passwordExpired
 
-  static hasMany = [vehiculos: Vehiculo]
+  /** 
+   * Relación con la clase Vehiculo.groovy.
+   * Un usuario puede tener muchos vehículos.
+   * Utilizado para dar de alta un viaje.
+   */
+  static hasMany = [vehiculos: Vehiculo, viaje: Viaje]
 
 
-
+  /**
+   * Utilizadas para generar la base de datos y las vistas.
+   * Indica el órden en que se generan los campos de la vista User,
+   * si un atributo puede ser null en la BD y en la vista, y la unicidad
+   * de los atributos.
+   */
+  static constraints = {
+    nombre()
+    apellido()
+    fecNac()
+    sexo()
+    mail()
+    telefono()
+    direccion(nullable: true)
+    fecVencCarnet(nullable: true)
+    username()
+    password ()
+    confirmCode(nullable: true)
+    username blank: false, unique: true
+    password blank: false
+  }
 
   User(String username, String password) {
     this()
@@ -71,20 +111,6 @@ class User implements Serializable {
 
   static transients = ['springSecurityService']
 
-  static constraints = {
-    nombre()
-    apellido()
-    fecNac()
-    sexo()
-    mail()
-    telefono()
-    direccion()
-    fecVencCarnet()
-    username()
-    password ()
-    username blank: false, unique: true
-    password blank: false
-  }
 
   static mapping = { password column: '`password`' }
 }

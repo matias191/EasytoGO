@@ -35,7 +35,7 @@
 	<label for="sexo"> <g:message code="user.sexo.label"
 			default="Sexo" /> <span class="required-indicator">*</span>
 	</label>
-	<!-- <g:field name="sexo" type="number" value="${userInstance.sexo}" required=""/> -->
+<%--	<g:field name="sexo" type="number" value="${userInstance.sexo}" required=""/> --%>
 
 
 	<g:select id="sexo" name="sexo" value="${userInstance.sexo}"
@@ -64,24 +64,25 @@
 </div>
 
 <div
-	class="fieldcontain ${hasErrors(bean: userInstance, field: 'direccion', 'error')} required">
+	class="fieldcontain ${hasErrors(bean: userInstance, field: 'direccion', 'error')}">
 	<label for="direccion"> <g:message code="user.direccion.label"
-			default="Direccion" /> <span class="required-indicator">*</span>
+			default="Direccion" />
 	</label>
-	<g:textField name="direccion" required=""
+	<g:textField name="direccion" 
 		value="${userInstance?.direccion}" />
-
+<span>(opcional)</span>
 </div>
 
 <div
-	class="fieldcontain ${hasErrors(bean: userInstance, field: 'fecVencCarnet', 'error')} required">
+	class="fieldcontain ${hasErrors(bean: userInstance, field: 'fecVencCarnet', 'error')} ">
 	<label for="fecVencCarnet"> <g:message
 			code="user.fecVencCarnet.label"
-			default="Vencimiento del carnet de conducir" /> <span
-		class="required-indicator">*</span>
+			default="Vencimiento del carnet de conducir" /> 
 	</label>
-	<g:datePicker name="fecVencCarnet" precision="month"
+	<g:datePicker default="none" noSelection="['':'']" name="fecVencCarnet" precision="month"
 		value="${userInstance?.fecVencCarnet}" />
+		
+		<span>(opcional)</span>
 
 </div>
 
@@ -105,7 +106,25 @@
 		value="${userInstance?.password}" />
 
 </div>
-<!-- 
+
+<div
+	class="fieldcontain">
+	<label for="confirmPassword">Confirmar contraseña<span class="required-indicator">*</span>
+	</label>
+	<g:field type="password" name="confirmPassword" required=""
+		value="" />
+
+</div>
+
+
+<div class="fieldcontain">
+	
+	<label></label><label><h5>* Campos Obligatorios</h5></label>
+</div>
+
+
+
+<%--
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountExpired', 'error')} ">
 	<label for="accountExpired">
 		<g:message code="user.accountExpired.label" default="Account Expired" />
@@ -142,4 +161,4 @@
 
 </div>
 
--->
+--%>

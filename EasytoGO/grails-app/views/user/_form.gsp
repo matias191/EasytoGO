@@ -33,7 +33,7 @@
 		<g:message code="user.sexo.label" default="Sexo" />
 		<span class="required-indicator">*</span>
 	</label>
-	<!-- <g:field name="sexo" type="number" value="${userInstance.sexo}" required=""/> -->
+<%--	<g:field name="sexo" type="number" value="${userInstance.sexo}" required=""/> --%>
 	
           
     <g:select id="sexo" name="sexo" value="${userInstance.sexo}"
@@ -86,7 +86,7 @@
 	</label>
 	<g:textField name="username" required="" value="${userInstance?.username}"/>
 
-</div>
+</div><%--
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 	<label for="password">
@@ -133,6 +133,7 @@
 
 </div>
 
+--%>
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'vehiculos', 'error')} ">
 	<label for="vehiculos">
 		<g:message code="user.vehiculos.label" default="Vehiculos" />

@@ -37,6 +37,23 @@ grails.mime.types = [ // the first one is the default format
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
 
+grails {
+  mail {
+    host = "smtp.gmail.com"
+    port = 465
+    username = "matias.morenor@gmail.com"
+    password = "caiolamobel"
+  props = ["mail.smtp.auth":"true",
+             "mail.smtp.socketFactory.port":"465",
+             "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+             "mail.smtp.socketFactory.fallback":"false"]
+  
+
+  }
+}
+grails.mail.default.from="noreply@easytogo.com.ar"
+
+
 // The default scope for controllers. May be prototype, session or singleton.
 // If unspecified, controllers are prototype scoped.
 grails.controllers.defaultScope = 'singleton'
@@ -58,8 +75,8 @@ grails {
         // filteringCodecForContentType.'text/html' = 'html'
     }
 }
-
-
+//Permito que GET porque por defecto requiere POST o agrego method="POST" en el main en el link del logout, eso hice
+grails.plugin.springsecurity.logout.postOnly = false
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
@@ -133,5 +150,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':    ['permitAll'],
     '/dbconsole/**':    ['permitAll'],
 	'/**/favicon.ico':  ['permitAll']
+    //      '/**/**':           ['permitAll']
 ]
 
