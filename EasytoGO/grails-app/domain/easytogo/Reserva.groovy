@@ -6,7 +6,14 @@ class Reserva {
     }
     Viaje viajes
 	User usuario
-	Date fecha_res
+	String fecha_res
 	int cant_plaz
+	
+	@Override
+	String toString() {
+	  "${viajes.conductor.nombre}"
+	  "${usuario.nombre}"
+	  
+	}
 	
 }

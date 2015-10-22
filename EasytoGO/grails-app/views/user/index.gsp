@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main2">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -31,7 +31,7 @@
 					
 						<g:sortableColumn property="sexo" title="${message(code: 'user.sexo.label', default: 'Sexo')}" />
 					
-						<g:sortableColumn property="mail" title="${message(code: 'user.mail.label', default: 'E-mail')}" />
+						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'E-email')}" />
 					
 						<g:sortableColumn property="telefono" title="${message(code: 'user.telefono.label', default: 'Telefono')}" />
 						
@@ -57,7 +57,7 @@
 						
 						<td>${userInstance.sexo == 1 ? 'Masculino' : 'Femenino'}</td>
 					
-						<td>${fieldValue(bean: userInstance, field: "mail")}</td>
+						<td>${fieldValue(bean: userInstance, field: "email")}</td>
 					
 						<td>${fieldValue(bean: userInstance, field: "telefono")}</td>
 						

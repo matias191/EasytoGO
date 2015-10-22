@@ -1,6 +1,7 @@
 package easytogo
 
 import java.util.Date;
+import groovy.time.*
 
 /**
  * Dominio User
@@ -24,19 +25,25 @@ class User implements Serializable {
   /** Opcional. Solo necesario cuando el usuario da de alta un viaje. */
   Date fecVencCarnet
   String direccion
-  String mail
+  String email
   String telefono
+  byte[] avatar
+  String avatarType
+  boolean verifTel = false
+  boolean verifDir = false
   /** 
    * Código único generado para validar al usuario
    *  cuando se registra. Se envia el código incrustado en un link
    *  a su cuenta de correo para activar la cuenta.
    */
   String confirmCode
+  int confirmCodeSMS
   int sexo
   boolean enabled = true
   boolean accountExpired
   boolean accountLocked
   boolean passwordExpired
+  
 
   /** 
    * Relación con la clase Vehiculo.groovy.
@@ -55,17 +62,21 @@ class User implements Serializable {
   static constraints = {
     nombre()
     apellido()
-    fecNac()
+    fecNac(max:(use(TimeCategory){18.years.ago  as Date}))
     sexo()
-    mail()
+    email(email: true)
     telefono()
     direccion(nullable: true)
     fecVencCarnet(nullable: true)
     username()
     password ()
     confirmCode(nullable: true)
+    confirmCodeSMS(nullable:true)
     username blank: false, unique: true
     password blank: false
+    avatar(nullable:true, maxSize: 100000 /* 100K */)
+    avatarType(nullable:true)
+    
   }
 
   User(String username, String password) {

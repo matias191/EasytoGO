@@ -1,26 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main2">
 		<g:javascript library='jquery' />
 		<g:set var="entityName" value="${message(code: 'vehiculo.label', default: 'Vehiculo')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-vehiculo" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-				
-		
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" />(Esto vuela mas adelante)</g:link></li>
-			</ul>
-		</div>
-		
-		
+	
 		
 		<div id="create-vehiculo" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h1>Agrega tu vehículo</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -31,12 +21,18 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:vehiculoInstance, action:'save']" >
+			<g:form url="[resource:vehiculoInstance, action:'save']" class="form-horizontal" >
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				<div class="container">
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="singlebutton"></label>
+					<g:submitButton name="create" class="save btn btn-success btn-lg" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				</div>
+					</div>
+    			
 				</fieldset>
 			</g:form>
 		</div>

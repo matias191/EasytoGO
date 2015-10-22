@@ -24,4 +24,5 @@ class Viaje {
 	int mascota
 	
 	
+	
 }

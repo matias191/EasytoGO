@@ -31,6 +31,31 @@ class ViajeController {
 		[viajes: ViajeList]
 		
 	}
+	
+	def usuarioViaje(){
+		//[viajes: Viaje.findAll]}
+		def params = sec.loggedInUserInfo(field:'id')
+		
+		//def ViajeList = Viaje.createCriteria().list (params) {
+			//if ( params.query ) {
+			//	ilike("conductor", "%${params.query}%")
+				//ilike("destino", "${sec.loggedInUserInfo(field:'id')}") //"%${params.query}%")
+			//}
+		//}
+		//[viajes:Viaje.listOrderByorigen()]
+		User usuario = User.findByUsername(sec.loggedInUserInfo(field:'username'))
+		[viajes: Viaje.findAllByConductor(usuario), reserva: Reserva.findAllByUsuario(usuario)]
+		
+		//[reserva: Reserva.findAllByUsuario(usuario)]
+		
+	}
+	
+	def pasajeroViaje(int viajeid){
+//		def params = sec.loggedInUserInfo(field:'id')
+		Viaje viajes = Viaje.findById(viajeid)
+		[reserva: Reserva.findAllByViajes(viajes)]
+//		
+	}
 
     def show(Viaje viajeInstance) {
         respond viajeInstance
@@ -123,6 +148,12 @@ class ViajeController {
    def reservar(Viaje viajeInstance) {
         respond viajeInstance
     }
+   def reservar = {
+	   visible = true
+	   if (isCurrent)
+		  visible = false
+	   [disabled, disabled]
+	   }
 }
 
 

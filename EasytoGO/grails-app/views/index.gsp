@@ -1,119 +1,99 @@
+<%@ page import="easytogo.User"%>
+
 <!DOCTYPE html>
-<html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <head>
-<meta name="layout" content="main" />
-<title>Easy to GO</title>
-<style type="text/css" media="screen">
-#status {
-	background-color: #eee;
-	border: .2em solid #fff;
-	margin: 2em 2em 1em;
-	padding: 1em;
-	width: 12em;
-	float: left;
-	-moz-box-shadow: 0px 0px 1.25em #ccc;
-	-webkit-box-shadow: 0px 0px 1.25em #ccc;
-	box-shadow: 0px 0px 1.25em #ccc;
-	-moz-border-radius: 0.6em;
-	-webkit-border-radius: 0.6em;
-	border-radius: 0.6em;
-}
-
-.ie6 #status {
-	display: inline;
-	/* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-}
-
-#status ul {
-	font-size: 0.9em;
-	list-style-type: none;
-	margin-bottom: 0.6em;
-	padding: 0;
-}
-
-#status li {
-	line-height: 1.3;
-}
-
-#status h1 {
-	text-transform: uppercase;
-	font-size: 1.1em;
-	margin: 0 0 0.3em;
-}
-
-#page-body {
-	margin: 2em 1em 1.25em 18em;
-}
-
-h2 {
-	margin-top: 1em;
-	margin-bottom: 0.3em;
-	font-size: 1em;
-}
-
-p {
-	line-height: 1.5;
-	margin: 0.25em 0;
-}
-
-#controller-list ul {
-	list-style-position: inside;
-}
-
-#controller-list li {
-	line-height: 1.3;
-	list-style-position: inside;
-	margin: 0.25em 0;
-}
-
-@media screen and (max-width: 480px) {
-	#status {
-		display: none;
-	}
-	#page-body {
-		margin: 0 1em 1em;
-	}
-	#page-body h1 {
-		margin-top: 0;
-	}
-}
-</style>
+     <meta name="layout" content="main2"/>
 </head>
+
 <body>
-	<a href="#page-body" class="skip"><g:message
-			code="default.link.skip.label" default="Skip to content&hellip;" /></a>
-	<div id="status" role="complementary">
-		<h1>Qué deseas hacer?</h1>
-		<ul>
-			
-			<li><a href="http://localhost:8080/EasytoGO/User/create">Registrarme</a></li>
-			<sec:ifLoggedIn>
-	
-		<sec:ifAllGranted roles="ROLE_ADMIN">
-				<li><g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link></li>
-				<li><g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link></li>
-		</sec:ifAllGranted>
-	</sec:ifLoggedIn>
-	
-			<li></li>
-		</ul>
-	</div>
+<div class="wrapper">
+      <div class="interactive-slider-v2 img-v1" style="background: url('${resource(dir: 'images', file: 'Carre.jpg')}'); background-size: cover;background-position: center;margin-top:0; ">
+     	<div class="container">
+     		
+            <h1>Bienvenido a EasyToGO</h1>
+            <p>Encuentra tu viaje</p>
+             <fieldset class="form">
+				<g:form controller="viaje"action="buscaViaje" method="GET">
+					<div class="row">
+					<div class="fieldcontain required">
+						<div class="input-group input-group-sm" style="padding: 0 25% 0 25%;">
+						<label for="query" class="input-group-addon" id="basic-addon1" aria-describedby="basic-addon1" ><span class="glyphicon glyphicon-map-marker"></span></label>
+						<g:textField id="pac-input2" class="form-control" name="query" value="${params.query}"placeholder="Ingresa un Origen"/> 
+						</div>
+					</div>
+						
+					<div class="fieldcontain" style="margin-top:0.3em;" >
+						<div class="input-group input-group-sm col-lg-12" style="padding: 0 25% 0 25%;" >
+						<label for="query"class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-map-marker"></span></label>
+						<g:textField id="pac-input" class="form-control" name="query1" value="${params.query1}" aria-describedby="basic-addon2" placeholder="Ingresa un Destino"/> <br>
+						</div>
+						<div class="fieldcontain" style="margin-top:0.3em; padding: 0 25% 0 25%;" >						
+						       <div class="input-group date input-group-sm col-lg-12" >
+      							<input id="date" type="text" class="form-control" placeholder="Fecha de Viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+    						   </div>
+						<div >
+						<div class="fieldcontain" style="margin-top:0.3em;" >
+						<button type="submit" class="controls btn btn-success btn-lg rounded"  value="Buscar">Buscar</button>
+						</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				</g:form>
+			</fieldset>
+            
+        </div>
+    </div>
+    <!--=== End Slider ===-->
 
-	<div id="page-body" role="main">
-		<h1>Bienvenido a Easy to Go</h1>
-		<p>Viaja en forma económica, segura, ecológica y divertida...</p>
-		
+    <!--=== Purchase Block ===-->
+    <!--/row-->
+    <!-- End Purchase Block -->
 
-		<!--
-			  <div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		 -->
-	</div>
+    <!--=== Content Part ===-->
+    <div class="container content-sm">
+    	<!-- Service Blocks -->
+    	<div class="row margin-bottom-30">
+        	<div class="col-md-4">
+        		<div class="service">
+                    <i class="fa fa-compress service-icon"></i>
+        			<div class="desc">
+        				<h4>Comparte tu Viaje</h4>
+                        <p>Estas cansado de viajar solo y gastar demasiado dinero en combustible?
+                            Comparte tu viaje hoy y olvidate de estos problemas</p>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-4">
+        		<div class="service">
+                    <i class="fa fa-cogs service-icon"></i>
+        			<div class="desc">
+        				<h4>Conoce Nuevas Personas</h4>
+                        <p>Encuentrar nuevos amigos es mas facil que nunca, nada hace mejor la amistad que gastar unas pocas horas hablando con personas interesantes</p>
+        			</div>
+        		</div>
+        	</div>
+        	<div class="col-md-4">
+        		<div class="service">
+                    <i class="fa fa-rocket service-icon"></i>
+        			<div class="desc">
+        				<h4>Ve a nuevos lugares</h4>
+                        <p>Encuentra nuevos lugares para descansar, ya no tienes excusas para quedarte y no conocer</p>
+        			</div>
+        		</div>	
+        	</div>
+    	</div>
+
+    </div>
+    
+</div>
+
+<asset:javascript  src="bootstrap-datepicker.es.min.js" />
+<asset:javascript  src="scripts.js" />
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmPsZlBSWMaZodkL-MfbUsIwdqoOX9F2s&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <%@ page import="easytogo.User"%>
 
 
-<div
+<div	
 	class="fieldcontain ${hasErrors(bean: userInstance, field: 'nombre', 'error')} required">
 	<label for="nombre"> <g:message code="user.nombre.label"
 			default="Nombre" /> <span class="required-indicator">*</span>

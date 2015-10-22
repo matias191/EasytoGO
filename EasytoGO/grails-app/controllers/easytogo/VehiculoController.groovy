@@ -9,6 +9,8 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 @Secured(['permitAll'])
 class VehiculoController {
+  
+  private static final okcontents = ['image/png', 'image/jpeg', 'image/gif']
 
   static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -57,13 +59,10 @@ class VehiculoController {
 
     request.withFormat {
       form multipartForm {
-        flash.message = message(code: 'default.created.message', args: [
-          message(code: 'vehiculo.label', default: 'Vehiculo'),
-          vehiculoInstance.id
-        ])
+        flash.message = "Vehiculo agregado correctamente"
         redirect vehiculoInstance
       }
-      '*' { respond vehiculoInstance, [status: CREATED] }
+     
     }
   }
 
@@ -131,6 +130,50 @@ class VehiculoController {
       '*'{ render status: NOT_FOUND }
     }
   }
+  
+  def upload_avatar(Vehiculo vehiculoInstance) {
+    def vehiculo = vehiculoInstance // or however you select the current user
+  
+    // Get the avatar file from the multi-part request
+    def f = request.getFile('avatar')
+  
+    // List of OK mime-types
+    if (!okcontents.contains(f.getContentType())) {
+      flash.message = "Avatar must be one of: ${okcontents}"
+      render(view:'select_avatar', model:[vehiculo:vehiculo])
+      return
+    }
+  
+    // Save the image and mime type
+    vehiculo.avatar = f.bytes
+    vehiculo.avatarType = f.contentType
+    vehiculo.save flush:true
+    log.info("File uploaded: $vehiculo.avatarType")
+  
+    // Validation works, will check if the image is too big
+    if (!vehiculo.save()) {
+      render(view:'select_avatar', model:[vehiculo:vehiculo])
+      return
+    }
+    
+    //flash.message = "Avatar (${user.avatarType}, ${user.avatar.size()} bytes) uploaded."
+    flash.message = "Foto actualizada correctamente."
+    redirect vehiculo
+  }
+  
+  def avatar_image() {
+    def avatarVehiculo = Vehiculo.get(params.id)
+    if (!avatarVehiculo || !avatarVehiculo.avatar || !avatarVehiculo.avatarType) {
+      response.sendError(404)
+      return
+    }
+    response.contentType = avatarVehiculo.avatarType
+    response.contentLength = avatarVehiculo.avatar.size()
+    OutputStream out = response.outputStream
+    out.write(avatarVehiculo.avatar)
+    out.close()
+  }
+  
 }
 
 

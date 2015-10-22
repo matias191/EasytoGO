@@ -17,7 +17,7 @@
 		<g:message code="reserva.fecha_res.label" default="Fechares" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="fecha_res" precision="day"  value="${reservaInstance?.fecha_res}"  />
+	<g:field name="fecha_res" type="String" value="${reservaInstance?.fecha_res}"  />
 
 </div>
 

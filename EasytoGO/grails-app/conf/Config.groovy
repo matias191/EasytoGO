@@ -41,8 +41,8 @@ grails {
   mail {
     host = "smtp.gmail.com"
     port = 465
-    username = "matias.morenor@gmail.com"
-    password = "caiolamobel"
+    username = "easytogo.viajescompartidos@gmail.com"
+    password = "proyecto2015"
   props = ["mail.smtp.auth":"true",
              "mail.smtp.socketFactory.port":"465",
              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
@@ -50,6 +50,8 @@ grails {
   
 
   }
+  
+ 
 }
 grails.mail.default.from="noreply@easytogo.com.ar"
 
@@ -117,6 +119,15 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'easytogo.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'easytogo.UserRol'
 grails.plugin.springsecurity.authority.className = 'easytogo.Rol'
 
+twilio {
+  // Enter your host address
+  host = 'https://api.twilio.com'
+  apiID = 'AC758205006d96fb76aedefb47e36bfa40'
+  apiPass = '9b9b4833864b714f768ad099ad0a0423'
+  smsUrl = '/2010-04-01/Accounts/' + apiID + '/Messages.json'
+  number = "+12523604342"
+}
+
 // log4j configuration
 log4j.main = {
     // Example of changing the log pattern for the default console appender:
@@ -149,7 +160,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
     '/dbconsole/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll']
-    //      '/**/**':           ['permitAll']
+	'/**/favicon.ico':  ['permitAll'],
+    '/**/**':           ['permitAll']
 ]
 

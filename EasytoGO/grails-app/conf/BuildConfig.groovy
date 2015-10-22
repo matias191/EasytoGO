@@ -21,6 +21,7 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
+
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -51,6 +52,10 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+        compile(group:'org.apache.httpcomponents',name:'httpclient',version:'4.3.6')
+        compile(group:'org.apache.httpcomponents',name:'fluent-hc',version:'4.3.6')
+        compile(group:'org.apache.httpcomponents',name:'httpclient-cache',version:'4.3.6')
+        compile(group:'org.apache.httpcomponents',name:'httpmime',version:'4.3.6')
     }
 
     plugins {
@@ -64,6 +69,15 @@ grails.project.dependency.resolution = {
         //compile ":spring-security-core:2.0-RC5"
         compile ':spring-security-core:2.0-RC5'
         compile ":mail:1.0.7"
+        compile ":spring-security-ui:1.0-RC2"
+        compile ":jquery-ui:1.10.4"
+        compile ":famfamfam:1.0.1"
+        //Twilio es el plugin para enviar SMS
+        compile ":twilio:0.1"
+        
+        
+       
+        
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
@@ -76,4 +90,7 @@ grails.project.dependency.resolution = {
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
+  
+    
 }
+

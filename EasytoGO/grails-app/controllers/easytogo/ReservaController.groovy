@@ -105,4 +105,36 @@ class ReservaController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	@Transactional
+	def save_reserva(Reserva reservaInstance, Viaje viajeInstance) {
+		if (reservaInstance == null) {
+			notFound()
+			return
+		}
+
+		if (reservaInstance.hasErrors()) {
+			respond reservaInstance.errors, view:'create'
+			return
+		}
+
+		reservaInstance.save flush:true
+
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.created.message', args: [message(code: 'reserva.label', default: 'Reserva'), reservaInstance.id])
+				//redirect reservaInstance
+			}
+			'*' { respond reservaInstance, [status: CREATED] }
+		}
+		
+		//def resultado = '${params.plazas_disponibles}'-'${params.cant_plaz}'		
+		def sql = """update Viaje viajeInstance
+                   set viajeInstance.plazas_disponibles = '${params.plazas_disponibles}'
+                    
+                   where viajeInstance.id = '${params.viajes.id}'""" 
+              viajeInstance.executeUpdate(sql)
+      redirect reservaInstance
+		
+	}
 }

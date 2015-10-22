@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main2">
 		<g:set var="entityName" value="${message(code: 'viaje.label', default: 'Viaje')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-viaje" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
 		<div id="create-viaje" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h1>Publicar mi viaje</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -25,14 +18,23 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:viajeInstance, action:'save']" >
-				<fieldset class="form">
+			<g:form url="[resource:viajeInstance, action:'save']" class="form-horizontal">
+				<fieldset >
 					<g:render template="form"/>
 				</fieldset>
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				<fieldset class="buttons" style="margin-botton:1em;">
+				<div class="container">
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="singlebutton"></label>
+					<div class="col-md-4">
+					<g:submitButton name="create" class="save btn btn-success btn-lg"  value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					</div>
+					</div>
+    			</div>	
 				</fieldset>
 			</g:form>
 		</div>
+
+	
 	</body>
 </html>

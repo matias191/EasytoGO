@@ -1,0 +1,9 @@
+<plugin name='twilio' version='0.1' grailsVersion='2.4 &gt; *'>
+  <title>Twilio Plugin</title>
+  <description>Provides SMS sending capabilities to a Grails application.</description>
+  <documentation>http://grails.org/plugin/twilio</documentation>
+  <type>TwilioGrailsPlugin</type>
+  <resources>
+    <resource>com.novadge.twilio.SmsService</resource>
+  </resources>
+</plugin>

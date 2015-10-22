@@ -2,60 +2,94 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-<meta name="layout" content="main"/>
+<meta name="layout" content="main2"/>
 <title>Insert title here</title>
 </head>
 <body>
 
-
+<div class="container">
 <g:if test="${flash.message}">
 <div class="message" role="status">${flash.message}</div>
 </g:if>
-<fieldset class="form">
-	<g:form action="buscaViaje" method="GET">
-		<div class="fieldcontain">
-			<label for="query">Origen:</label>
-			<g:textField id="pac-input2" class="controls" name="query" value="${params.query}"/> <br>
-			
-			<label for="query">Destino:</label>
-			<g:textField id="pac-input" class="controls" name="query1" value="${params.query1}"/> <br>
-			
-			<input type="submit" value="Buscar">
+<fieldset>
+	<g:form action="buscaViaje" method="GET" class="form-horizontal">
+		<div class="container">
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="query"><span class="glyphicon glyphicon-map-marker"></span>Origen</label>
+					<div class="col-md-4">
+					
+					<g:textField id="pac-input2" class="form-control input-md" name="query" value="${params.query}"/> <br>
+					</div>
+					</div>
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="query1"><span class="glyphicon glyphicon-map-marker"></span>Destino</label>
+					<div class="col-md-4">
+					
+					<g:textField id="pac-input" class="form-control input-md" name="query1" value="${params.query1}"/> <br>
+					</div>
+					</div>
+					
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="singlebutton"></label>
+					<div class="col-md-4">
+					<button type="submit" class="controls btn btn-success btn-md rounded"  value="Buscar">Buscar</button>
+					</div>
+					</div>
+					
 		</div>
-		
+      
 	</g:form>
 </fieldset>
 
 
   <div class="body">
-  
-  <table>
-			<thead>
-					<tr>
+  <div class="table-responsive" > 
+  <table class="table table-hover"  >
+
+    <thead>
+
+       
+
+            <tr>		
+            			<th></th>
+            			
 						<g:sortableColumn property="origen" title="${message(code: 'viaje.origen.label', default: 'Origen')}" />
 						
 						<g:sortableColumn property="destino" title="${message(code: 'viaje.destino.label', default: 'Destino')}" />
 					
-						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fechasalida')}" />
+						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fecha de salida')}" />
 					
-						<g:sortableColumn property="fecha_llegada" title="${message(code: 'viaje.fecha_llegada.label', default: 'Fechallegada')}" />
+						<g:sortableColumn property="fecha_llegada" title="${message(code: 'viaje.fecha_llegada.label', default: 'Fecha de llegada')}" />
 					
-						<g:sortableColumn property="plazas_disponibles" title="${message(code: 'viaje.plazas_disponibles.label', default: 'Plazasdisponibles')}" />
+						<g:sortableColumn property="plazas_disponibles" title="${message(code: 'viaje.plazas_disponibles.label', default: 'Plazas disponibles')}" />
 					
-						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costoplaza')}" />
-					
-						<g:sortableColumn property="comentario" title="${message(code: 'viaje.comentario.label', default: 'Comentario')}" />
-					
-						<th><g:message code="viaje.conductor.label" default="Conductor" /></th>
-					
-					</tr>
-				</thead>
-	
-	<g:each in="${viajes}" status="i" var="Viaje">	
+						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costo plaza')}" />
 						
-						<tr>		
+						<g:sortableColumn property="conductor" title="${message(code: 'viaje.conductor.label', default: 'Conductor')}" />										
+															
 						
-						<td><g:link action="reservar" id="${Viaje.id}">${Viaje.origen}</g:link></td>
+			</tr>
+
+        
+
+    </thead>
+
+    <tbody>
+
+        <g:each in="${viajes}" status="i" var="Viaje">	
+						
+						<tr>
+						
+						<Td>
+						<sec:ifLoggedIn>
+						<g:link action="reservar" id="${Viaje.id}"><span class="glyphicon glyphicon-shopping-cart">Reservar</span></g:link>
+						</sec:ifLoggedIn>
+						 <sec:ifNotLoggedIn>
+						 <a class="home" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-shopping-cart">Reservar</span></a>
+						 </sec:ifNotLoggedIn>
+						</Td>
+						
+						<td>${Viaje.origen}</td>
 						
 						<td>${Viaje.destino}</td>
 					
@@ -67,23 +101,26 @@
 					
 						<td>${Viaje.costoplaza}</td>
 					
-						<td>${Viaje.comentario}</td>
-					
 						<td>${Viaje.conductor}</td>
-					
+						
+						
+						
 					</tr>
 						
 
 												
                       
 					
-				</g:each>
+		</g:each>
 
-    
-	</tbody>
-	</table>
-    
-  </div>
+    </tbody>
+
+</table>
+  
+ </div>   
+ </div>
+ </div>
+<asset:javascript  src="scripts.js" />
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmPsZlBSWMaZodkL-MfbUsIwdqoOX9F2s&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>

@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="main2">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation"> <!-- Barrita abajo del logo -->
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index">Lista de Usuarios(esto vuela de acá mas adelante)</g:link></li><!-- link a Lista de Usuarios -->
-			</ul>
-		</div>
-		<div id="create-user" class="content scaffold-create" role="main">
+		<div class="container">
+		<div class="row">
+	
 			<h1>Registrarse</h1><!-- "crear usuario" titulo -->
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -25,14 +20,26 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:userInstance, action:'save']" >
-				<fieldset class="form">
-					<g:render template="formCrearUser"/>  <!-- llama al "form" --> 
+			
+			<g:form url="[resource:userInstance, action:'save']"class="form-horizontal" >
+				<fieldset>
+					<g:render template="useriocreacioneex"/>  <!-- llama al "form" --> 
 				</fieldset>
+				
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				<div class="container">
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="singlebutton"></label>
+					<div class="col-md-4">
+					<g:submitButton name="create" class="save btn btn-success btn-lg" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					</div>
+					</div>
+    			</div>	
 				</fieldset>
 			</g:form>
+			
+			
+	  </div>
 		</div>
 	</body>
 </html>
