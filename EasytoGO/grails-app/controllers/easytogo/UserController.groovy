@@ -46,7 +46,10 @@ class UserController {
    * @return userInstance Instancia de usuario para que la vista lo maneje.
    */
   def show(User userInstance) {
+    def user = springSecurityService.currentUser
+    if (userInstance == user){
     respond userInstance
+    }else{publicPerfil(userInstance)}
   }
 
   def create() {
@@ -319,6 +322,10 @@ class UserController {
     redirect user
     }
     
+  }
+  
+  def publicPerfil(User userInstance){
+     render(view:'publicPerfil', model: [userInstance: userInstance])  ;
   }
   
   
