@@ -85,20 +85,7 @@
 				</div>
 				   	</div>
 				</g:if>
-			
-				<g:if test="${viajeInstance?.conductor}">
-				<div class="form-group">
-					<span id="conductor-label" class="col-md-4 control-label"><g:message code="viaje.conductor.label" default="Conoce los detalles del conductor" /></span>
-					<div class="col-md-6" >	
-						<g:form controller="user"action="show" id="${viajeInstance?.conductor?.id}" >
-						<button class="form-control btn btn-info" aria-labelledby="conductor-label" ><span class="glyphicon glyphicon-user " ></span> 	${viajeInstance?.conductor?.encodeAsHTML()} </button>
-						</g:form>
-					</div>
-				   	</div>
-				</g:if>
-			
 				
-			
 				<g:if test="${viajeInstance?.equipaje}">
 				<div class="form-group">
 					<span id="equipaje-label" class="col-md-4 control-label"><g:message code="viaje.equipaje.label" default="¿Se permite equipe?" /></span>
@@ -124,10 +111,115 @@
 						<input class="form-control input-md" aria-labelledby="mascota-label" value="${viajeInstance.mascota == 1 ? 'Si' : 'No' }"readonly>
 					</div>
 				   	</div>
+			
+				<g:if test="${viajeInstance?.conductor}">
+				<div class="form-group">
+					<span id="conductor-label" class="col-md-4 control-label"><g:message code="viaje.conductor.label" default="Conoce los detalles del conductor" /></span>
+					<div class="col-md-6" >	
+						<g:form controller="user"action="show" id="${viajeInstance?.conductor?.id}" >
+						<button class="form-control btn btn-info" aria-labelledby="conductor-label" ><span class="glyphicon glyphicon-user " ></span> 	${viajeInstance?.conductor?.encodeAsHTML()} 
+							
+						</button>
+						</g:form>
+					</div>
+				   	</div>
+				</g:if>
+				
+				<%--Foto del conductor--%>
+				<div class="form-group">
+							<g:if test="${viajeInstance?.conductor.avatar}">
+							<div class="fieldcontain col-md-2">
+							<span class="property-value">
+							<img class="avatar avatar_small" src="${createLink(controller:'user', action:'avatar_image', id:viajeInstance.conductor.id)}" />
+							</span>
+							</div>	
+							</g:if>	
+				</div>
+				
+			<%--Verificaciones--%>
+			<div class="form-group">			
+			<div class="col col-md-3">
+			<div id="status" role="complementary">			
+			<ul>
+				<sec:ifLoggedIn>
+							<li class="fieldcontain">
+							Edad: ${age} años
+							</li>	
+											
+							<li class="fieldcontain">							
+							<g:if test="${viajeInstance?.conductor.verifTel.toBoolean() }">
+							<span >Teléfono verificado</span>
+							<asset:image src="imagenYes.png" width="20" height="20"/>
+							</g:if>
+							<g:if test="${!viajeInstance?.conductor.verifTel.toBoolean()}">
+							<span >Teléfono NO verificado</span>
+     						<asset:image src="imagenNo.png" width="20" height="20"/>
+     						</g:if>
+							</li>
+						
+							<li class="fieldcontain">														
+							<g:if test="${viajeInstance?.conductor.enabled.toBoolean() }">
+							<span >E-mail verificado</span>
+							<asset:image src="imagenYes.png" width="20" height="20"/>
+							</g:if>
+							<g:if test="${!viajeInstance?.conductor.enabled.toBoolean() }">
+							<span >E-mail NO verificado</span>
+     						<asset:image src="imagenNo.png" width="20" height="20"/>
+							</g:if>
+							</li>
+							
+							<li class="fieldcontain">												
+							<g:if test="${viajeInstance?.conductor.verifDir.toBoolean() }">
+							<span >Dirección verificada</span>
+							<asset:image src="imagenYes.png" width="20" height="20"/>
+							</g:if>
+							<g:if test="${!viajeInstance?.conductor.verifDir.toBoolean() }">
+							<span >Dirección NO verificada</span>
+     						<asset:image src="imagenNo.png" width="20" height="20"/>
+							</g:if>
+							</li>					
+				</sec:ifLoggedIn>
+				</ul>			
+				</div>		
+				</div>
+				</div>
+				
+				<%--Muestra el vehiculo--%>
+				<div class="form-group">
+				<g:if test="${viajeInstance?.conductor.vehiculos}">
+				<div class="fieldcontain col-md-2">
+					Vehículo
+					
+						<g:each in="${viajeInstance.conductor.vehiculos}" var="v">
+						<li class="fieldcontain">
+						<span class="property-value" aria-labelledby="vehiculos-label">${v?.modelo.marca.nombre.encodeAsHTML()} ${v?.modelo.nombre.encodeAsHTML()}</span>
+						</li>
+						</g:each>
+				</div>
+				</g:if>
+				</div>
+				
+				<%--Foto del vehiculo--%>
+				<div class = "form-group">
+					<g:if test="${viajeInstance?.conductor.vehiculos.avatar}">
+						<div class="fieldcontain">
+							<span class="property-value">
+								<g:each in="${viajeInstance.conductor.vehiculos}" var="v">
+								<img class="avatar avatar_small" src="${createLink(controller:'vehiculo', action:'avatar_image', id:v.id)}" />
+								</g:each>
+							</span>
+						</div>
+					</g:if>
+				</div>
+			
+				
 				   	
-				  <h5>	Esto lo podes tratar asi para darle otro formato.</h5> 
+				 
+				<h5>No darle bola a esto, excepto Roberto jaja </h5>
+				<h5>	Esto lo podes tratar asi para darle otro formato. Y ya como texto es mas facil pq lo metes en cualquier lado</h5> 
 				<h5>EL costo por plaza es ${viajeInstance.costoplaza}</h5>
 				<h5>Plazas disponibles: ${viajeInstance.plazas_disponibles}</h5>
+				<h5>Cristian, si queres sacar esto pq justo haces el video andate al proyecto->views->viajes->reservar y borra esto </h5>
 	
 				
 			<fieldset class="form">

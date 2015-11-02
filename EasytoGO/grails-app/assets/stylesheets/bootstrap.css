@@ -1144,6 +1144,17 @@ img {
 .img-circle {
   border-radius: 50%;
 }
+
+.avatar_small {
+	border-radius: 50%;
+  width: 4em;
+  height: 5em;
+}
+
+.avatar_tiny {
+  width: 2em;
+  height: 2.5em;
+}
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
