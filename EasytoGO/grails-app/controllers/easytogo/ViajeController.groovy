@@ -51,9 +51,21 @@ class ViajeController {
 	}
 	
 	def pasajeroViaje(int viajeid){
-//		def params = sec.loggedInUserInfo(field:'id')
-		Viaje viajes = Viaje.findById(viajeid)
-		[reserva: Reserva.findAllByViajes(viajes)]
+		def usr = sec.loggedInUserInfo(field:'id')
+		def usr1 = User.findById(usr)
+		Viaje viajes_pas = Viaje.findById(viajeid)
+		def calif = Calificacion.findAllByCalificadorAndEstado(usr1, "TRUE")
+		def calificado = User.findAllById(calif.calificado.id)
+		def c = Reserva.createCriteria()
+		def reser = c{like("viajes", viajes_pas)
+			//and {NotEqual("usuario", calificado)}
+		}
+		//	and {like("usuario",usr)}
+		//}
+		//[reserva: reser]
+		[reserva: Reserva.findAllByViajesAndUsuarioNotEqualAndUsuarioNotEqual(viajes_pas, usr1, calificado), 
+		  calificacion:	Calificacion.findAllByEstado("FALSE")]
+		
 //		
 	}
 
@@ -153,6 +165,13 @@ class ViajeController {
 	   if (isCurrent)
 		  visible = false
 	   [disabled, disabled]
+	   }
+   def calificar(int reservaid, int calificadoid, int conductorid) {
+	   
+	   //Reserva reserva = findbyId(reservaid)
+	   //User usuario	= findbyId(calificadoid)
+	   [reserva: Reserva.findById(reservaid), usuario: User.findById(calificadoid)]
+	  
 	   }
 }
 

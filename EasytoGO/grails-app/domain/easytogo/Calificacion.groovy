@@ -10,5 +10,6 @@ class Calificacion {
 	Reserva viaje_c
 	User calificador
 	User calificado
+	boolean estado
 	
 }

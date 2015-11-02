@@ -3,55 +3,83 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="administracion">
 		<g:set var="entityName" value="${message(code: 'marca.label', default: 'Marca')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-marca" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+		 <div class="container">		
+			
+			<div class="row">
+			 <div class="container">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Administracion <small>ABM-Marcas</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Marca de Vehiculos
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+          </div>
+		
+		<div class="row">
+		 <div class="container">
+		
 		<div id="show-marca" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
-			<ol class="property-list marca">
+			
+			<div class="form-horizontal">
 			
 			<g:if test="${marcaInstance?.nombre}">
-				<li class="fieldcontain">
-					<span id="nombre-label" class="property-label"><g:message code="marca.nombre.label" default="Nombre" /></span>
-					
-						<span class="property-value" aria-labelledby="nombre-label"><g:fieldValue bean="${marcaInstance}" field="nombre"/></span>
-					
-				</li>
+				<div class="form-group">
+					<span id="nombre-label" class="col-md-4 control-label"><g:message code="marca.nombre.label" default="Nombre" /></span>
+					<div class="col-md-6">
+						<input class="form-control input-md" aria-labelledby="nombre-label" value="${marcaInstance.nombre}"readonly>
+					</div>
+				</div>
 				</g:if>
 			
 				<g:if test="${marcaInstance?.modelos}">
-				<li class="fieldcontain">
-					<span id="modelos-label" class="property-label"><g:message code="marca.modelos.label" default="Modelos" /></span>
-					
+				<div class="form-group">
+					<span id="modelos-label" class="col-md-4 control-label"><g:message code="marca.modelos.label" default="Modelos" /></span>
+					<div class="col-md-6">
+						<select id="selectbasic" name="selectbasic" class="form-control">
 						<g:each in="${marcaInstance.modelos}" var="m">
-						<span class="property-value" aria-labelledby="modelos-label"><g:link controller="modelo" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
+						<option value="m" class="property-value" aria-labelledby="modelos-label">${m?.encodeAsHTML()}</option>
 						</g:each>
-					
-				</li>
+						</select>
+					</div>
+				</div>
 				</g:if>
-			
+		    </div>
+              </div>
+                  </div>
+          
+          
 				
-			
-			</ol>
+		<div class="row" style="padding-left:30px;">
+	
 			<g:form url="[resource:marcaInstance, action:'delete']" method="DELETE">
+		
+			<div class="form-group">	
 				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${marcaInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				<br>
+				<br>	
+					<g:link class="edit btn btn-lg btn-primary" action="edit" resource="${marcaInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:actionSubmit class="delete btn btn-lg btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
+				</div>
+				
 			</g:form>
-		</div>
+			</div>
+				   
+		       </div>
+        	</div>
 	</body>
 </html>

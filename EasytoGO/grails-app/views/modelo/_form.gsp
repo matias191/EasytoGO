@@ -1,24 +1,34 @@
 <%@ page import="easytogo.Modelo" %>
 
 
-
+<div class="form-group">
 <div class="fieldcontain ${hasErrors(bean: modeloInstance, field: 'marca', 'error')} required">
-	<label for="marca">
+	<label for="marca" class="col-md-4 control-label">
 		<g:message code="modelo.marca.label" default="Marca" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="marca" name="marca.id" from="${easytogo.Marca.list()}" optionKey="id" required="" value="${modeloInstance?.marca?.id}" class="many-to-one"/>
-
+	<div class="col-md-6">
+	
+	<g:select class="form-control" id="marca" name="marca.id" from="${easytogo.Marca.list()}" optionKey="id" required="" value="${modeloInstance?.marca?.id}" class="many-to-one"/>
+	
 </div>
-
+</div>
+</div>
+<div class="form-group">
 <div class="fieldcontain ${hasErrors(bean: modeloInstance, field: 'nombre', 'error')} required">
-	<label for="nombre">
+	<label for="nombre" class="col-md-4 control-label">
 		<g:message code="modelo.nombre.label" default="Nombre" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nombre" required="" value="${modeloInstance?.nombre}"/>
-
+	<div class="col-md-6">
+	<input name="nombre"  class="form-control input-md
+	" required="" value="${modeloInstance?.nombre}" />
 </div>
+</div>
+</div>
+
+
+
 <!-- 
 <div class="fieldcontain ${hasErrors(bean: modeloInstance, field: 'vehiculos', 'error')} ">
 	<label for="vehiculos">

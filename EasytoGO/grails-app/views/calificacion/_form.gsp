@@ -16,7 +16,7 @@
 		<g:message code="calificacion.calificador.label" default="Calificador" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="calificador" name="calificador.id" from="${easytogo.User.list()}" optionKey="id" required="" value="${calificacionInstance?.calificador?.id}" class="many-to-one"/>
+	<g:hiddenField  name="calificador" required="" value="${sec.loggedInUserInfo(field:'id')}" class="many-to-one"/>
 
 </div>
 
@@ -52,7 +52,7 @@
 		<g:message code="calificacion.viaje_c.label" default="Viajec" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="viaje_c" name="viaje_c.id" from="${easytogo.Reserva.list()}" optionKey="id" required="" value="${calificacionInstance?.viaje_c?.id}" class="many-to-one"/>
+	<g:textField name="viaje_c.id" required="" value="${calificacionInstance.viaje_c}" class="many-to-one"/>
 
 </div>
 

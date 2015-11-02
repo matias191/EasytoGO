@@ -46,8 +46,7 @@
 
 <div
 	class="fieldcontain ${hasErrors(bean: userInstance, field: 'mail', 'error')} required">
-	<label for="mail"> <g:message code="user.mail.label"
-			default="E-mail" /> <span class="required-indicator">*</span>
+	<label for="mail"> E-mail <span class="required-indicator">*</span>
 	</label>
 	<g:textField name="mail" required="" value="${userInstance?.mail}" />
 

@@ -24,7 +24,7 @@
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'fecNac', 'error')} required controls">
 			<label for="fecNac"class="col-md-4 control-label"> <g:message code="user.fecNac.label"
-			default="Fecha de Nacimiento" /> <span class="required-indicator">*</span>
+			default="Fecha de Nacimientoooo" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
 			<g:datePicker name="fecNac" precision="day" value="${userInstance?.fecNac}" />
@@ -45,8 +45,7 @@
 	</div>
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'mail', 'error')} required controls">
-			<label for="mail"class="col-md-4 control-label"> <g:message code="user.mail.label"
-			default="E-mail" /> <span class="required-indicator">*</span>
+			<label for="mail"class="col-md-4 control-label"> E-mail<span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
 			<input name="mail" required="" value="${userInstance?.mail}" class="form-control input-md" placeholder="Mail"/>

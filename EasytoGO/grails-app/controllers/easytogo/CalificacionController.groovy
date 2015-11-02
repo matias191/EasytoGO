@@ -44,6 +44,11 @@ class CalificacionController {
             }
             '*' { respond calificacionInstance, [status: CREATED] }
         }
+		//def sql = """update Reserva cacionInstance
+         //          set calificacionInstance.calificado = '1'
+                    
+         //          where calificacionInstance.id = '${}'""" 
+	   //viajeInstance.executeUpdate(sql)
     }
 
     def edit(Calificacion calificacionInstance) {
@@ -101,4 +106,32 @@ class CalificacionController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	@Transactional
+	def save_calificacion(Calificacion calificacionInstance, Reserva reservaInstance) {
+		if (calificacionInstance == null) {
+			notFound()
+			return
+		}
+
+		if (calificacionInstance.hasErrors()) {
+			respond calificacionInstance.errors, view:'create'
+			return
+		}
+
+		calificacionInstance.save flush:true
+
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.created.message', args: [message(code: 'calificacion.label', default: 'Calificacion'), calificacionInstance.id])
+				redirect calificacionInstance
+			}
+			'*' { respond calificacionInstance, [status: CREATED] }
+		}
+		def sql = """update Calificacion calificacionInstance
+                     set calificacionInstance.estado = 'TRUE'
+                    where calificacionInstance.id = calificacionInstance.id""" 
+	   reservaInstance.executeUpdate(sql)
+	   //redirect calificacionInstance
+	}
 }

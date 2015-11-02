@@ -45,6 +45,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo id:"mercadopago", url:"https://github.com/mercadopago/sdk-java/raw/master/releases"
     }
 
     dependencies {
@@ -56,6 +57,7 @@ grails.project.dependency.resolution = {
         compile(group:'org.apache.httpcomponents',name:'fluent-hc',version:'4.3.6')
         compile(group:'org.apache.httpcomponents',name:'httpclient-cache',version:'4.3.6')
         compile(group:'org.apache.httpcomponents',name:'httpmime',version:'4.3.6')
+        compile(group:'com.mercadopago',name:'sdk',version:'0.3.4')
     }
 
     plugins {

@@ -21,12 +21,15 @@
 		<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 		<asset:stylesheet src="stilos.css" type="text/css"/>
 		<asset:stylesheet src="bootstrap-datepicker3.min.css" type="text/css"/>
-		<asset:stylesheet src="bootstrap-datepicker.min.css" type="text/css"/>
+        <asset:stylesheet src="bootstrap-datepicker.min.css" type="text/css"/>
+		<asset:stylesheet src="bootstrap-datetimepicker.min.css" type="text/css"/>
+		
 		<g:layoutHead/>
 		
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-inverse" style="margin-bottom: 0 !important;
+	border-radius: 0 !important;background:ocefa5 !important;">
   			<div class="container-fluid">
     			<div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -34,7 +37,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a  class="navbar-brand home"  href="${createLink(uri: '/')}" ><asset:image src="esasylogoheade2trans5.png" class="img-responsive" alt="Logo" style="vertical-align: center;text-align: center;"/></a>
+      <a  class="navbar-brand home" style="padding: 0;
+	padding-top: 4px;padding-left:10px;" href="${createLink(uri: '/')}" ><asset:image src="esasylogoheade2trans5.png" class="img-responsive" alt="Logo" /></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav" style="vertical-align:center;">
@@ -43,13 +47,13 @@
         <li><g:link controller='viaje' action='create'>Publica tu viaje</g:link></li>
         </sec:ifLoggedIn>
         <sec:ifNotLoggedIn>
-        <li><a class="home" href="${createLink(uri: '/')}">Publica tu viaje</a></li>
+        <li><g:link controller='login' action='auth'>Publica tu viaje</g:link></li>
         </sec:ifNotLoggedIn>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="float:left;">
       	<sec:ifNotLoggedIn>
-        <li><g:link controller='User' action='create'><span class="glyphicon glyphicon-user"></span> Sign Up</g:link></li>
-        <li><g:link controller='login' action='auth'><span class="glyphicon glyphicon-log-in"></span> Login</g:link></li>
+        <li><g:link controller='User' action='create'><span class="glyphicon glyphicon-user"></span> Registrarse</g:link></li>
+        <li><g:link controller='login' action='auth'><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</g:link></li>
       	</sec:ifNotLoggedIn>
       	<sec:ifLoggedIn>
       	
@@ -58,24 +62,26 @@
       	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><sec:username/><span class="caret"></span></a>
      		<ul class="dropdown-menu">
      		
-     			<sec:ifAllGranted roles="ROLE_ADMIN">
-				 <li><a href="#"></a><g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link></li>
-				 <li><a href="#"></a><g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link></li>
-				 <li><a href="#"></a><g:link>Reportes</g:link></li>
-				</sec:ifAllGranted>
-     		
+     			
      		 
+     		 <li><a href="#"></a><g:link class="editar" controller='User' action= 'show' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-user"></span>Mi perfil</g:link></li>
+     		 <sec:ifAllGranted roles="ROLE_ADMIN">
+				 <%--<li><a href="#"></a><g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link></li>
+				 <li><a href="#"></a><g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link></li>
+				 --%>
+			<li><a href="#"></a><g:link controller='marca' action='index'><span class="glyphicon glyphicon-cog"></span>Administracion</g:link></li>
+				</sec:ifAllGranted>
+     		 <li class="divider"></li>	
      		 <li><a href="#"></a><g:link class="logout" controller="logout" action= "index" method="POST"> <span class="glyphicon glyphicon-off"></span>Desconectarse</g:link></li>
-     		 <li><a href="#"></a><g:link class="editar" controller='User' action= 'show' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-cog"></span>Mi perfil</g:link></li>
      		</ul>
      	</sec:ifLoggedIn>
       </ul>
     </div>
   </div>
 </nav>
-  
+  <g:layoutBody/>
 	
-		<g:layoutBody/>
+		
 		
 <div class="footer-v1">
         <div class="footer">
@@ -198,6 +204,10 @@
 		<asset:javascript  src="bootstrap.min.js" />
 		<asset:javascript  src="bootstrap-datepicker.js" />
 		<asset:javascript  src="bootstrap-datepicker.es.min.js" />
+		
+		<asset:javascript  src="bootstrap-datetimepicker.min.js" />
+		<asset:javascript  src="bootstrap-datetimepicker.es.js" />
+		
 		
 		<asset:javascript  src="scripts.js" />
 		

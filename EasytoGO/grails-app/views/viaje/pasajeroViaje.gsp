@@ -68,6 +68,7 @@
 				</thead>
 	
 	<g:each in="${reserva}" status="i" var="Reserva">	
+			
 						
 						<tr class= "success">		
 						
@@ -86,10 +87,10 @@
 						<td>${Reserva.usuario}</td>
 <%--					--%>
 <%--						<td>${Viaje.conductor}</td>--%>
-						<td><g:link controller="calificacion" action="create" id="${Reserva.id}" params="[viajeid: Reserva.id, calificadoid: Reserva.usuario.id, conductor: Reserva.viajes.conductor.id]">${"Calificar"}</g:link></td>
+						<td><g:link action="calificar" id="${Reserva.id}" params="[reservaid: Reserva.id, calificadoid: Reserva.usuario.id, conductor: Reserva.viajes.conductor.id]">${"Calificar"}</g:link></td>
 					
 					</tr>
-						
+					
 
 												
                       

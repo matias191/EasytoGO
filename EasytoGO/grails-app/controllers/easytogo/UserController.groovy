@@ -46,6 +46,23 @@ class UserController {
    * @return userInstance Instancia de usuario para que la vista lo maneje.
    */
   def show(User userInstance) {
+   
+     def dateOfBirth = userInstance.getFecNac()
+    Calendar dob = Calendar.getInstance();
+    dob.setTime(dateOfBirth);
+    Calendar today = Calendar.getInstance();
+    int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+   
+    
+    
+    if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+      age--;
+    } else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+        && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+      age--;
+    }
+    
+    
     def user = springSecurityService.currentUser
     if (userInstance == user){
     respond userInstance
@@ -328,5 +345,5 @@ class UserController {
      render(view:'publicPerfil', model: [userInstance: userInstance])  ;
   }
   
-  
+  def pago(){}
 }

@@ -9,7 +9,8 @@
 	<body>
 			
 		<div id="show-viaje" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			
+			<h3>Conoce los detalles del viaje, pregunta tus dudas al conductor y reserva una plaza!  </h3>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -54,13 +55,6 @@
 				   	</div>
 				</g:if>
 				
-			
-				
-		
-				
-				
-				
-							
 				<g:if test="${viajeInstance?.plazas_disponibles}">
 				<div class="form-group">
 					<span id="plazas_disponibles-label" class="col-md-4 control-label"><g:message code="viaje.plazas_disponibles.label" default="Plazas disponibles" /></span>
@@ -78,6 +72,10 @@
 				</div>
 				   	</div>
 				</g:if>
+				
+				
+				
+			
 			
 				<g:if test="${viajeInstance?.comentario}">
 				<div class="form-group">
@@ -90,7 +88,7 @@
 			
 				<g:if test="${viajeInstance?.conductor}">
 				<div class="form-group">
-					<span id="conductor-label" class="col-md-4 control-label"><g:message code="viaje.conductor.label" default="Conductor Perfil" /></span>
+					<span id="conductor-label" class="col-md-4 control-label"><g:message code="viaje.conductor.label" default="Conoce los detalles del conductor" /></span>
 					<div class="col-md-6" >	
 						<g:form controller="user"action="show" id="${viajeInstance?.conductor?.id}" >
 						<button class="form-control btn btn-info" aria-labelledby="conductor-label" ><span class="glyphicon glyphicon-user " ></span> 	${viajeInstance?.conductor?.encodeAsHTML()} </button>
@@ -103,29 +101,33 @@
 			
 				<g:if test="${viajeInstance?.equipaje}">
 				<div class="form-group">
-					<span id="equipaje-label" class="col-md-4 control-label"><g:message code="viaje.equipaje.label" default="Equipaje" /></span>
+					<span id="equipaje-label" class="col-md-4 control-label"><g:message code="viaje.equipaje.label" default="¿Se permite equipe?" /></span>
 					<div class="col-md-6">	
-						<input class="form-control input-md" aria-labelledby="equipaje-label" value="${viajeInstance.equipaje == 1 ? 'PEQUEÑO' : viajeInstance.equipaje == 2 ? 'MEDIANO'  : 'GRANDE' }" readonly>
+						<input class="form-control input-md" aria-labelledby="equipaje-label" value="${viajeInstance.equipaje == 1 ? 'Pequeño (bolsa o maletin)' : viajeInstance.equipaje == 2 ? 'Mediano (bolso hasta 15 kg)'  : 'Grande (valija)' }" readonly>
 					</div>
 				   	</div>
 				</g:if>
 			
 				<g:if test="${viajeInstance?.fumar}">
 				<div class="form-group">
-					<span id="fumar-label" class="col-md-4 control-label"><g:message code="viaje.fumar.label" default="Fumar" /></span>
+					<span id="fumar-label" class="col-md-4 control-label"><g:message code="viaje.fumar.label" default="¿Se permite fumar?" /></span>
 					<div class="col-md-6">	
-						<input class="form-control input-md" aria-labelledby="fumar-label" value="${viajeInstance.fumar == true ? 'SI' : 'NO'}" readonly>
+						<input class="form-control input-md" aria-labelledby="fumar-label" value="${viajeInstance.fumar == true ? 'Si' : 'No'}" readonly>
 					</div>
 				   	</div>
 				</g:if>
 			
 				
 				<div class="form-group">
-					<span id="mascota-label" class="col-md-4 control-label"><g:message code="viaje.mascota.label" default="Mascota" /></span>
+					<span id="mascota-label" class="col-md-4 control-label"><g:message code="viaje.mascota.label" default="¿Se permiten mascotas?" /></span>
 					<div class="col-md-6">	
-						<input class="form-control input-md" aria-labelledby="mascota-label" value="${viajeInstance.mascota == 1 ? 'SI' : 'NO' }"readonly>
+						<input class="form-control input-md" aria-labelledby="mascota-label" value="${viajeInstance.mascota == 1 ? 'Si' : 'No' }"readonly>
 					</div>
 				   	</div>
+				   	
+				  <h5>	Esto lo podes tratar asi para darle otro formato.</h5> 
+				<h5>EL costo por plaza es ${viajeInstance.costoplaza}</h5>
+				<h5>Plazas disponibles: ${viajeInstance.plazas_disponibles}</h5>
 	
 				
 			<fieldset class="form">

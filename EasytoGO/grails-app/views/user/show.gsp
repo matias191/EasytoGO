@@ -146,7 +146,7 @@ p {
 			<g:if test="${userInstance?.avatar}">
 			<div class="fieldcontain col-md-2">
 				<span class="property-value">
-				<img class="avatar" src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
+				<img class="avatar img-circle"" src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
 				</span>
 			</div>	
 			</g:if>
@@ -209,7 +209,7 @@ p {
 			
 				<g:if test="${userInstance?.direccion}">
 				<div class="form-group">
-					<span id="direccion-label" class="col-md-2 control-label">><g:message code="user.direccion.label" default="Dirección" /></span>
+					<span id="direccion-label" class="col-md-2 control-label"><g:message code="user.direccion.label" default="Dirección" /></span>
 					<div class="col-md-5">
 						<input class="form-control input-md"  aria-labelledby="direccion-label"  value="${userInstance.direccion}"readonly>
 					</div>

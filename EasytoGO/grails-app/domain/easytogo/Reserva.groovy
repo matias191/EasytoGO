@@ -8,6 +8,7 @@ class Reserva {
 	User usuario
 	String fecha_res
 	int cant_plaz
+	boolean estado
 	
 	@Override
 	String toString() {

@@ -5,12 +5,17 @@ package easytogo
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityService;
+import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityUtils;
 
 
 
 @Secured(['permitAll'])
 @Transactional(readOnly = true)
 class ReservaController {
+  def springSecurityService
+
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -22,6 +27,45 @@ class ReservaController {
     def show(Reserva reservaInstance) {
         respond reservaInstance
     }
+    
+    def showReserva(Reserva reservaInstance) {
+      
+      def Reserva res = reservaInstance
+      def Viaje viaj = reservaInstance.viajes
+      def User conductor = viaj.conductor
+      def Vehiculo vehiculo = Vehiculo.findByUser(conductor)
+            
+      
+      
+      def origen = viaj.origen
+      def destino = viaj.destino
+      def fechaSalida = viaj.fecha_salida
+      def fechaLlegada = viaj.fecha_llegada
+      def costoPlaza = viaj.costoplaza
+      def costoGestion = viaj.costoplaza*0.1
+      
+      def idRese = res.id      
+      def cantidad = res.cant_plaz
+      def fechaRes = res.fecha_res
+      
+      def nombreConductor = conductor.nombre
+      def apellidoConductor = conductor.apellido
+      def celular = conductor.telefono
+      def mail = conductor.email
+      def foto = conductor.avatar
+      
+      def modelo = vehiculo.modelo.nombre
+      def marca = vehiculo.modelo.marca.nombre
+      
+      
+      
+      
+     // def user = springSecurityService.currentUser      
+      //Reserva reservaInstance = Reserva.findByUsuario(user)
+      render(view:'showReserva', model: [reservaInstance: reservaInstance, origen: origen, destino: destino, fechaSalida: fechaSalida, fechaLlegada: fechaLlegada, costoPlaza: costoPlaza, costoGestion: costoGestion, idRese: idRese, cantidad: cantidad, nombreConductor: nombreConductor, apellidoConductor: apellidoConductor, celular: celular, mail: mail, foto: foto, modelo: modelo, marca: marca, fechaRes: fechaRes]);
+      
+//      respond reservaInstance
+  }
 
     def create() {
         respond new Reserva(params)
@@ -108,6 +152,11 @@ class ReservaController {
 	
 	@Transactional
 	def save_reserva(Reserva reservaInstance, Viaje viajeInstance) {
+    
+    def Reserva res = reservaInstance
+    def Viaje viaj = reservaInstance.viajes
+    
+   
 		if (reservaInstance == null) {
 			notFound()
 			return
@@ -119,13 +168,18 @@ class ReservaController {
 		}
 
 		reservaInstance.save flush:true
-
+        def idRese = res.id
+        def precio = viaj.costoplaza*0.1
+        def descripcion = "Viaje con origen en " + viaj.origen + " y destino en " + viaj.destino + ". Cantidad de plazas a pagar: " + res.cant_plaz
+        
+        def cantidad = res.cant_plaz
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'reserva.label', default: 'Reserva'), reservaInstance.id])
 				//redirect reservaInstance
 			}
-			'*' { respond reservaInstance, [status: CREATED] }
+			
+          render(view:'show', model: [reservaInstance: reservaInstance, precio: precio, descripcion: descripcion, cantidad: cantidad, idRese: idRese])  ;
 		}
 		
 		//def resultado = '${params.plazas_disponibles}'-'${params.cant_plaz}'		
@@ -134,7 +188,7 @@ class ReservaController {
                     
                    where viajeInstance.id = '${params.viajes.id}'""" 
               viajeInstance.executeUpdate(sql)
-      redirect reservaInstance
+       render(view:'show', model: [reservaInstance: reservaInstance, precio: precio,  descripcion: descripcion, cantidad: cantidad, idRese: idRese])  ;
 		
 	}
 }

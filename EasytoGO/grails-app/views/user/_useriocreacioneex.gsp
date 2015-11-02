@@ -24,7 +24,7 @@
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'fecNac', 'error')} required controls">
 			<label for="fecNac"class="col-md-4 control-label"> <g:message code="user.fecNac.label"
-			default="Fecha de Nacimiento" /> <span class="required-indicator">*</span>
+			default="Fecha de nacimiento" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
 			<g:datePicker name="fecNac" precision="day" value="${userInstance?.fecNac}" />
@@ -46,7 +46,7 @@
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'email', 'error')} required controls">
 			<label for="email"class="col-md-4 control-label"> <g:message code="user.email.label"
-			default="E-email" /> <span class="required-indicator">*</span>
+			default="E-mail" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
 			<input name="email" required="" value="${userInstance?.email}" class="form-control input-md" placeholder="email"/>
@@ -56,7 +56,7 @@
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'telefono', 'error')} required controls">
 			<label for="telefono"class="col-md-4 control-label"> <g:message code="user.telefono.label"
-			default="Telefono" /> <span class="required-indicator">*</span>
+			default="Teléfono" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
 			<input name="telefono" required="" value="${userInstance?.telefono}" class="form-control input-md" placeholder="Telefono"/>
@@ -66,7 +66,7 @@
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'direccion', 'error')} required controls">
 			<label for="direccion"class="col-md-4 control-label"> <g:message code="user.direccion.label"
-			default="Direccion" /> <span class="required-indicator">*</span>
+			default="Dirección completa" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
 			<input name="direccion" value="${userInstance?.direccion}" class="form-control input-md" placeholder="Direccion"/><span>(opcional)</span>
