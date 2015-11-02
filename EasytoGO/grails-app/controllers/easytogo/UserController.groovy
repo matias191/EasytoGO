@@ -96,6 +96,7 @@ class UserController {
     }
 
     userInstance.save flush:true
+    def mail = userInstance.email
      
 
       mailService.sendMail {
@@ -109,7 +110,8 @@ class UserController {
         flash.message = message(code: 'default.created.message',args: [message(code: 'user.label', default: 'User'), userInstance.id])
         flash.message = "probando mensaje"
         //redirect userInstance
-        redirect(action: "success")
+        //redirect(action: "success")
+        render(view:'success', model: [mail: mail]);
       }
       '*' { respond userInstance, [status: CREATED] }
     }
