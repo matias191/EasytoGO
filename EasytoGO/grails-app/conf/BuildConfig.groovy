@@ -52,6 +52,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+        runtime 'org.springframework:spring-test:3.1.0.RELEASE'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
         compile(group:'org.apache.httpcomponents',name:'httpclient',version:'4.3.6')
         compile(group:'org.apache.httpcomponents',name:'fluent-hc',version:'4.3.6')
@@ -76,6 +77,8 @@ grails.project.dependency.resolution = {
         compile ":famfamfam:1.0.1"
         //Twilio es el plugin para enviar SMS
         compile ":twilio:0.1"
+        //Generador de pdf
+        compile ":rendering:1.0.0"
         
         
        

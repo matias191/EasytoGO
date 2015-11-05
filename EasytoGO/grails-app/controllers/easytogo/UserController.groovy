@@ -24,9 +24,11 @@ import java.util.Random;
 class UserController {
   def random = new Random();
   def randomInt = null
+  def randomInt1 = null
   def springSecurityService 
   def mailService;
   def smsService
+  def pdfRenderingService
   private static final okcontents = ['image/png', 'image/jpeg', 'image/gif']
   
   
@@ -80,10 +82,11 @@ class UserController {
     userInstance.confirmCode= UUID.randomUUID().toString()
     
     
-    randomInt = random.nextInt(9000-1000+1)+100
-    
-     
+    randomInt = random.nextInt(9000-1000+1)+100     
     userInstance.confirmCodeSMS=randomInt
+    
+    randomInt1 = random.nextInt(9000-1000+1)+100
+    userInstance.confirmCodeDir=randomInt1
 
     if (userInstance == null) {
       notFound()
@@ -335,7 +338,7 @@ class UserController {
     if (cod1 == cod2){
       user.verifTel=true
       user.save flush:true
-      redirect user            
+      redirect user
     }else{
     flash.message = "El codigo que ingresaste es incorrecto. Intenta validar tu telefono nuevamente."
     redirect user
@@ -348,4 +351,79 @@ class UserController {
   }
   
   def pago(){}
+  
+  //metodo aparte para probar pero no lo ocupo
+  def crearPdf(){
+     new File("C:/Mati/report.pdf").withOutputStream { outputStream ->
+            pdfRenderingService.render(controller:this, template:"pdfTemplate", outputStream)
+        }
+  
+    redirect(uri:'/')
+    
+  }
+  
+  //este hace q salga la ventanita q te pregunta donde lo queres guardar (si no le pongo filename, lo muestra en el navegador)
+ /* def crearPdf(){
+    def args = [template:"pdfTemplate", filename: "yourTitle"]
+    pdfRenderingService.render(args+[controller:this],response)
+    redirect(uri:'/')
+    
+  }*/
+  
+  @Transactional
+  def confirmDireccion(User userInstance){
+    //SE FIJA QUE EL USUARIO TENGA UNA DIRECCION CARGADA
+    if (!userInstance.direccion){
+      flash.message = "No tenemos tu direccion! Ingresala de forma completa en tu perfil para que podamos verificarla."
+      redirect userInstance
+    }else{
+    
+    userInstance.envioCarta=true
+    userInstance.save flush:true
+    
+    /*TimeZone reference = TimeZone.getTimeZone("GMT");
+    Calendar myCal = Calendar.getInstance(reference);
+    TimeZone.setDefault(reference);
+    def fecha=  myCal.getTime();*/
+    
+    Date now = Calendar.getInstance(TimeZone.getTimeZone('GMT-3')).time
+    def formatter = new java.text.SimpleDateFormat('dd/MM/yyyy')
+    formatter.timeZone = TimeZone.getTimeZone('GMT-3')
+    def fecha= formatter.format(now)
+    
+    def direccion = userInstance.direccion
+    def usuario = userInstance.username
+    def cod = userInstance.confirmCodeDir
+    def nombre = userInstance.nombre
+    def apellido = userInstance.apellido
+    new File("C:/Mati/${usuario}.pdf").withOutputStream { outputStream ->
+      pdfRenderingService.render(controller:this, template:"pdfTemplate",model:[fecha:fecha, direccion:direccion,usuario:usuario, cod: cod, nombre:nombre, apellido:apellido], outputStream)
+    }
+    [direccion:direccion]
+    }
+  }
+  
+  def confirmCodDireccion(User userInstance){
+    
+  }
+  
+  def verifCodDireccion(int codigo){
+   
+    
+    def user = springSecurityService.currentUser
+    
+    def cod1 = user.confirmCodeDir
+    def cod2 = codigo
+    if (cod1 == cod2){
+      user.verifDir=true
+      user.save flush:true
+      redirect user
+    }else{
+    flash.message = "El codigo que ingresaste es incorrecto. Intenta validar tu dirección nuevamente."
+    redirect user
+    }
+    
+  }
+  
+  
 }

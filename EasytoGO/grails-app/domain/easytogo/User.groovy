@@ -38,11 +38,13 @@ class User implements Serializable {
    */
   String confirmCode
   int confirmCodeSMS
+  int confirmCodeDir
   int sexo
   boolean enabled = true
   boolean accountExpired
   boolean accountLocked
   boolean passwordExpired
+  boolean envioCarta = false
   
 
   /** 
@@ -50,7 +52,7 @@ class User implements Serializable {
    * Un usuario puede tener muchos vehículos.
    * Utilizado para dar de alta un viaje.
    */
-  static hasMany = [vehiculos: Vehiculo, viaje: Viaje]
+  static hasMany = [vehiculos: Vehiculo, viaje: Viaje, preguntas: Pregunta, respuestas: Respuesta]
 
 
   /**
@@ -72,10 +74,12 @@ class User implements Serializable {
     password ()
     confirmCode(nullable: true)
     confirmCodeSMS(nullable:true)
+    confirmCodeDir(nullable:true)
     username blank: false, unique: true
     password blank: false
     avatar(nullable:true, maxSize: 100000 /* 100K */)
     avatarType(nullable:true)
+    envioCarta(nullable:true)
     
   }
 

@@ -41,10 +41,11 @@ class MarcaController {
 
     request.withFormat {
       form multipartForm {
-        flash.message = message(code: 'default.created.message', args: [
-          message(code: 'marca.label', default: 'Marca'),
-          marcaInstance.id
-        ])
+        
+          flash.message = "Marca creada correctamente."
+         
+          
+       
         redirect marcaInstance
       }
       '*' { respond marcaInstance, [status: CREATED] }

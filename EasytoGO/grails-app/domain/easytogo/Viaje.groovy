@@ -5,6 +5,7 @@ import java.util.Date;
 
 class Viaje {
 	static hasOne = [conductor: User]
+    static hasMany = [preguntas: Pregunta]
 	static constraints = {
 		fecha_salida blank: false
 		fecha_llegada blank: false

@@ -14,7 +14,9 @@
      	<div class="container">
      		
             <h1>Bienvenido a EasyToGO</h1>
+            
             <p>Encuentra tu viaje</p>
+           
              <fieldset class="form">
 				<g:form controller="viaje"action="buscaViaje" method="GET">
 					<div class="row">

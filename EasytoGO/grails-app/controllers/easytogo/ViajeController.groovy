@@ -10,6 +10,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 @Secured(['permitAll'])
 class ViajeController {
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -158,6 +159,9 @@ class ViajeController {
         }
     }
    def reservar(Viaje viajeInstance) {
+     def User user = springSecurityService.currentUser
+     def idUser = user.id
+     Viaje viajes = Viaje.findById(viajeInstance.id)
      def dateOfBirth = viajeInstance.conductor.getFecNac()
      Calendar dob = Calendar.getInstance();
      dob.setTime(dateOfBirth);
@@ -172,7 +176,7 @@ class ViajeController {
          && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
        age--;
      }
-         render(view:'reservar', model: [viajeInstance: viajeInstance, age: age]);
+         render(view:'reservar', model: [viajeInstance: viajeInstance, age: age, idUser: idUser, reserva: Reserva.findAllByViajes(viajes)]);
         //respond viajeInstance
     }
    def reservar = {

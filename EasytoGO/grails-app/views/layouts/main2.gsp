@@ -45,9 +45,35 @@
         <li><a class="home" href="${createLink(uri: '/')}"	>Encuentra tu viaje</a></li>
         <sec:ifLoggedIn>
         <li><g:link controller='viaje' action='create'>Publica tu viaje</g:link></li>
+        
+        
+        
+<%--        MUESTRA LAS PREGUNTAS QUE TIENE SIN RESPONDER EL USUARIO QUE ESTA LOGUEADO--%>
+
+<g:set var="user" value="${easytogo.User.findById(sec.loggedInUserInfo(field:'id'))}"/>
+
+<g:set var="notificaciones" value="${0}"/>
+
+						<g:each in="${user?.viaje}" var="v">
+							<g:each in="${v?.preguntas}" var="p">
+								<g:each in="${p?.respuesta == null}" var="r">
+									<g:if test="${r}"> 
+										<g:set var="notificaciones" value="${notificaciones +1 }"/>
+									</g:if>									
+								</g:each>
+							</g:each>
+						</g:each>
+				
+  <li><a class="home"  href="http://localhost:8080/EasytoGO/respuesta/create">Preguntas <span class="badge">${notificaciones}</span><br></a></li>     
+        
+        
+        
+        
+        
+        
         </sec:ifLoggedIn>
         <sec:ifNotLoggedIn>
-        <li><g:link controller='login' action='auth'>Publica tu viaje</g:link></li>
+        <li><g:link controller='login' action='auth'>Publica tu viaje</g:link></li>        
         </sec:ifNotLoggedIn>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="float:left;">

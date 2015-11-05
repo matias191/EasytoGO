@@ -211,16 +211,72 @@
 						</div>
 					</g:if>
 				</div>
+				
+				<%--Pasajeros--%>
+			Pasajeros
+				<g:each in="${reserva}" status="i" var="Reservas">	
+				 	
+				   	<div class = "form-group">
+				   	 <g:if test="${Reservas.usuario.username}" var="r">
+				   	  <li class="fieldcontain"> 
+				   			<g:if test="${Reservas.usuario.avatar}">
+							<div class="fieldcontain col-md-2">
+							<span class="property-value">
+							<img class="avatar avatar_small" src="${createLink(controller:'user', action:'avatar_image', id:Reservas.usuario.id)}" />
+							${Reservas.usuario.username}
+							</span>
+							</div>	
+							</g:if>	
+					    </li>
+				   		</g:if>
+				   		
+				   	</div>
+				</g:each>
+				
+				<%--Formulario para hacer preguntas--%>
+				<div class="form-group">
+				<g:form url="[resource:preguntaInstance, controller: 'pregunta', action:'save']" >
+				<fieldset class="form">
+					<g:render template="formPregunta"/>
+				</fieldset>
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="save" value="Preguntar" />
+				</fieldset>
+			</g:form>
+				</div>
 			
+				<%--Se muestran las preguntas con sus respuestas (si es q tiene rta)--%>
+				<div class = "form-group">
+				<g:if test="${viajeInstance?.preguntas}">
+					
+					<h3>Preguntas realizadas</h3><asset:image src="pregunta6.png" width="31" height="25" />
+					
+						<g:each in="${viajeInstance.preguntas}" var="v">
+						<li class="fieldcontain">
+						<span class="property-value" aria-labelledby="vehiculos-label">Pregunta: ${v?.duda.encodeAsHTML()} (${v?.user.username.encodeAsHTML()})</span>
+						</li>
+						<g:if test="${v?.respuesta}">
+						<li class="fieldcontain">
+						<span class="property-value" aria-labelledby="vehiculos-label">Respuesta: ${v?.respuesta.resp.encodeAsHTML()} (${v?.respuesta.user.username.encodeAsHTML()}) </span>
+						
+						</li>
+						<br/>
+						</g:if>
+						<br/>
+						</g:each>
+					
+				
+				</g:if>
+				</div>
 				
 				   	
-				 
+				<div class="form-group">
 				<h5>No darle bola a esto, excepto Roberto jaja </h5>
 				<h5>	Esto lo podes tratar asi para darle otro formato. Y ya como texto es mas facil pq lo metes en cualquier lado</h5> 
 				<h5>EL costo por plaza es ${viajeInstance.costoplaza}</h5>
 				<h5>Plazas disponibles: ${viajeInstance.plazas_disponibles}</h5>
 				<h5>Cristian, si queres sacar esto pq justo haces el video andate al proyecto->views->viajes->reservar y borra esto </h5>
-	
+				</div> 
 				
 			<fieldset class="form">
 			<g:form url="[resource:reservaInstance, controller:'reserva', action:'save']" >

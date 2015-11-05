@@ -92,7 +92,6 @@ p {
 				<sec:ifLoggedIn>
 					
 							<li class="fieldcontain">
-							
 							<g:if test="${userInstance.verifTel.toBoolean() }">
 							<span >Teléfono verificado</span>
 							<asset:image src="imagenYes.png" width="20" height="20"/>
@@ -105,7 +104,6 @@ p {
 							</li>
 						
 							<li class="fieldcontain">
-														
 							<g:if test="${userInstance.enabled.toBoolean() }">
 							<span >E-mail verificado</span>
 							<asset:image src="imagenYes.png" width="20" height="20"/>
@@ -117,15 +115,23 @@ p {
 							</li>
 							
 							<li class="fieldcontain">
-												
 							<g:if test="${userInstance.verifDir.toBoolean() }">
 							<span >Dirección verificada</span>
 							<asset:image src="imagenYes.png" width="20" height="20"/>
 							</g:if>
 							<g:if test="${!userInstance.verifDir.toBoolean() }">
-							<span >Dirección NO verificada</span>
-     						<asset:image src="imagenNo.png" width="20" height="20"/>
+								<g:if test="${!userInstance.envioCarta.toBoolean() }">
+									<span >Dirección NO verificada</span>
+     								<asset:image src="imagenNo.png" width="20" height="20"/>
+     								<g:link class="edit" action="confirmDireccion" resource="${userInstance}">Verificar</g:link>
+								</g:if>
+								<g:if test="${userInstance.envioCarta.toBoolean() }">
+									<span >Dirección NO verificada</span>
+     								<asset:image src="imagenNo.png" width="20" height="20"/>
+     								<g:link class="edit" action="confirmCodDireccion" resource="${userInstance}">Ingresar código</g:link>
+								</g:if>
 							</g:if>
+							
 							</li>
 					
 				</sec:ifLoggedIn>
