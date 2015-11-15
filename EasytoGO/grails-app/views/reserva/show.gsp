@@ -38,12 +38,13 @@
 	</head>
 	<body>
 		<div class="container">
+		<h3 class="alert alert-success" role="alert"> Ya casi terminas, ahora solo queda pagar</h3>
 		<div id="show-reserva" class="content scaffold-show" role="main">
-			<h1>Mi reserva</h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<h1 class="page-header">Mi reserva</h1>
+			<%--<g:if test="${flash.message}">
+			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
-			<div class="form-horizontal">
+			--%><div class="form-horizontal"> 	 	
 			<div class="container">
 			
 				<g:if test="${reservaInstance?.cant_plaz}">

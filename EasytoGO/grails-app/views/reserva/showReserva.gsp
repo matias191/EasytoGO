@@ -16,30 +16,39 @@
 	<body>
 		<div class="container">
 		<div id="show-reserva" class="content scaffold-show" role="main">
-			<h1>Has reservado con éxito!</h1>
+			<h1 class="alert alert-success" role="alert" >Has reservado con éxito!</h1>
 			
-			<h3>A continuación te recordamos los datos del viaje.</h3>
+			<h5>A continuación te recordamos los datos del viaje.</h5>
+			<br>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
+			<div class="panel panel-default">
+			<div class="panel-body">
 			<div class="form-horizontal">
 			
 			
 								
 				
-				<h5>Número de reserva ${idRese}</h5>
-				<h5>Fecha de la reserva: ${fechaRes}</h5>
+				<h5>Número de reserva:${idRese}</h5>
+				<h5>Fecha de la reserva:${fechaRes}</h5>
 				<h5>Origen: ${origen}</h5>
 				<h5>Fecha y hora de salida: ${fechaSalida}</h5>
 				<h5>Destino: ${destino}</h5>
-				<h5>Fecha y hora de llegada estimada: ${fechaLlegada}</h5>
-				<h5>Plazas reservadas: ${cantidad}</h5>
+				<h5>Fecha y hora de llegada estimada:${fechaLlegada}</h5>
+				<h5>Plazas reservadas:	 ${cantidad}</h5>
 				<h5>Costo por plaza: ${costoPlaza}</h5>
 				<h5>Gastos de gestión: ${costoGestion}</h5>
 				<h5>Vehículo en el que viajarás: ${marca} ${modelo}</h5>
 				<br/> 
-				
+			</div>
+			</div>
+			</div>
+			<div class="panel panel-default">
+			<div class="panel-heading">
 			<h3>Contacta al conductor ${nombreConductor} ${apellidoConductor} para ultimar los detalles del viaje.</h3>
+			</div>
+			<div class="panel-body">
 				<g:if test="${reservaInstance?.viajes.conductor.avatar}">
 				<div class="fieldcontain col-md-2">
 				<span class="property-value">
@@ -49,14 +58,15 @@
 				</g:if>
 				<h4>Teléfono: ${celular}</h4>
 				<h4>E-mail: ${mail}</h4>
+				<br>
+				<br>
+				<h2>Que tengas muy buen viaje!</h2>
+			 </div>	
+				
+				 </div>	
 				
 				
-				
-				<br/>
-				
-				<h2>Buen viaje!</h2>
-				
-				
+				</div>	
 				
 			
 				<%--<g:if test="${reservaInstance?.viajes}">
@@ -78,6 +88,6 @@
 			
 				</div>
 		</div>
-		</div>
+		
 	</body>
 </html>

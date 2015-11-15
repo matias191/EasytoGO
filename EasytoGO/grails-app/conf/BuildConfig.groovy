@@ -79,6 +79,8 @@ grails.project.dependency.resolution = {
         compile ":twilio:0.1"
         //Generador de pdf
         compile ":rendering:1.0.0"
+        //reportes
+        compile ":google-visualization:1.0.2"
         
         
        

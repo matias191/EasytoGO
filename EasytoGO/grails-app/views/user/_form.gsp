@@ -12,7 +12,7 @@
 		</div>
 	</div>
       
- 	  <div class="form-group">
+ 	  <div class="form-group">	
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'apellido', 'error')} required controls">
 			<label for="apellido"class="col-md-4 control-label"> <g:message code="user.apellido.label"
 			default="Apellido" /> <span class="required-indicator">*</span>
@@ -106,7 +106,7 @@
   					</div>
   					<div class="col-md-2">
   					<g:form url="[resource:vehiculoInstance, action:'delete']" method="DELETE">	
-  					<g:link class="edit" action="edit" resource="${UserInstance}"><span class="glyphicon glyphicon-edit">Editar</span></g:link>
+  					<g:link class="edit" action="edit" controller="Vehiculo" resource="${UserInstance}" value=""><span class="glyphicon glyphicon-edit">Editar</span></g:link>
 					</g:form>
 					</div>
 			</div>

@@ -4,14 +4,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-<meta name="layout" content="main"/>
+<meta name="layout" content="main2"/>
 <title>Viajes de Usuario</title>
 </head>
 <body>
-
+<div class="container">		
+			
+			<div class="row">
+			 <div class="container">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Mi viajes <small>Calificar Pasejero</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i >Califica a tus compañeros de viaje, comentanos de tus experiancias con los mismos</i> 
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+          </div>
+ </div>
 
 <g:if test="${flash.message}">
-<div class="message" role="status">${flash.message}</div>
+<div class="alert alert-success" role="alert">${flash.message}</div>
 </g:if>
 <%--<fieldset class="form">--%>
 <%--	<g:form action="usuarioViaje" method="GET">--%>
@@ -27,32 +43,65 @@
 <%--		--%>
 <%--	</g:form>--%>
 <%--</fieldset>--%>
-
-
   <div class="container">
-  
-  <table class="table">
+   <h4 class="page-header">Califica al conductor del viaje</h4>
+   <div class="table-responsive" > 
+  		<table class="table table-hover"  >
 			<thead>
 					<tr>
-					<g:sortableColumn property="origen" title="${message(code: 'viaje.origen.label', default: 'Origen')}" />
+					
+						<g:sortableColumn property="Conductor" title="${message(code: 'Conductor', default: 'Conductor')}" />
 						
-						<g:sortableColumn property="destino" title="${message(code: 'viaje.destino.label', default: 'Destino')}" />
-					
-						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fechasalida')}" />
-					
-<%--						<g:sortableColumn property="fecha_llegada" title="${message(code: 'viaje.fecha_llegada.label', default: 'Fechallegada')}" />--%>
-					
-						<g:sortableColumn property="cant_plaz" title="${message(code: 'reserva.cant_plaz.label', default: 'Cantidad de Plazas')}" />
-					
-<%--						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costo por plaza')}" />--%>
-					
-<%--						<g:sortableColumn property="comentario" title="${message(code: 'viaje.comentario.label', default: 'Comentario')}" />--%>
-					
-						<th><g:message code="viaje.conductor.label" default="Conductor" /></th>
 						
+						
+						<g:sortableColumn property="calificar" title="${message(code: 'Calificar', default: 'Calificar')}" />
+					
+					</tr>
+				</thead>
+	
+	<g:each in="${calificacion}" status="i" var="Reserva1">	
+			
+						
+						<tr class= "success">		
+						
+						
+					
+<%--						<td>${Reserva.viajes.costoplaza}</td>--%>
+<%--					--%>
+						<td>${Reserva1.viajes.conductor}</td>
+<%--					--%>
+					
+<%--					--%>
+<%--						<td>${Viaje.conductor}</td>--%>
+						<td><g:link action="calificar" id="${Reserva1.id}" params="[reservaid: Reserva1.id, calificadoid: Reserva1.viajes.conductor.id, conductor: Reserva1.viajes.conductor.id]">${"Calificar"}</g:link></td>
+
+					</tr>
+					
+
+												
+                      
+					
+				</g:each>
+
+    
+	</tbody>
+	</table>	
+    </div>
+  </div>
+
+  <div class="container">
+     <h4 class="page-header">Califica a tus compañeros de viaje</h4>
+  <div class="table-responsive" > 
+  		<table class="table table-hover"  >
+			<thead>
+					<tr>
+					
 						<g:sortableColumn property="usuario" title="${message(code: 'reserva.usuario.label', default: 'Pasajero')}" />
 						
 						<g:sortableColumn property="calificar" title="${message(code: 'Calificar', default: 'Calificar')}" />
+						
+						
+						
 <%--						<g:sortableColumn property="origen" title="${message(code: 'reserva.viajes.label', default: 'Viaje')}" />--%>
 <%--						--%>
 <%--						<g:sortableColumn property="destino" title="${message(code: 'viaje.usuario.label', default: 'Usuario')}" />--%>
@@ -72,18 +121,7 @@
 						
 						<tr class= "success">		
 						
-						<td>${Reserva.viajes.origen}</td>
-						
-						<td>${Reserva.viajes.destino}</td>
 					
-						<td>${Reserva.viajes.fecha_salida}</td>
-					
-						<td>${Reserva.cant_plaz}</td>
-					
-<%--						<td>${Reserva.viajes.costoplaza}</td>--%>
-<%--					--%>
-						<td>${Reserva.viajes.conductor}</td>
-<%--					--%>
 						<td>${Reserva.usuario}</td>
 <%--					--%>
 <%--						<td>${Viaje.conductor}</td>--%>
@@ -100,7 +138,7 @@
     
 	</tbody>
 	</table>
-    
+    </div>
   </div>
 
 </body>

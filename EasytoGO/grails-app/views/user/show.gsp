@@ -141,10 +141,12 @@ p {
 		
 		</div>
 	   <div class="container">
+	   	<div class="panel panel-default">
+			<div class="panel-body">
 		<div id="page-body" role="main">
-			<h1>Mi perfil</h1>
+			<h1 class="page-header">Mi perfil</h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
 			<div class="form-horizontal">
 			<div class="container">
@@ -152,7 +154,7 @@ p {
 			<g:if test="${userInstance?.avatar}">
 			<div class="fieldcontain col-md-2">
 				<span class="property-value">
-				<img class="avatar img-circle"" src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
+				<img class="avatar img-circle" src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
 				</span>
 			</div>	
 			</g:if>
@@ -300,6 +302,7 @@ p {
 		
 		</div>
 		</div>
-
+		</div>
+		</div>
 	</body>
 </html>

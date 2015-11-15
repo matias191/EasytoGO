@@ -135,7 +135,7 @@ p {
 		</div>
 	   <div class="container">
 		<div id="page-body" role="main">
-			<h1>Detalles del perfil</h1>
+			<h1 class="page-header">Detalles del perfil</h1>
 			<h3>Conozca el perfil del usuario con el que puede compartir un viaje. Los aspectos más importantes a observar son las verificaciones y calificaciones que ha obtenido.</h3>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

@@ -74,16 +74,14 @@
 																		
 						<Td>
 						<sec:ifLoggedIn>
-						<g:link action="edit" class="btn-sm btn-primary"id="${marcaInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link>
+						<g:link action="edit" id="${marcaInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link>
 					
-						<g:link  resource="marca" method="DELETE"class="btn btn-sm btn-danger" id="${marcaInstance.id}" action="delete" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" ><span class="glyphicon glyphicon-remove"></span>
-						</g:link>
+						
 						
 						</sec:ifLoggedIn>
 						<sec:ifNotLoggedIn>
 						 <a class="home" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-pencil"></span></a>
-						 <a class="home" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-remove"></span></a>
-						</sec:ifNotLoggedIn>
+							</sec:ifNotLoggedIn>
 						</Td>
 						
 							

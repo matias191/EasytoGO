@@ -354,7 +354,7 @@ class UserController {
   
   //metodo aparte para probar pero no lo ocupo
   def crearPdf(){
-     new File("C:/Mati/report.pdf").withOutputStream { outputStream ->
+     new File("C:/pdf/report.pdf").withOutputStream { outputStream ->
             pdfRenderingService.render(controller:this, template:"pdfTemplate", outputStream)
         }
   
@@ -396,7 +396,7 @@ class UserController {
     def cod = userInstance.confirmCodeDir
     def nombre = userInstance.nombre
     def apellido = userInstance.apellido
-    new File("C:/Mati/${usuario}.pdf").withOutputStream { outputStream ->
+    new File("C:/pdf/${usuario}.pdf").withOutputStream { outputStream ->
       pdfRenderingService.render(controller:this, template:"pdfTemplate",model:[fecha:fecha, direccion:direccion,usuario:usuario, cod: cod, nombre:nombre, apellido:apellido], outputStream)
     }
     [direccion:direccion]

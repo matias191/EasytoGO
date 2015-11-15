@@ -25,6 +25,7 @@
 		<asset:stylesheet src="sb-admin.css" type="text/css"/>	
 		<link rel="stylesheet" href="${request.contextPath}/choper/assets/css/footers/footer-v1.css" >
 		 <link rel="stylesheet" href="${request.contextPath}/choper/assets/plugins/line-icons/line-icons.css">
+		 <asset:stylesheet src="star-rating.min.css" type="text/css"/>
 		<g:layoutHead/>
 </head>
 	
@@ -46,15 +47,46 @@
         				<li><a class="home" href="${createLink(uri: '/')}"	>Encuentra tu viaje</a></li>
         				<sec:ifLoggedIn>
         				<li><g:link controller='viaje' action='create'>Publica tu viaje</g:link></li>
+        				<%--        MUESTRA LAS PREGUNTAS QUE TIENE SIN RESPONDER EL USUARIO QUE ESTA LOGUEADO--%>
+
+					<g:set var="user" value="${easytogo.User.findById(sec.loggedInUserInfo(field:'id'))}"/>
+
+					<g:set var="notificaciones" value="${0}"/>
+
+						<g:each in="${user?.viaje}" var="v">
+							<g:each in="${v?.preguntas}" var="p">
+								<g:each in="${p?.respuesta == null}" var="r">
+									<g:if test="${r}"> 
+										<g:set var="notificaciones" value="${notificaciones +1 }"/>
+									</g:if>									
+								</g:each>
+							</g:each>
+						</g:each>
+				
+  						<li><a class="home"  href="http://localhost:8080/EasytoGO/respuesta/create">Preguntas <span class="badge">${notificaciones}</span><br></a></li>     
+      				
+      				
+      				
+        				
+        				
         				</sec:ifLoggedIn>
+        				
         				<sec:ifNotLoggedIn>
         				<li><g:link controller='login' action='auth'>Publica tu viaje</g:link></li>
+        				
+        				
         				</sec:ifNotLoggedIn>
       				</ul>
       				<ul class="nav navbar-nav navbar-right top-nav" style="float:left;">
+      				
+      				
+      				
+      				
       				<sec:ifNotLoggedIn>
-        			<li><g:link controller='User' action='create'><span class="glyphicon glyphicon-user"></span> Sign Up</g:link></li>
-        			<li><g:link controller='login' action='auth'><span class="glyphicon glyphicon-log-in"></span> Login</g:link></li>
+        			<li><g:link controller='User' action='create'><span class="glyphicon glyphicon-user"></span> Registrarse</g:link></li>
+        			<li><g:link controller='login' action='auth'><span class="glyphicon glyphicon-log-in"></span> Iniciar sesión</g:link></li>
+      				
+      				
       				</sec:ifNotLoggedIn>
       				<sec:ifLoggedIn>
       	
@@ -66,6 +98,10 @@
      			
      		 
      		 			<li><a href="#"></a><g:link class="editar" controller='User' action= 'show' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-user"></span>Mi perfil</g:link></li>
+     		 			<li><a href="#"></a><g:link class="editar" controller='viaje' action= 'misViajes' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-plane"></span>Mis Viajes</g:link></li>
+     					<li><a href="#"></a><g:link class="editar" controller='reserva' action= 'misReservas' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-usd"></span>Mis Reservas</g:link></li>
+     					<li><a href="#"></a><g:link class="editar" controller='viaje' action= 'usuarioViaje' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-star"></span>Calificar</g:link></li>
+     		
      		 			<sec:ifAllGranted roles="ROLE_ADMIN">
 				 		<%--<li><a href="#"></a><g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link></li>
 				 		<li><a href="#"></a><g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link></li>
@@ -82,7 +118,7 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                       <a href="#"> <i class="fa fa-fw fa-dashboard"></i>Reportes</a>
+                       <g:link controller='viaje' action='reportes'><i class="fa fa-fw fa-dashboard"></i>Reportes</g:link>
                     </li>
                     <li>
                        <g:link controller='marca' action='index'><i class="fa fa-fw fa-bar-chart-o"></i> Marcas</g:link>
@@ -92,7 +128,7 @@
                     </li>
                     <li>
                           <g:link controller='user' action='index'><i class="fa fa-fw fa-edit"></i> Usuarios</g:link>
-                    </li>
+                    </li><%--
                     <li>
                         <a href="#"><i class="fa fa-fw fa-desktop"></i> Viajes</a>
                     </li>
@@ -109,7 +145,7 @@
                         </ul>
                     </li>
                    
-                </ul>
+                --%></ul>
             </div>
 			
 
@@ -124,7 +160,7 @@
 		<asset:javascript  src="bootstrap.min.js" />
 		<asset:javascript  src="bootstrap-datepicker.js" />
 		<asset:javascript  src="bootstrap-datepicker.es.min.js" />
-		
+		<asset:javascript  src="star-rating.min.js" />
 		<asset:javascript  src="scripts.js" />
 		
 </body>

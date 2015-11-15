@@ -1,15 +1,20 @@
 <%@ page import="easytogo.Pregunta" %>
 
-
-
+<h3>Hazle una pregunta al conductor</h3>
+<br>
+<br>
 <div class="fieldcontain ${hasErrors(bean: preguntaInstance, field: 'duda', 'error')} ">
+	<div class="row">
+	
+	<div class="col-md-3">
 	<label for="duda">
 		<asset:image src="pregunta3.png" width="250" height="95" />
-		<h3>Hazle una pregunta al conductor</h3>
+		
 		
 	</label>
-	<g:textField name="duda" value="${preguntaInstance?.duda}"/>
-
+	</div>
+		<textArea name="duda" class="col-md-6 " placeholder="Realiza aqui tu pregunta" rows="4" value="${preguntaInstance?.duda}" style="margin-left:1em !important;"></textArea>
+	</div>
 </div>
 
 <%--<div class="fieldcontain ${hasErrors(bean: preguntaInstance, field: 'respuesta', 'error')} ">

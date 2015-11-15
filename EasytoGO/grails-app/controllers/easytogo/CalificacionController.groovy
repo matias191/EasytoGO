@@ -40,7 +40,7 @@ class CalificacionController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'calificacion.label', default: 'Calificacion'), calificacionInstance.id])
-                redirect calificacionInstance
+                redirect action:"index", method:"GET"
             }
             '*' { respond calificacionInstance, [status: CREATED] }
         }
@@ -124,14 +124,15 @@ class CalificacionController {
 		request.withFormat {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'calificacion.label', default: 'Calificacion'), calificacionInstance.id])
-				redirect calificacionInstance
+				//redirect calificacionInstance
+        redirect(uri:'/')
 			}
-			'*' { respond calificacionInstance, [status: CREATED] }
+			'*' { respond calificacionInstance, [status: CREATED], action:"index", method:"GET"}
 		}
 		def sql = """update Calificacion calificacionInstance
                      set calificacionInstance.estado = 'TRUE'
                     where calificacionInstance.id = calificacionInstance.id""" 
-	   reservaInstance.executeUpdate(sql)
+	   calificacionInstance.executeUpdate(sql)
 	   //redirect calificacionInstance
 	}
 }

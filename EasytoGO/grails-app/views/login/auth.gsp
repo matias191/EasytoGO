@@ -158,18 +158,19 @@ body, html {
 	<form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
 	<div class="sign-in">
 	<div class='fheader'></div>
-	<g:if test='${flash.message}'>
-			<div class='login_message'>${flash.message}</div>
-		</g:if>
+	<g:if test="${flash.message}">
+<div class="alert alert-warning" role="alert">${flash.message}</div>
+</g:if>
+		
  <div class="container">
         <div class="card card-container">
-        	<h1 id="profile-name" class="profile-name-card">Inicia Sesion</h1>
+        	<h1 id="profile-name" class="profile-name-card">Inicia Sesión</h1>
           <br>
           <br>
             <div class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" id="inputEmail" class="form-control" name="j_username" placeholder="Usuario" required autofocus>
-                <input type="password" id="inputPassword" name="j_password"class="form-control" placeholder="Password" required>
+                <input type="password" id="inputPassword" name="j_password"class="form-control" placeholder="Contraseña" required>
                 <div id="remember" class="checkbox">
                     <label>
                        <input type="checkbox" class="checkbox" name="${rememberMeParameter}" id="remember_me"  /> Recuerdame
@@ -189,6 +190,7 @@ body, html {
 	</div>
 </div>
 </div>
+
 <script>
 $(document).ready(function() {
 	$('#username').focus();

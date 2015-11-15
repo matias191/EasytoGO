@@ -11,6 +11,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['permitAll'])
 class ViajeController {
     def springSecurityService
+    def pdfRenderingService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -21,54 +22,100 @@ class ViajeController {
     }
 	
 	def buscaViaje(String origen1, String destino1){
-		//[viajes: Viaje.findAll]
-		def ViajeList = Viaje.createCriteria().list (params) {
-			if ( params.query ) {
-				ilike("origen", "%${params.query}%")
-				ilike("destino", "%${params.query1}%") //"%${params.query}%")
-			}
-		}
-		//[viajes:Viaje.listOrderByorigen()]
-		[viajes: ViajeList]
-		
-	}
+    //[viajes: Viaje.findAll]
+    def now = new Date()
+    def v_fecha2
+    def v_fecha
+    Date fecha_par
+    if (params.fecha1){
+    
+       v_fecha2 = new Date(params.fecha1)
+    v_fecha = v_fecha2.format('yyyy-MM-dd HH:mm:ss')
+    fecha_par = Date.parse('yyyy-MM-dd HH:mm:ss', v_fecha)
+    }
+    def ViajeList = Viaje.createCriteria().list (params) {
+    if (params.query) {
+    ilike("origen", "%${params.query}%")
+    ilike("destino", "%${params.query1}%")
+    between("fecha_salida", now, now + 20)
+   // ge("fecha_salida", fecha_par)
+    //"%${params.query}%")
+    }
+       else
+    {
+    between("fecha_salida", now-1  , now + 20)
+    //gt("fecha_salida", fecha_par)
+    
+    }
+    }
+    //[viajes:Viaje.listOrderByorigen()]
+    [viajes: ViajeList]
+    
+    }
 	
 	def usuarioViaje(){
-		//[viajes: Viaje.findAll]}
-		def params = sec.loggedInUserInfo(field:'id')
-		
-		//def ViajeList = Viaje.createCriteria().list (params) {
-			//if ( params.query ) {
-			//	ilike("conductor", "%${params.query}%")
-				//ilike("destino", "${sec.loggedInUserInfo(field:'id')}") //"%${params.query}%")
-			//}
-		//}
-		//[viajes:Viaje.listOrderByorigen()]
-		User usuario = User.findByUsername(sec.loggedInUserInfo(field:'username'))
-		[viajes: Viaje.findAllByConductor(usuario), reserva: Reserva.findAllByUsuario(usuario)]
-		
-		//[reserva: Reserva.findAllByUsuario(usuario)]
-		
-	}
+        //[viajes: Viaje.findAll]}
+        def params = sec.loggedInUserInfo(field:'id')
+        
+        //def ViajeList = Viaje.createCriteria().list (params) {
+            //if ( params.query ) {
+            //  ilike("conductor", "%${params.query}%")
+                //ilike("destino", "${sec.loggedInUserInfo(field:'id')}") //"%${params.query}%")
+            //}
+        //}
+        //[viajes:Viaje.listOrderByorigen()]
+        User usuario = User.findByUsername(sec.loggedInUserInfo(field:'username'))
+        [viajes: Viaje.findAllByConductor(usuario), reserva: Reserva.findAllByUsuario(usuario)]
+        
+        //[reserva: Reserva.findAllByUsuario(usuario)]
+        
+    }
 	
-	def pasajeroViaje(int viajeid){
-		def usr = sec.loggedInUserInfo(field:'id')
-		def usr1 = User.findById(usr)
-		Viaje viajes_pas = Viaje.findById(viajeid)
-		def calif = Calificacion.findAllByCalificadorAndEstado(usr1, "TRUE")
-		def calificado = User.findAllById(calif.calificado.id)
-		def c = Reserva.createCriteria()
-		def reser = c{like("viajes", viajes_pas)
-			//and {NotEqual("usuario", calificado)}
-		}
-		//	and {like("usuario",usr)}
-		//}
-		//[reserva: reser]
-		[reserva: Reserva.findAllByViajesAndUsuarioNotEqualAndUsuarioNotEqual(viajes_pas, usr1, calificado), 
-		  calificacion:	Calificacion.findAllByEstado("FALSE")]
-		
-//		
-	}
+    def pasajeroViaje(int viajeid){
+        
+        def usr = sec.loggedInUserInfo(field:'id')
+        def usr1 = User.findById(usr) //busco el usuario que califica el usaurio logueado
+        Viaje viajes_pas = Viaje.findById(viajeid) //busco el viaje que se esta en el que estuvieron los usuarios
+        def reser = Reserva.findByViajesAndUsuario(viajes_pas, usr1)
+        def calif = Calificacion.findAllByCalificadorAndViaje_c(usr1, reser) //busco todas las calificaciones realizadas por el usuario calificador osea el logueado
+        def calificado = User.findById(calif.calificado.id) //busco todos los usaurios que han sido calificados por el usr logueado
+        //def c = Reserva.createCriteria()
+        //def reser = c{like("viajes", viajes_pas)
+            //and {NotEqual("usuario", calificado)}
+        
+        //}
+        def ReservaList = Reserva.createCriteria().list() {
+             if (calificado){
+                eq("viajes", viajes_pas)
+                ne("usuario", usr1)
+                ne("usuario", calificado) //"%${params.query}%")
+            }
+             else{
+                 eq("viajes", viajes_pas)
+                 ne("usuario", usr1)
+             }
+             } //creo un criterio para traer los pasajeros que aún no han sido calificados
+        def condc = User.findById(viajes_pas.conductor.id)
+        
+        Reserva r
+        r = reser
+        Reserva cond
+        
+        def calcond = Calificacion.findAllByCalificadorAndCalificadoAndViaje_c(usr1, condc, reser)
+        if (calcond){
+            cond = null
+            
+        }else{
+            cond = r
+        }
+        //  and {like("usuario",usr)}
+        //}
+        //[reserva: reser]
+        //[reserva: Reserva.findAllByViajesAndUsuarioNotEqualAndUsuarioNotEqual(viajes_pas, usr1, calificado), 
+         [reserva: ReservaList, calificacion: cond]
+        
+//      
+    }
 
     def show(Viaje viajeInstance) {
         respond viajeInstance
@@ -86,6 +133,16 @@ class ViajeController {
             notFound()
             return
         }
+        
+        //Guarda el viaje siempre y cuando la fecha de salida no sea menor a la actual
+        Date now = new Date()
+        Date salida = viajeInstance.fecha_salida
+        //si es mejor vuelve a la misma vista con el flashmessage, si esta todo bien sigue y guarda
+       if (salida.before(now)){ 
+         flash.message = "Revisa tu fecha de salida ya que no puede ser anterior a la fecha de hoy."
+         render(view:'create', model: [viajeInstance: viajeInstance]);
+        
+          }else{
 
         if (viajeInstance.hasErrors()) {
             respond viajeInstance.errors, view:'create'
@@ -96,11 +153,18 @@ class ViajeController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'viaje.label', default: 'Viaje'), viajeInstance.id])
+                
+                //flash.message = message(code: 'default.created.message', args: [message(code: 'viaje.label', default: 'Viaje'), viajeInstance.id])
                 redirect viajeInstance
             }
+            def sql = """update Viaje viajeInstance
+                   set viajeInstance.estado = 'ACTIVO'
+                    
+                   where viajeInstance.id = '${viajeInstance.id}'""" 
+              viajeInstance.executeUpdate(sql)
             '*' { respond viajeInstance, [status: CREATED] }
         }
+          }
     }
 
     def edit(Viaje viajeInstance) {
@@ -126,6 +190,10 @@ class ViajeController {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Viaje.label', default: 'Viaje'), viajeInstance.id])
                 redirect viajeInstance
             }
+            def sql = """update Viaje viajeInstance
+                   set viajeInstance.estado = 'ACTIVO'
+                    
+                   where viajeInstance.id = '${viajeInstance.id}'""" 
             '*'{ respond viajeInstance, [status: OK] }
         }
     }
@@ -190,8 +258,76 @@ class ViajeController {
 	   //Reserva reserva = findbyId(reservaid)
 	   //User usuario	= findbyId(calificadoid)
 	   [reserva: Reserva.findById(reservaid), usuario: User.findById(calificadoid)]
-	  
+     //render(view:'misViajes')
 	   }
+   
+   
+   def misViajes(){
+     
+     User cond = User.findById(sec.loggedInUserInfo(field:'id'))
+     [mviaje: Viaje.findAllByConductor(cond)]
+ }
+ 
+ def reportes(){
+     Date now = Calendar.getInstance(TimeZone.getTimeZone('GMT-3')).time
+     def formatter = new java.text.SimpleDateFormat('dd/MM/yyyy')
+     formatter.timeZone = TimeZone.getTimeZone('GMT-3')
+     def fecha= formatter.format(now)
+     if (params){
+         User cond123 = User.findById(sec.loggedInUserInfo(field:'id'))
+         def ViajeReport = Viaje.createCriteria().list (params) {
+             
+                 ilike("origen", "%${params.origen}%")
+                 ilike("destino", "%${params.destino}%")
+                // between("fecha_salida", "{params.fechadesde}", "${params.fechahasta}")
+             }
+         def columnas = [['string', 'Origen'],['number', 'conteo']]
+         def datos = []
+         def columnas1 = [['string', 'Destino'],['number', 'conteo']]
+         def datos1 = []
+         def cant
+         
+         def columnas2 = [['string', 'Reserva'],['number', 'conteo']]
+         def datos2 = []
+         def columnas3 = [['string', 'Destino'],['number', 'conteo']]
+         def datos3 = []
+        
+         Reserva.list().each{est->
+             def registro = [est, Reserva.countByEstIlike(est)]
+             datos2.add(registro)
+         }
+         
+         
+         
+        
+         Viaje.list().each{origen->
+             def registro = [origen, Viaje.countByOrigen(origen)]
+             datos.add(registro)
+         }
+         
+         Viaje.list().each{destino->
+             def registro = [destino.toString(), Viaje.countByDestino(destino)]
+             datos1.add(registro)
+         }
+         
+         def titulo = "Origen de viajes"
+         def titulo1 = "Destino de viajes"
+         def titulo2 = "Reservas"
+         
+         [titulo: titulo, columnas: columnas, datos: datos, viajes1: ViajeReport,
+            titulo1: titulo1, columnas1: columnas1, datos1: datos1,
+            titulo2: titulo2, columnas2: columnas2, datos2: datos2]
+         
+        //new File("C:/Dario/${cond123}.pdf").withOutputStream
+//        def pdf = new ByteArrayOutputStream().withStream  { outputStream ->
+//             pdfRenderingService.render(controller:this, template:"pdfReportes",model:[viajeReport: ViajeReport, fecha: fecha], outputStream).toByteArray()
+//           }
+//        render(file:pdf,contentType: 'application/pdf')
+//        [viajes1: ViajeReport]
+     }
+     
+     
+ }
 }
 
 

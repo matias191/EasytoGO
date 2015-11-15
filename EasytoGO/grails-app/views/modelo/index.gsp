@@ -61,12 +61,10 @@
 					<td>
 					<sec:ifLoggedIn>
 						<g:link action="edit" id="${modeloInstance.id}"><span class="glyphicon glyphicon-pencil"></span></g:link>
-						<g:link action="delete" method="DELETE"  controller="modelo" resource="modeloInstance"id="${modeloInstance.id}"><span class="glyphicon glyphicon-remove"></span></g:link>
 						</sec:ifLoggedIn>
 						<sec:ifNotLoggedIn>
 						 <a class="home" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-pencil"></span></a>
-						 <a class="home" href="${createLink(uri: '/')}"><span class="glyphicon glyphicon-remove"></span></a>
-					</sec:ifNotLoggedIn>
+							</sec:ifNotLoggedIn>
 					</td>	
 					</tr>
 				</g:each>

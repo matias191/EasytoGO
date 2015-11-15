@@ -13,7 +13,7 @@
       <div class="interactive-slider-v2 img-v1" style="background: url('${resource(dir: 'images', file: 'Carre.jpg')}'); background-size: cover;background-position: center;margin-top:0; ">
      	<div class="container">
      		
-            <h1>Bienvenido a EasyToGO</h1>
+            <h1>Bienvenido a Easy To GO</h1>
             
             <p>Encuentra tu viaje</p>
            
@@ -34,7 +34,7 @@
 						</div>
 						<div class="fieldcontain" style="margin-top:0.3em; padding: 0 25% 0 25%;" >						
 						       <div class="input-group date input-group-sm col-lg-12" >
-      							<input id="date" type="text" class="form-control" placeholder="Fecha de Viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+      							<input id="date" type="String" class="form-control" placeholder="Fecha de Viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
     						   </div>
 						<div >
 						<div class="fieldcontain" style="margin-top:0.3em;" >

@@ -23,6 +23,8 @@
 		<asset:stylesheet src="bootstrap-datepicker3.min.css" type="text/css"/>
         <asset:stylesheet src="bootstrap-datepicker.min.css" type="text/css"/>
 		<asset:stylesheet src="bootstrap-datetimepicker.min.css" type="text/css"/>
+		<asset:stylesheet src="star-rating.min.css" type="text/css"/>
+		
 		
 		<g:layoutHead/>
 		
@@ -73,7 +75,8 @@
         
         </sec:ifLoggedIn>
         <sec:ifNotLoggedIn>
-        <li><g:link controller='login' action='auth'>Publica tu viaje</g:link></li>        
+		<g:set var="msg" value="${1}"/>
+        <li><g:link controller='login' action='auth' params="[msg: msg]">Publica tu viaje</g:link></li>        
         </sec:ifNotLoggedIn>
       </ul>
       <ul class="nav navbar-nav navbar-right" style="float:left;">
@@ -91,11 +94,14 @@
      			
      		 
      		 <li><a href="#"></a><g:link class="editar" controller='User' action= 'show' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-user"></span>Mi perfil</g:link></li>
+     		 <li><a href="#"></a><g:link class="editar" controller='viaje' action= 'misViajes' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-plane"></span>Mis Viajes</g:link></li>
+     		 <li><a href="#"></a><g:link class="editar" controller='reserva' action= 'misReservas' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-usd"></span>Mis Reservas</g:link></li>
+     		 <li><a href="#"></a><g:link class="editar" controller='viaje' action= 'usuarioViaje' id="${sec.loggedInUserInfo(field:'id') }"> <span class="glyphicon glyphicon-star"></span>Calificar</g:link></li>
      		 <sec:ifAllGranted roles="ROLE_ADMIN">
 				 <%--<li><a href="#"></a><g:link class="modelo" controller='Modelo' action= 'index'>ABM Modelo</g:link></li>
 				 <li><a href="#"></a><g:link class="marca" controller='Marca' action= 'index'>ABM Marca</g:link></li>
 				 --%>
-			<li><a href="#"></a><g:link controller='marca' action='index'><span class="glyphicon glyphicon-cog"></span>Administracion</g:link></li>
+			<li><a href="#"></a><g:link controller='viaje' action='reportes'><span class="glyphicon glyphicon-cog"></span>Administracion</g:link></li>
 				</sec:ifAllGranted>
      		 <li class="divider"></li>	
      		 <li><a href="#"></a><g:link class="logout" controller="logout" action= "index" method="POST"> <span class="glyphicon glyphicon-off"></span>Desconectarse</g:link></li>
@@ -116,27 +122,27 @@
                     <!-- About -->
                     <div class="col-md-3 md-margin-bottom-40">
                         <a href="index.html"><asset:image id="logo-footer" class="footer-logo"src="Easytogologotrans3.png" class="img-responsive" alt="Responsive image"/></a>
-                        <p>About Unify dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl id libero tincidunt sodales.</p>
-                        <p>Duis eleifend fermentum ante ut aliquam. Cras mi risus, dignissim sed adipiscing ut, placerat non arcu.</p>
+                        <p>Permite a las personas ofrecer sus viajes, conocer nuevos amigos, compartir experiencias y viajar de manera divertida</p>
+                        <p>Aportar su granito de arena para la mejora del medio ambiente</p>
                     </div><!--/col-md-3-->
                     <!-- End About -->
 
                     <!-- Latest -->
-                    <div class="col-md-3 md-margin-bottom-40">
+                    <div class="col-md-1 md-margin-bottom-40">
                         <div class="posts">
-                            <div class="headline"><h2>Latest Posts</h2></div>
-                            <ul class="list-unstyled latest-list">
+                            <div class=""><h2></h2></div>
+                            <ul class="">
                                 <li>
-                                    <a href="#">Incredible content</a>
-                                    <small>May 8, 2014</small>
+                                    <a href="#"></a>
+                                    <small></small>
                                 </li>
                                 <li>
-                                    <a href="#">Best shoots</a>
-                                    <small>June 23, 2014</small>
+                                    <a href="#"></a>
+                                    <small></small>
                                 </li>
                                 <li>
-                                    <a href="#">Terminos y Condiciones</a>
-                                    <small>September 15, 2014</small>
+                                    <a href="#"></a>
+                                    <small></small>
                                 </li>
                             </ul>
                         </div>
@@ -144,26 +150,26 @@
                     <!-- End Latest -->
 
                     <!-- Link List -->
-                    <div class="col-md-3 md-margin-bottom-40">
+                    <div class="col-md-4 md-margin-bottom-40">
                         <div class="headline"><h2>Nuestra Empresa</h2></div>
                         <ul class="list-unstyled link-list">
                             <li><a href="#">Sobre Nosotros</a><i class="fa fa-angle-right"></i></li>
                             <li><a href="#">Nuestra Empresa</a><i class="fa fa-angle-right"></i></li>
-                            <li><a href="#">Latest jobs</a><i class="fa fa-angle-right"></i></li>
-                            <li><a href="#">Community</a><i class="fa fa-angle-right"></i></li>
-                            <li><a href="#">Contactenos</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="#"></a><i class=""></i></li>
+                            <li><a href="#"></a><i class=""></i></li>
+                            <li><a href="#"></a><i class=""></i></li>
                         </ul>
                     </div><!--/col-md-3-->
                     <!-- End Link List -->
 
                     <!-- Address -->
-                    <div class="col-md-3 map-img md-margin-bottom-40">
+                    <div class="col-md-4 map-img md-margin-bottom-40">
                         <div class="headline"><h2>Contactenos</h2></div>
                         <address class="md-margin-bottom-40">
-                            25, Lorem Lis Street, Mendoza <br />
+                            J. Rodriguez 273, Mendoza <br />
                             Mendoza, Argentina <br />
                             Telefono: 261 2194052 <br />
-                            Email: <a href="roberto.d.hudson@gmail.com" class="">roberto.d.hudson@gmail.com</a>
+                            Email: <a href="easytogo.viajescompartidos@gmail.com" class="">easytogo.viajescompartidos@gmail.com</a>
                         </address>
                     </div><!--/col-md-3-->
                     <!-- End Address -->
@@ -177,7 +183,7 @@
                     <div class="col-md-6">
                         <p>
                             2015 &copy; All Rights Reserved.
-                           <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                           <a href="#">Politicas de Privacidad</a> | <a href="#">Terminos de Servicio</a>
                         </p>
                     </div>
 
@@ -234,7 +240,7 @@
 		<asset:javascript  src="bootstrap-datetimepicker.min.js" />
 		<asset:javascript  src="bootstrap-datetimepicker.es.js" />
 		
-		
+		<asset:javascript  src="star-rating.min.js" />
 		<asset:javascript  src="scripts.js" />
 		
 </body>

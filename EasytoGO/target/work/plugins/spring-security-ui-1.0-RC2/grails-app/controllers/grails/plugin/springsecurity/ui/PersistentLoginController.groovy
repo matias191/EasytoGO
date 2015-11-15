@@ -43,7 +43,7 @@ class PersistentLoginController extends AbstractS2UiController {
 			return
 		}
 
-		flash.message = "${message(code: 'default.updated.message', args: [message(code: 'persistentLogin.label', default: 'PersistentLogin'), persistentLogin.id])}"
+		flash.message = "lal"
 		redirect action: 'edit', id: persistentLogin.id
 	}
 

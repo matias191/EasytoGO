@@ -4,14 +4,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-<meta name="layout" content="main"/>
+<meta name="layout" content="main2"/>
 <title>Viajes de Usuario</title>
 </head>
 <body>
 
+<div class="container">		
+			
+			<div class="row">
+			 <div class="container">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Calificar<small> mis viajes</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i >Selecciona los viajes en los mismos podras ver a tus compañeros de viaje y calificarlos, brindanos tus experiancias con los mismos</i> 
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+          </div>
+ </div>
 
 <g:if test="${flash.message}">
-<div class="message" role="status">${flash.message}</div>
+<div class="alert alert-success" role="alert">${flash.message}</div>
 </g:if>
 <%--<fieldset class="form">--%>
 <%--	<g:form action="usuarioViaje" method="GET">--%>
@@ -30,8 +47,9 @@
 
 
   <div class="container">
-  
-  <table class="table">
+  <h4 class="page-header">Viajes como Conductor</h4>
+  <div class="table-responsive" > 
+  		<table class="table table-hover"  >
 			<thead>
 					<tr>
 						<g:sortableColumn property="origen" title="${message(code: 'viaje.origen.label', default: 'Origen')}" />
@@ -88,12 +106,13 @@
     
 	</tbody>
 	</table>
-    
+    </div>
   </div>
   
   <div class="container">
-  
-  <table class="table">
+    <h4 class="page-header">Viajes como  pasajero</h4>
+ <div class="table-responsive" > 
+  		<table class="table table-hover"  >
 			<thead>
 					<tr>
 					<g:sortableColumn property="origen" title="${message(code: 'viaje.origen.label', default: 'Origen')}" />
@@ -160,7 +179,7 @@
     
 	</tbody>
 	</table>
-   
+   </div>
   </div>
   
 

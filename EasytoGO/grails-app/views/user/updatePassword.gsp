@@ -12,6 +12,10 @@
 	</head>
 <body>
 	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+			<div id="page-body" role="main">
+			<h2 class="page-header">Cambiar contraseña</h2>
 		<div class="form-horizontal">
 			<div class="container">
 		<g:form url="[resource:userInstance, action:'update']" method="PUT" >
@@ -27,7 +31,7 @@
 				</label>
 				<div class="col-md-3">
 				<g:form url="[resource:userInstance, action:'update']" method="PUT" >
-					<button class="btn btm-warning"  > Actualizar</button>
+					<button action="update" class="btn btn-warning"  > Actualizar</button>
 				</g:form>
 				</div>
 				</div>
@@ -36,5 +40,8 @@
 			</div>
 			</div>
 	</div>
+	</div>
+	</div>
+		</div>
 </body>
 </html>

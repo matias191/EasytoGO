@@ -8,15 +8,35 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		
+		<div class="container">		
+			
+			<div class="row">
+			 <div class="container">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Mi viaje <small></small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i>Puedes editar o eliminar tu viaje publicado</i> 
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+          </div>
+ </div>
 		<div id="show-viaje" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<div class="container">
+			<h3 class="alert alert-success" role="alert">Has creado tu viaje correctamente!</h3>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
+			  </div>
+			
 			<div class="form-horizontal">
 			<div class="container">
-			
+			 <div class="panel panel-default">
+			<div class="panel-body">
 				<g:if test="${viajeInstance?.origen}">
 				
     				 <div class="form-group">
@@ -66,7 +86,7 @@
 				<div class="form-group">
 					<span id="plazas_disponibles-label" class="col-md-4 control-label"><g:message code="viaje.plazas_disponibles.label" default="Plazas disponibles" /></span>
 					<div class="col-md-6">	
-						<input class="form-control input-md" aria-labelledby="plazas_disponibles-label" value="${viajeInstance.plazas_disponibles}" readonly>
+						<input class="form-control input-md" aria-labelledby="plazas_disponibles-label"  value="${viajeInstance.plazas_disponibles}" readonly>
 				</div>
 				   	</div>
 				</g:if>
@@ -124,7 +144,7 @@
 				<div class="form-group">
 					<span id="mascota-label" class="col-md-4 control-label"><g:message code="viaje.mascota.label" default="¿Permite Mascotas?" /></span>
 					<div class="col-md-6">	
-						<input class="form-control input-md" aria-labelledby="mascota-label" value="${userInstance.mascota == null ? 'NO' : 'SI'}"readonly>
+						<input class="form-control input-md" aria-labelledby="mascota-label" value="${viajeInstance.mascota == null ? 'NO' : 'SI'}"readonly>
 					</div>
 				   	</div>
 				</g:if>
@@ -134,11 +154,16 @@
 			
 			
 			<g:form url="[resource:viajeInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${viajeInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+				<div class="form-group">
+				<span id="mascota-label" class="col-md-4 control-label"></span>
+				<fieldset class="buttons col-md-6">
+					<g:link class="edit btn btn-success" action="edit" resource="${viajeInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</fieldset>
+					</div>
 			</g:form>
+		</div>
+		</div>
 		</div>
 		</div>
 			</div>

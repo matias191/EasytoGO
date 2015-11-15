@@ -15,7 +15,7 @@ import grails.plugin.springsecurity.SpringSecurityUtils;
 @Transactional(readOnly = true)
 class ReservaController {
   def springSecurityService
-
+    def pdfRenderingService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -57,7 +57,19 @@ class ReservaController {
       def modelo = vehiculo.modelo.nombre
       def marca = vehiculo.modelo.marca.nombre
       
+      def User pasajero = res.usuario
+      def nombre = pasajero.nombre
+      def apellido = pasajero.apellido
+      def direccion = pasajero.direccion
+      def mailpasajero = pasajero.email
       
+      
+      new File("C:/Mati/${nombre}.pdf").withOutputStream { outputStream ->
+        pdfRenderingService.render(controller:this, template:"pdfFacturaTemplate",model:[nombre:nombre,mailpasajero:mailpasajero, apellido:apellido, direccion:direccion, fechaRes:fechaRes,origen:origen, destino:destino, costoPlaza:costoPlaza, cantidad:cantidad, costoGestion: costoGestion], outputStream)
+      }
+      
+      /*def args = [template:"pdfFacturaTemplate",  filename: "yourTitle", model:[nombre:nombre, apellido:apellido, direccion:direccion, fechaRes:fechaRes,origen:origen, destino:destino, costoPlaza:costoPlaza, cantidad:cantidad, costoGestion: costoGestion]]
+      pdfRenderingService.render(args+[controller:this],response)*/
       
       
      // def user = springSecurityService.currentUser      
@@ -133,8 +145,10 @@ class ReservaController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Reserva.label', default: 'Reserva'), reservaInstance.id])
-                redirect action:"index", method:"GET"
+                flash.message = "Has eliminado tu reserva correctamente"
+                //redirect action:"index", method:"GET"
+               
+                render(view:'misReservas')
             }
             '*'{ render status: NO_CONTENT }
         }
@@ -191,4 +205,14 @@ class ReservaController {
        render(view:'show', model: [reservaInstance: reservaInstance, precio: precio,  descripcion: descripcion, cantidad: cantidad, idRese: idRese])  ;
 		
 	}
+  
+  def misReservas(){
+    
+    User cond = User.findById(sec.loggedInUserInfo(field:'id'))
+    [mreserva: Reserva.findAllByUsuario(cond)]
+}
+
+  def show_old(Reserva reservaInstance) {
+    respond reservaInstance
+}
 }

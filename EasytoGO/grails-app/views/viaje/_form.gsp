@@ -8,7 +8,8 @@
 			default="Origen" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input id="pac-input2" class="form-control input-md" name="origen"  placeholder="origen" value="${viajeInstance?.origen}" />
+			<input id="pac-input2" required="" class="form-control input-md" name="origen"  placeholder="origen" value="${viajeInstance?.origen}" />
+			
 			</div>
 		</div>
 	</div>
@@ -18,7 +19,7 @@
 			default="Destino" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input id="pac-input" class="form-control input-md" name="destino" placeholder="Destino" value="${viajeInstance?.destino}" />
+			<input id="pac-input" required="" class="form-control input-md" name="destino" placeholder="Destino" value="${viajeInstance?.destino}" />
 			</div>
 		</div>
 	</div>
@@ -48,7 +49,7 @@
 			default="Plazas Disponibles" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<g:field name="plazas_disponibles" type="number" value="${viajeInstance.plazas_disponibles}" required=""/>
+			<g:field name="plazas_disponibles" type="number"  min="1" value="${viajeInstance.plazas_disponibles}" required=""/>
 		</div>
 		</div>
 	</div>
