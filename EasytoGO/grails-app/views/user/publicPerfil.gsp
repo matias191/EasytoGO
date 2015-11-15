@@ -151,6 +151,23 @@ p {
 			</div>	
 			</g:if>
 			</div>	
+			
+				<div class="row">
+						<div class="form-group">
+							<div
+								class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'valor', 'error')} required">
+								 <label for="valor" id="nombre-label"
+									class="col-md-2 control-label">Reputación 
+								</label>
+								<div class="col-md-6">
+
+									<g:field type="number" name="valor" id="input-1" class="rating" data-min="0" data-max="5" data-disabled="true" value="3" data-size="xs" data-step="1" required="required"/>
+									 <span>(5 calificaciones)</span>
+								</div>
+							</div>
+						</div>
+			
+			
 			<div class="row">
 			<g:if test="${userInstance?.nombre}">
 				<div class="form-group ">
