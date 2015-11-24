@@ -125,7 +125,8 @@ class CalificacionController {
 			form multipartForm {
 				flash.message = message(code: 'default.created.message', args: [message(code: 'calificacion.label', default: 'Calificacion'), calificacionInstance.id])
 				//redirect calificacionInstance
-        redirect(uri:'/')
+        //redirect(uri:'/')
+        redirect(controller: 'Viaje', action:'usuarioViajeCal')
 			}
 			'*' { respond calificacionInstance, [status: CREATED], action:"index", method:"GET"}
 		}

@@ -34,7 +34,7 @@ class ViajeController {
     fecha_par = Date.parse('yyyy-MM-dd HH:mm:ss', v_fecha)
     }
     def ViajeList = Viaje.createCriteria().list (params) {
-    if (params.query) {
+    if (params.query || params.query1) {
     ilike("origen", "%${params.query}%")
     ilike("destino", "%${params.query1}%")
     between("fecha_salida", now, now + 20)
@@ -328,6 +328,8 @@ class ViajeController {
      
      
  }
+ 
+ def usuarioViajeCal(){}
 }
 
 

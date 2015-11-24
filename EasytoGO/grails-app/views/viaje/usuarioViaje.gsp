@@ -19,7 +19,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i >Selecciona los viajes en los mismos podras ver a tus compañeros de viaje y calificarlos, brindanos tus experiancias con los mismos</i> 
+                                <i >Selecciona un viaje, califica a tus compañeros, y comenta como fue tu experiancia con ellos.</i> 
                             </li>
                         </ol>
                     </div>
@@ -47,22 +47,22 @@
 
 
   <div class="container">
-  <h4 class="page-header">Viajes como Conductor</h4>
+  <h4 class="page-header">Viajes como conductor</h4>
   <div class="table-responsive" > 
   		<table class="table table-hover"  >
 			<thead>
 					<tr>
-						<g:sortableColumn property="origen" title="${message(code: 'viaje.origen.label', default: 'Origen')}" />
+						<g:sortableColumn property="origen" title="Origen" />
 						
-						<g:sortableColumn property="destino" title="${message(code: 'viaje.destino.label', default: 'Destino')}" />
+						<g:sortableColumn property="destino" title="Destino" />
 					
-						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fechasalida')}" />
+						<g:sortableColumn property="fecha_salida" title="Fecha de salida" />
 					
 <%--						<g:sortableColumn property="fecha_llegada" title="${message(code: 'viaje.fecha_llegada.label', default: 'Fechallegada')}" />--%>
 					
-						<g:sortableColumn property="plazas_disponibles" title="${message(code: 'viaje.plazas_disponibles.label', default: 'Plazasdisponibles')}" />
+						<g:sortableColumn property="plazas_disponibles" title="Plazas disponibles" />
 					
-						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costoplaza')}" />
+						<g:sortableColumn property="costoplaza" title="Costo por plaza" />
 					
 <%--						<g:sortableColumn property="comentario" title="${message(code: 'viaje.comentario.label', default: 'Comentario')}" />--%>
 					
@@ -119,11 +119,11 @@
 						
 						<g:sortableColumn property="destino" title="${message(code: 'viaje.destino.label', default: 'Destino')}" />
 					
-						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fechasalida')}" />
+						<g:sortableColumn property="fecha_salida" title="Fecha de salida" />
 					
 <%--						<g:sortableColumn property="fecha_llegada" title="${message(code: 'viaje.fecha_llegada.label', default: 'Fechallegada')}" />--%>
 					
-						<g:sortableColumn property="cant_plaz" title="${message(code: 'reserva.cant_plaz.label', default: 'Cantidad de Plazas')}" />
+						<g:sortableColumn property="cant_plaz" title="${message(code: 'reserva.cant_plaz.label', default: 'Cantidad de plazas')}" />
 					
 						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costo por plaza')}" />
 					

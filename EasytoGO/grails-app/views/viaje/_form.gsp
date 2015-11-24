@@ -8,7 +8,7 @@
 			default="Origen" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input id="pac-input2" required="" class="form-control input-md" name="origen"  placeholder="origen" value="${viajeInstance?.origen}" />
+			<input id="pac-input2" required="" class="form-control input-md" name="origen"  placeholder="Origen" value="${viajeInstance?.origen}" />
 			
 			</div>
 		</div>
