@@ -4,6 +4,23 @@
 		<meta name="layout" content="main2">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+		<script type="text/javascript" language="JavaScript">
+<!--
+//--------------------------------
+// This code compares two fields in a form and submit it
+// if they're the same, or not if they're different.
+//-------------------------------->
+function checkPass(theForm) {
+    if (theForm.password.value != theForm.confirmPassword.value)
+    {
+        alert('La contraseña y la confirmación de la contraseña no son las mismas. Vuélvalas a ingresar.');
+        return false;
+    } else {
+        return true;
+    }
+}
+
+</script>
 	</head>
 	<body>
 		<div class="container">
@@ -21,7 +38,7 @@
 			</ul>
 			</g:hasErrors>
 			
-			<g:form url="[resource:userInstance, action:'save']"class="form-horizontal" >
+			<g:form url="[resource:userInstance, action:'save']"class="form-horizontal" onsubmit="return checkPass(this);">
 				<fieldset>
 					<g:render template="useriocreacioneex"/>  <!-- llama al "form" --> 
 				</fieldset>
