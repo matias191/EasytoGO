@@ -12,7 +12,7 @@
 		<div id="show-vehiculo" class="content scaffold-show" role="main">
 			<h1>Mi vehículo</h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
 			<div class="form-horizontal">
 			<div class="container">
@@ -76,15 +76,15 @@
 				
 				
 			
-				<g:if test="${vehiculoInstance?.seguro}">
+				
 				<div class="form-group">
 					<span id="seguro-label"class="col-md-4 control-label"><g:message code="vehiculo.seguro.label" default="Seguro" /></span>
 					<div class="col-md-6">
-						<input class="form-control input-md" aria-labelledby="seguro-label" value="${vehiculoInstance?.seguro == 1 ? 'SI' : 'NO'}" readonly>
+						<input class="form-control input-md" aria-labelledby="seguro-label" value="${vehiculoInstance?.seguro ? 'SI' : 'NO'}" readonly>
 					</div>
 				   	</div>
 				
-				</g:if>
+				
 			<!-- 
 				<g:if test="${vehiculoInstance?.user}">
 				<li class="fieldcontain">

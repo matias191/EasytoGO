@@ -20,7 +20,12 @@
 								src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
 							</span>
 						</div>
-					</g:if>
+					</g:if><g:else>
+			<div class="fieldcontain col-md-2">
+				<span class="property-value">
+				<asset:image class="avatar img-circle" src="user2.png"/></span>
+			</div>	
+			</g:else>
 				</div>
 				<div class="col-md-9">
 					<h1>Añade tu foto!</h1>

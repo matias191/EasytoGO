@@ -60,7 +60,7 @@
 			default="Telefono" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input name="telefono" required="" value="${userInstance?.telefono}" class="form-control input-md" placeholder="Telefono"/>
+			<input name="telefono" required="" value="${userInstance?.telefono}" class="form-control input-md" placeholder="+(Cod. Pais)(Cod. Area)(Teléfono)"/>
 			</div>
 		</div>
 	</div>

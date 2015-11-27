@@ -59,14 +59,14 @@
 			default="Teléfono" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input name="telefono" required="" value="${userInstance?.telefono}" class="form-control input-md" placeholder="Telefono"/>
+			<input name="telefono" required="" value="${userInstance?.telefono}" class="form-control input-md" placeholder="Sin espacios +(Cod País)(Cod Área)(Teléfono) +542613456321"/>
 			</div>
 		</div>
 	</div>
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'direccion', 'error')} required controls">
 			<label for="direccion"class="col-md-4 control-label"> <g:message code="user.direccion.label"
-			default="Dirección completa" /> <span class="required-indicator">*</span>
+			default="Dirección completa" />
 			</label>
 			<div class="col-md-6">
 			<input name="direccion" value="${userInstance?.direccion}" class="form-control input-md" placeholder="Direccion"/><span>(opcional)</span>
@@ -76,10 +76,10 @@
 	  <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'fecVencCarnet', 'error')} required controls">
 			<label for="fecVencCarnet"class="col-md-4 control-label"> <g:message code="user.fecVencCarnet.label"
-			default="Vencimiento del carnet de conducir" /> <span class="required-indicator">*</span>
+			default="Vencimiento del carnet de conducir" /> 
 			</label>
 			<div class="col-md-6">
-			<g:datePicker default="none" noSelection="['':'']" name="fecVencCarnet" precision="month" value="${userInstance?.fecVencCarnet}" /><span>(opcional)</span>
+			<g:datePicker noSelection="['':'']" name="fecVencCarnet" years="${2015..2020}" precision="month" value="${userInstance?.fecVencCarnet}" /><span>(opcional)</span>
 			</div>
 		</div>
 	</div>

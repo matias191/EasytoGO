@@ -149,7 +149,13 @@ p {
 				<img class="avatar" src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
 				</span>
 			</div>	
-			</g:if>
+			</g:if><g:else>
+			<div class="fieldcontain col-md-2">
+				<span class="property-value">
+				<asset:image class="avatar img-circle" src="user2.png"/></span>
+				<span class="property-value"><h4>Todavia no actualizas tu foto? Edita tu perfil y agregala!</h4></span>
+			</div>	
+			</g:else>
 			</div>	
 			
 				<div class="row">

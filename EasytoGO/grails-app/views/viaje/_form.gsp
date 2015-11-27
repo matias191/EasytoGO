@@ -49,7 +49,7 @@
 			default="Plazas Disponibles" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<g:field name="plazas_disponibles" type="number"  min="1" value="${viajeInstance.plazas_disponibles}" required=""/>
+			<g:field name="plazas_disponibles" type="number"  min="1" max="3" value="${viajeInstance.plazas_disponibles}" required=""/>
 		</div>
 		</div>
 	</div>
@@ -59,7 +59,7 @@
 			default="Costo de la Plaza" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input  class="form-control input-md" name="costoplaza"  placeholder="Costo de la Plaza" value="${viajeInstance?.costoplaza}" />
+			<input  class="form-control input-md" name="costoplaza" placeholder="Costo de la Plaza" value="${viajeInstance?.costoplaza}" />
 			</div>
 		</div>
 	</div>
