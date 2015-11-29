@@ -16,6 +16,7 @@ import grails.plugin.springsecurity.SpringSecurityUtils;
 class ReservaController {
   def springSecurityService
     def pdfRenderingService
+    def mailService;
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -62,10 +63,18 @@ class ReservaController {
       def apellido = pasajero.apellido
       def direccion = pasajero.direccion
       def mailpasajero = pasajero.email
+      def celularPasajero = pasajero.telefono
       
       
       new File("C:/Mati/${nombre}.pdf").withOutputStream { outputStream ->
         pdfRenderingService.render(controller:this, template:"pdfFacturaTemplate",model:[nombre:nombre,mailpasajero:mailpasajero, apellido:apellido, direccion:direccion, fechaRes:fechaRes,origen:origen, destino:destino, costoPlaza:costoPlaza, cantidad:cantidad, costoGestion: costoGestion], outputStream)
+      }
+      
+      //MANDAR MAIL AL CONDUCTOR INFORMANDO SOBRE LA RESERVA
+      mailService.sendMail {
+        to mail
+        subject "Easy To Go - Tienes una nueva reserva en tu viaje."
+        html g.render(template:"reservaAconductor",model:[nombrePasajero:nombre, apellidoPasajero:apellido,idRese: idRese, fechaRes: fechaRes, origen: origen, destino: destino, fechaSalida: fechaSalida, fechaLlegada: fechaLlegada, costoPlaza: costoPlaza, cantidad:cantidad, marca:marca, modelo:modelo, mailPasajero:mailpasajero, celularPasajero:celularPasajero])
       }
       
       /*def args = [template:"pdfFacturaTemplate",  filename: "yourTitle", model:[nombre:nombre, apellido:apellido, direccion:direccion, fechaRes:fechaRes,origen:origen, destino:destino, costoPlaza:costoPlaza, cantidad:cantidad, costoGestion: costoGestion]]

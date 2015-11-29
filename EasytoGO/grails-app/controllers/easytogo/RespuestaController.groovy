@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class RespuestaController {
 def springSecurityService
+def mailService;
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -31,7 +32,8 @@ def springSecurityService
     @Transactional
     def save(Respuesta respuestaInstance) {
       def User user = springSecurityService.currentUser
-    
+      respuestaInstance.pregunta.user.email
+      
      
       //Pregunta[] preg = Pregunta.findByUser(user)
       
@@ -43,6 +45,13 @@ def springSecurityService
         if (respuestaInstance.hasErrors()) {
             respond respuestaInstance.errors, view:'create'
             return
+        }
+        
+        //MANDAR MAIL AL PASAJERO INFORMANDO QUE LE RESPONDIERON
+        mailService.sendMail {
+          to respuestaInstance.pregunta.user.email
+          subject "Easy To Go - Respondieron tu pregunta."
+          html g.render(template:"respondieron",model:[nombre:respuestaInstance.pregunta.user.nombre, apellido: respuestaInstance.pregunta.user.apellido, pregunta: respuestaInstance.pregunta.duda, respuesta: respuestaInstance.resp])
         }
 
         respuestaInstance.save flush:true
