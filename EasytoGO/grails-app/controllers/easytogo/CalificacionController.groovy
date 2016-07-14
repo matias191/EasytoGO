@@ -108,8 +108,10 @@ class CalificacionController {
     }
 	
 	@Transactional
-	def save_calificacion(Calificacion calificacionInstance, Reserva reservaInstance) {
-		if (calificacionInstance == null) {
+	def save_calificacion(Calificacion calificacionInstance) {
+	
+    
+    if (calificacionInstance == null) {
 			notFound()
 			return
 		}
@@ -118,8 +120,8 @@ class CalificacionController {
 			respond calificacionInstance.errors, view:'create'
 			return
 		}
-
-		calificacionInstance.save flush:true
+      
+      calificacionInstance.save flush:true
 
 		request.withFormat {
 			form multipartForm {
@@ -130,10 +132,12 @@ class CalificacionController {
 			}
 			'*' { respond calificacionInstance, [status: CREATED], action:"index", method:"GET"}
 		}
+    
 		def sql = """update Calificacion calificacionInstance
                      set calificacionInstance.estado = 'TRUE'
                     where calificacionInstance.id = calificacionInstance.id""" 
 	   calificacionInstance.executeUpdate(sql)
+    
 	   //redirect calificacionInstance
 	}
 }

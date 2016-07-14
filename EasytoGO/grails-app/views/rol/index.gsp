@@ -3,24 +3,43 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="administracion">
 		<g:set var="entityName" value="${message(code: 'rol.label', default: 'Rol')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-rol" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+	<div class="container">		
+			
+			<div class="row">
+			 <div class="container">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Administracion <small>ABM-Rol</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Este Apartado  Muestra los Roles existentes para los usuarios del sistema
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+          </div>
+          
+        <div class="container">
+		<h3 class="page-header">
+                            Crear nuevo Rol 
+                        </h3>
+		<g:link class="btn  btn-primary" action="create" resource="${rolInstance}"><g:message code="default.button.create.label" default="Crear" /></g:link>
+		 </div>
+		<div class="row">
+		 <div class="container">
 		<div id="list-rol" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h3>Lista de Roles</h3>
 			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
+				<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>
-			<table>
+			<div class="table-responsive" > 
+  			<table class="table table-hover"  >
 			<thead>
 					<tr>
 					
@@ -38,9 +57,24 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination">
-				<g:paginate total="${rolInstanceCount ?: 0}" />
-			</div>
+			<nav>
+			<ul class="pagination">
+				<li>
+				 <a href="#" aria-label="Previous">
+       			 <span aria-hidden="true">&laquo;</span>
+      				</a>
+      			 </li>
+				 <li><g:paginate total="${rolInstanceCount ?: 0}" /></li>
+				<li> <a href="#" aria-label="Next">
+      			  <span aria-hidden="true">&raquo;</span>
+    				  </a>
+				</li>
+			</ul>
+		</nav>
+		</div>
+		</div>
+		</div>
+		</div>
 		</div>
 	</body>
 </html>

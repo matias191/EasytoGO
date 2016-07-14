@@ -13,7 +13,7 @@
 			 <div class="container">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            ¿Qué me han preguntado? <small>preguntas</small>
+                            ¿Qué me han preguntado?
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">

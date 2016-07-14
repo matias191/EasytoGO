@@ -12,11 +12,11 @@
 			 <div class="container">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Buscar<small> Viajes</small>
+                            Buscar<small> viajes</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class=""></i> Puedes visualizar los viajes disponibles  y ver los detalles del mismo
+                                <i class=""></i> Puedes visualizar los viajes disponibles con sus destalles si lo deseas!
                             </li>
                         </ol>
                     </div>
@@ -31,31 +31,36 @@
 <fieldset>
 	<g:form action="buscaViaje" method="GET" class="form-horizontal">
 		<div class="container">
+		
 					<div class="form-group">
 					<label class="col-md-4 control-label" for="query"><span class="glyphicon glyphicon-map-marker"></span>Origen:</label>
-					<div class="col-md-4">
-					
+					<div class="col-md-4">					
 					<g:textField id="pac-input2" class="form-control input-md" name="query" value="${params.query}"/> <br>
 					</div>
 					</div>
+					
+					
 					<div class="form-group">
 					<label class="col-md-4 control-label" for="query1"><span class="glyphicon glyphicon-map-marker"></span>Destino:</label>
-					<div class="col-md-4">
-					
+					<div class="col-md-4">					
 					<g:textField id="pac-input" class="form-control input-md" name="query1" value="${params.query1}"/> <br>
 					</div>
 					</div>
+					
 					
 					<div class="fieldcontain" style="margin-top:0.3em; padding: 0 0% 0 0%;" >	
 					<div class="form-group"	>
 					<label class="col-md-4 control-label" for="query1"><span >Fecha del viaje:</span></label>
 					<div class="col-md-4">				
-						       <div class="input-group date input-group-sm " >
-      							<input id="date" type="String" class="form-control" placeholder="Fecha de Viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+						<div class="input-group date input-group-sm " >
+     					<input id="date" class="form-control" name="fecha1" value="${params.fecha1}" placeholder="Fecha de viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+<%--    					 <g:datePicker name="fecha1" noSelection="['':'-Choose-']" precision="day" value="${params.fecha1}" />--%>
+    					
     				</div>
     				</div>
     				</div>
 					</div>
+					
 					<div class="form-group">
 					<label class="col-md-4 control-label" for="singlebutton"></label>
 					<div class="col-md-4">

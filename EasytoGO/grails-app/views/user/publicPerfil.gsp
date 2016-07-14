@@ -158,7 +158,36 @@ p {
 			</g:else>
 			</div>	
 			
+			
+			  <div class="container">
+			<h3 class="page-header">Comentarios sobre mi</h3>
+			<div class="panel panel-default">
+			<div class="panel-body">
+			<g:set var="i" value="${0}"/>
+			<g:set var="prom" value="${0}"/>
+			
+			
+			<g:if test = "${datos}">
+			
+			<g:each in="${datos}" var="v">
+			
+			<h4>${datos[i][2]}</h4>
+			
+			<h4>Comentario:</h4><h5>${datos[i][1]}</h5>
+			
+			
+			
+			<g:set var="prom" value="${prom+datos[i][0]}"/>	
+			
+			<g:set var="i" value="${i +1 }"/>	
+			</g:each>
+			</g:if>
+			</div>
+			</div>
+			</div>
+				
 				<div class="row">
+				<g:if test = "${datos}">
 						<div class="form-group">
 							<div
 								class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'valor', 'error')} required">
@@ -167,13 +196,12 @@ p {
 								</label>
 								<div class="col-md-6">
 
-									<g:field type="number" name="valor" id="input-1" class="rating" data-min="0" data-max="5" data-disabled="true" value="3" data-size="xs" data-step="1" required="required"/>
-									 <span>(5 calificaciones)</span>
+									<g:field type="number" name="valor" id="input-1" class="rating" data-min="0" data-max="5" data-disabled="true" value="${prom/i}" data-size="xs" data-step="1" required="required"/>
+									 
 								</div>
 							</div>
 						</div>
-			
-			
+			</g:if>
 			<div class="row">
 			<g:if test="${userInstance?.nombre}">
 				<div class="form-group ">
@@ -255,6 +283,6 @@ p {
 		
 		</div>
 		</div>
-
+		</div>
 	</body>
 </html>

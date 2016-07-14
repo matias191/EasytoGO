@@ -53,6 +53,11 @@ grails {
   
  
 }
+
+/*grails.plugin.springsecurity.ui.password.validationRegex='^([a-zA-Z0-9@*#_%])*$'
+grails.plugin.springsecurity.ui.password.minLength=8
+grails.plugin.springsecurity.ui.password.maxLength=64*/
+
 grails.mail.default.from="noreply@easytogo.com.ar"
 
 
@@ -122,10 +127,12 @@ grails.plugin.springsecurity.authority.className = 'easytogo.Rol'
 twilio {
   // Enter your host address
   host = 'https://api.twilio.com'
-  apiID = 'AC758205006d96fb76aedefb47e36bfa40'
-  apiPass = '9b9b4833864b714f768ad099ad0a0423'
+  //apiID = 'AC758205006d96fb76aedefb47e36bfa40'
+  //apiPass = '9b9b4833864b714f768ad099ad0a0423'
+  apiID = 'ACa4dd107fef16afe744108e4e2911df58'
+  apiPass = '1cf48bd61a0587729024e4b49efcce0f'
   smsUrl = '/2010-04-01/Accounts/' + apiID + '/Messages.json'
-  number = "+12523604342"
+  number = "+14243428457"
 }
 
 // log4j configuration

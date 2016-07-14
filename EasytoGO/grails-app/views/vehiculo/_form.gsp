@@ -47,7 +47,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-md-6">
-	<g:select name="anio" from="${2015..1930}" value="${vehiculoInstance.anio}" required="" />
+	<g:select name="anio" from="${2016..1930}" value="${vehiculoInstance.anio}" required="" />
 	</div>
 </div>
 </div>

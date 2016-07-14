@@ -132,20 +132,20 @@
                     <li>
                         <a href="#"><i class="fa fa-fw fa-desktop"></i> Viajes</a>
                     </li>
-                   
+                    --%>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Seguridad <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Crear permisos</a>
+                                <g:link controller='rol' action='index'>Rol</g:link>
                             </li>
                             <li>
-                                <a href="#">Revocar permisos</a>
+                                 <g:link controller='userRol' action='index'>Roles usuarios</g:link>
                             </li>
                         </ul>
                     </li>
                    
-                --%></ul>
+               </ul>
             </div>
 			
 

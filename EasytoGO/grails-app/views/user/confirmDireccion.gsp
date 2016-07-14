@@ -18,7 +18,7 @@ por favor ingresa el código que recibirás para completar el proceso de verific
 
 <p>Para ello inicia sesión, entra a tu perfil y en la sección Verificaciones encontrarás un link para ingresar el código.</p>
 
-<p>Si no recibes la carta en el transcurso de 10 días, por favor escribenos a support@easytogo.com.ar</p>
+<p>Si no recibes la carta en el transcurso de 10 días, por favor escribenos a easytogo.viajescompartidos@gmail.com</p>
 	
 		</div>
 	</body>

@@ -12,12 +12,12 @@
 
 <div class="container">
 <h1>Verificación de teléfono</h1>
-<p>Hemos enviado un SMS a tu telefono ${telefono},
+<p>Hemos enviado un SMS a tu teléfono ${telefono},
 por favor ingresa el código recibido para completar el proceso de verificación.<p>
 
 <p>Si no recibes el SMS en el transcurso de unos minutos, por favor intenta nuevamente.</p>
 <br></br>
-<p> Ante dudas o consultas puedes escribir a support@easytogo.com.ar</p>
+<p> Ante dudas o consultas puedes escribir a easytogo.viajescompartidos@gmail.com</p>
 
 			<g:form action="verifSMS" method="GET">
 				<g:hiddenField name="version" value="${userInstance?.version}" />

@@ -16,7 +16,7 @@
 				<div class="col-md-3">
 					<g:if test="${userInstance?.avatar}">
 						<div class="fieldcontain col-md-2">
-							<span class="property-value"> <img class="avatar"
+							<span class="property-value"> <img class="avatar img-circle"
 								src="${createLink(controller:'user', action:'avatar_image', id:userInstance.id)}" />
 							</span>
 						</div>
@@ -50,7 +50,7 @@
 					</g:uploadForm>
 				</div>
 			</div>
-			<h1>Modificar mi perfil</h1>
+			<h1 class="page-header">Modificar mi perfil</h1>
 			<g:if test="${flash.message}">
 				<div class="alert alert-success" role="alert">
 					${flash.message}
@@ -67,41 +67,90 @@
 			</g:hasErrors>
 
 
-			<g:form url="[resource:userInstance, action:'update']" method="PUT"
-				class="form-horizontal">
+			<g:form url="[resource:userInstance, action:'update']" method="PUT" class="form-horizontal">
 				<g:hiddenField name="version" value="${userInstance?.version}" />
 				<fieldset>
 					<g:render template="form" />
 				</fieldset>
-				<fieldset class="buttons">
+				<%--<fieldset class="buttons">
 					<div class="container">
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="singlebutton"></label>
 							<div class="btn-group btn-group-lg col-md-4">
 
 								<g:link controller="user" class="save btn btn-success btn-lg"
-									action="save" params="['user.id':userInstance?.id]" > Actualizar</g:link>
+									action="update" params="['user.id':userInstance?.id]" > Actualizar</g:link>
 
 							</div>
-							<div class="btn-group btn-group-lg ">
-
-								<g:link class="save btn btn-success btn-lg"
-									controller="vehiculo" action="create"
-									params="['user.id': userInstance?.id]">
-									${message(code: 'default.add.label', args: [message(code: 'vehiculo.label', default: 'Vehiculo')])}
-								</g:link>
 							</div>
-						</div>
 					</div>
 				</fieldset>
+							
+							--%>
+							
+							
+						
 
 
 
 
 
+			
+			
+			
+			<fieldset class="buttons">
+				<div class="container">
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="singlebutton"></label>
+					<div class="col-md-4">
+					<g:actionSubmit class="save btn btn-success btn-lg" action="update" value="Actualizar" />
+				</div>
+					</div>
+    			</div>	
+				</fieldset>
 			</g:form>
-
-
+			
+			
+			<h1 class="page-header">Vehículos</h1>
+			
+			
+     	
+	
+			
+			
+			
+			<div class="form-group">
+ 				 <label class="col-md-4 control-label" for="selectbasic">Mis vehículos</label>
+  					<div class="col-md-5">
+    				<select id="selectbasic" name="selectbasic" class="form-control">
+      				<g:each in="${userInstance?.vehiculos?}" var="v">
+      				<option value="v">${v?.modelo.marca.nombre.encodeAsHTML()} ${v?.modelo.nombre.encodeAsHTML()}</option>
+     				 </g:each>
+      				</select>
+  					</div>
+  					<%--<div class="col-md-2">
+  					<g:form url="[resource:vehiculoInstance, action:'delete']" method="DELETE">	
+  					<g:link class="edit" action="edit" controller="Vehiculo" resource="${userInstance}" value=""><span class="glyphicon glyphicon-edit">Editar</span></g:link>
+					</g:form>
+					</div>
+			--%></div>		
+			
+			<fieldset class="buttons">
+				<div class="container">
+					<div class="form-group">
+					<label class="col-md-4 control-label" for="singlebutton"></label>
+					<div class="col-md-4">
+						<g:link class="save btn btn-success btn-lg"
+								controller="vehiculo" action="create"
+								params="['user.id': userInstance?.id]">
+								Agregar vehículo
+						</g:link>
+					</div>
+					</div>
+    			</div>	
+			</fieldset>
+			
+				
 
 		</div>
 	</div>

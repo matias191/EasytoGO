@@ -20,11 +20,12 @@
 				<fieldset class="form">
 					<div class="fieldcontain required">
 						<label for="verifSMS">
-							<g:message code="user.password.label" default="Ingrese el codigo recibido en la carta" />
+							<g:message code="user.password.label" default="Ingrese el código recibido en la carta" />
 							<span class="required-indicator">*</span>
 						</label>
 					<g:passwordField name="codigo" required="" value="${params.codigo}"/>
 					</div>
+					<p>Si no recibes la carta en el transcurso de 10 días, por favor escribenos a easytogo.viajescompartidos@gmail.com</p>
 				</fieldset>
 				
 				<fieldset class="buttons">

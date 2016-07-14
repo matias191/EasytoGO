@@ -19,7 +19,7 @@ por favor revisa tu e-mail y haz click en el link para completar el proceso de r
 <p1>Si no puedes ver el e-mail en el transcurso de unos minutos, por favor revisa la
 carpeta Spam o No deseada.</p>
 <br></br>
-<p2> Ante dudas o consultas puedes escribir a support@easytogo.com.ar</p>
+<p2> Ante dudas o consultas puedes escribir a easytogo.viajescompartidos@gmail.com</p>
 
 
 	

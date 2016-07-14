@@ -31,6 +31,9 @@ class ReservaController {
     
     def showReserva(Reserva reservaInstance) {
       
+      reservaInstance.est = "PAGADO"
+      reservaInstance.save flush:true
+      
       def Reserva res = reservaInstance
       def Viaje viaj = reservaInstance.viajes
       def User conductor = viaj.conductor
@@ -38,8 +41,8 @@ class ReservaController {
             
       
       
-      def origen = viaj.origen
-      def destino = viaj.destino
+      def origen1 = viaj.origen
+      def destino1 = viaj.destino
       def fechaSalida = viaj.fecha_salida
       def fechaLlegada = viaj.fecha_llegada
       def costoPlaza = viaj.costoplaza
@@ -59,13 +62,29 @@ class ReservaController {
       def marca = vehiculo.modelo.marca.nombre
       
       def User pasajero = res.usuario
-      def nombre = pasajero.nombre
-      def apellido = pasajero.apellido
-      def direccion = pasajero.direccion
+      def nombre1 = pasajero.nombre
+      def apellido1 = pasajero.apellido
+      def direccion1 = pasajero.direccion
       def mailpasajero = pasajero.email
       def celularPasajero = pasajero.telefono
       
+      byte[] apellido4 = apellido1.getBytes()
+      String apellido = new String(apellido4,"US-ASCII")
+     
+      byte[] nombre4 = nombre1.getBytes()
+      String nombre = new String(nombre4,"US-ASCII")
       
+      byte[] direccion4 = direccion1.getBytes()
+      String direccion = new String(direccion4,"US-ASCII")
+      
+      byte[] origen4 = origen1.getBytes()
+      String origen = new String(origen4,"US-ASCII")
+      
+      byte[] destino4 = destino1.getBytes()
+      String destino = new String(destino4,"US-ASCII")
+      
+      
+      //crea la factura
       new File("C:/Mati/${nombre}.pdf").withOutputStream { outputStream ->
         pdfRenderingService.render(controller:this, template:"pdfFacturaTemplate",model:[nombre:nombre,mailpasajero:mailpasajero, apellido:apellido, direccion:direccion, fechaRes:fechaRes,origen:origen, destino:destino, costoPlaza:costoPlaza, cantidad:cantidad, costoGestion: costoGestion], outputStream)
       }
@@ -103,7 +122,7 @@ class ReservaController {
             respond reservaInstance.errors, view:'create'
             return
         }
-
+        
         reservaInstance.save flush:true
 
         request.withFormat {
@@ -150,7 +169,14 @@ class ReservaController {
             return
         }
 
-        reservaInstance.delete flush:true
+        //reservaInstance.delete flush:true
+        def sql3 = """update Reserva reservaInstance
+                   set reservaInstance.est = 'CANCELADO'
+                    
+                   where reservaInstance.id = '${reservaInstance.id}'""" 
+      reservaInstance.executeUpdate(sql3)
+      
+       
 
         request.withFormat {
             form multipartForm {
@@ -175,9 +201,10 @@ class ReservaController {
 	
 	@Transactional
 	def save_reserva(Reserva reservaInstance, Viaje viajeInstance) {
-    
+    def userlog = springSecurityService.currentUser
     def Reserva res = reservaInstance
     def Viaje viaj = reservaInstance.viajes
+    def idviaje = viaj.id
     
    
 		if (reservaInstance == null) {
@@ -189,7 +216,16 @@ class ReservaController {
 			respond reservaInstance.errors, view:'create'
 			return
 		}
-
+     
+        if (viaj.conductor ==  userlog ){
+          flash.message = "No puedes reservar una plaza en tu mismo viaje"
+          redirect(uri: "/viaje/reservar/${idviaje}")
+          return
+        }
+    
+    
+    
+        reservaInstance.est = "IMPAGA"
 		reservaInstance.save flush:true
         def idRese = res.id
         def precio = viaj.costoplaza*0.1
@@ -210,7 +246,20 @@ class ReservaController {
                    set viajeInstance.plazas_disponibles = '${params.plazas_disponibles}'
                     
                    where viajeInstance.id = '${params.viajes.id}'""" 
+    
               viajeInstance.executeUpdate(sql)
+              if (viajeInstance.plazas_disponibles == 0){
+                sql = """update Viaje viajeInstance
+                  set viajeInstance.estado = 'COMPLETO'
+                   
+                  where viajeInstance.id = '${params.viajes.id}'"""
+               viajeInstance.executeUpdate(sql)}
+               
+               /* def sql4 = """update Reserva reservaInstance
+                  set reservaInstance.est = 'PAGADO'
+                   
+                  where reservaInstance.id = '${reservaInstance.id}'"""
+                reservaInstance.executeUpdate(sql4)*/
        render(view:'show', model: [reservaInstance: reservaInstance, precio: precio,  descripcion: descripcion, cantidad: cantidad, idRese: idRese])  ;
 		
 	}

@@ -21,8 +21,8 @@
 			<div class="comment-tabs">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a href="#comments-logout" role="tab"
-						data-toggle="tab"><h4 class="reviews text-capitalize">Detalles
-								del Viaje</h4></a></li>
+						data-toggle="tab"><h4>Detalles
+								del viaje</h4></a></li>
 					<li><a href="#add-comment" role="tab" data-toggle="tab"><h4
 								class="reviews text-capitalize">Pasajeros</h4></a></li>
 					
@@ -159,7 +159,7 @@
 
 									<g:if test="${viajeInstance?.plazas_disponibles}">
 										<div class="">
-											<span id="plazas_disponibles-label" class="control-label">Cantidad de Plazas disponibles:</span><h4>${viajeInstance.plazas_disponibles}</h4>
+											<span id="plazas_disponibles-label" class="control-label">Cantidad de plazas disponibles:</span><h4>${viajeInstance.plazas_disponibles}</h4>
 											
 										</div>
 										
@@ -167,7 +167,7 @@
 
 									<g:if test="${viajeInstance?.costoplaza}">
 									<div class="">
-											<span id="costoplaza-label" class="control-label">Costo de la plaza:</span><h4>${viajeInstance.costoplaza}</h4>
+											<span id="costoplaza-label" class="control-label">Costo por plaza:</span><h4>${viajeInstance.costoplaza}</h4>
 											
 										</div>
 										
@@ -180,14 +180,14 @@
 							
 									
 									<div class="">
-											<span id="equipaje-label" class="control-label">¿Se permite equipaje?</span><h4>${viajeInstance.equipaje == 1 ? 'Pequeño (bolsa o maletin)' : viajeInstance.equipaje == 2 ? 'Mediano (bolso hasta 15 kg)'  : 'Grande (valija)' }
+											<span id="equipaje-label" class="control-label">¿Se permite equipaje?</span><h4>${viajeInstance?.equipaje == 0 ? 'No' : viajeInstance.equipaje == 1 ? 'Pequeño (bolsa o maletín)' : viajeInstance.equipaje == 2 ? 'Mediano (bolso hasta 15 kg)'  : 'Grande (valija)' }
 											</h4>
 											
 										</div>
 																
 										
 										<div class="">
-											<span id="fumar-label" class="control-label">¿Se permite Fumar?</span><h4>${viajeInstance.fumar == true ? 'Si' : 'No'}
+											<span id="fumar-label" class="control-label">¿Se permite fumar?</span><h4>${viajeInstance.fumar == true ? 'Si' : 'No'}
 											</h4>
 											
 										</div>
@@ -195,7 +195,7 @@
 									
 										
 										<div class="">
-											<span id="mascota-label" class="control-label">¿Se permite Mascota?</span><h4>${viajeInstance.mascota == 1 ? 'Si' : 'No' }
+											<span id="mascota-label" class="control-label">¿Se permite mascota?</span><h4>${viajeInstance.mascota == 0 ? 'Si' : 'No' }
 											</h4>
 											
 										</div>
@@ -221,15 +221,11 @@
 										
 										<g:if test="${viajeInstance?.comentario}">
 										<div class="">
-											<span id="comentario-label" class=" control-label">Comentario del Conductor:</span>
+											<span id="comentario-label" class=" control-label">Comentario del conductor:</span>
 											<br>
 											<div class="">
-													
-												<textarea class="col-md-6" rows="4"
-													 readonly>
-													${viajeInstance?.comentario?.encodeAsHTML()}
-												</textarea>
-													<br>
+												<textarea class="col-md-6" rows="4" aria-labelledby="comentario-label" readonly >${viajeInstance?.comentario?.encodeAsHTML()}</textarea>
+											<br>
 											</div>
 										</div>
 									</g:if>								
@@ -295,7 +291,7 @@
 												value="${reservaInstance?.cant_plaz}" required="" />
 										<g:actionSubmit controller="reserva" name="create"  style="margin-left:0.5em !important;"
 												action="save_reserva" class="save btn btn-success"
-												value="reservar" /></span>
+												value="Reservar" /></span>
 									</div>
 								</div>
 							

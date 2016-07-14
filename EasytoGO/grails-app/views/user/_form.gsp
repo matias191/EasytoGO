@@ -95,25 +95,9 @@
 		</div>
 		</div>
 		
-			<div class="form-group">
- 				 <label class="col-md-4 control-label" for="selectbasic">Vehiculos</label>
-  					<div class="col-md-5">
-    				<select id="selectbasic" name="selectbasic" class="form-control">
-      				<g:each in="${userInstance?.vehiculos?}" var="v">
-      				<option value="v">${v?.modelo.marca.nombre.encodeAsHTML()} ${v?.modelo.nombre.encodeAsHTML()}</option>
-     				 </g:each>
-      				</select>
-  					</div>
-  					<div class="col-md-2">
-  					<g:form url="[resource:vehiculoInstance, action:'delete']" method="DELETE">	
-  					<g:link class="edit" action="edit" controller="Vehiculo" resource="${UserInstance}" value=""><span class="glyphicon glyphicon-edit">Editar</span></g:link>
-					</g:form>
-					</div>
-			</div>
-	</div>
-	<%--
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
+
+<%--<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 	<label for="password">
 		<g:message code="user.password.label" default="Contraseña" />
 		<span class="required-indicator">*</span>
@@ -157,5 +141,10 @@
 	<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
 
 </div>
+			
+	--%>
+	
+</div>
+	
+	
 
---%>

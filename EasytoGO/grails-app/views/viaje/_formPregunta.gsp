@@ -1,6 +1,6 @@
 <%@ page import="easytogo.Pregunta" %>
 
-<h3>Hazle una pregunta al conductor</h3>
+<h3 class="page-header">Hazle una pregunta al conductor</h3>
 <br>
 <br>
 <div class="fieldcontain ${hasErrors(bean: preguntaInstance, field: 'duda', 'error')} ">

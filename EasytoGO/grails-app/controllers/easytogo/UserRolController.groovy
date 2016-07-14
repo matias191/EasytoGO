@@ -4,8 +4,10 @@ package easytogo
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
+@Secured(['ROLE_ADMIN'])
 class UserRolController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -40,7 +42,8 @@ class UserRolController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'userRol.label', default: 'UserRol'), userRolInstance.id])
-                redirect userRolInstance
+                redirect action: "index", method: "GET"
+               // redirect userRolInstance
             }
             '*' { respond userRolInstance, [status: CREATED] }
         }
@@ -86,7 +89,8 @@ class UserRolController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'UserRol.label', default: 'UserRol'), userRolInstance.id])
-                redirect action:"index", method:"GET"
+                //redirect action:"index", method:"GET"
+                redirect userRolInstance
             }
             '*'{ render status: NO_CONTENT }
         }

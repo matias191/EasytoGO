@@ -55,13 +55,15 @@
 						
 						<g:sortableColumn property="destino" title="${message(code: 'viaje.destino.label', default: 'Destino')}" />
 					
-						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fechasalida')}" />
+						<g:sortableColumn property="fecha_salida" title="${message(code: 'viaje.fecha_salida.label', default: 'Fecha de salida')}" />
 					
 <%--						<g:sortableColumn property="fecha_llegada" title="${message(code: 'viaje.fecha_llegada.label', default: 'Fechallegada')}" />--%>
 					
-						<g:sortableColumn property="plazas_disponibles" title="${message(code: 'viaje.plazas_disponibles.label', default: 'Plazasdisponibles')}" />
+						<g:sortableColumn property="plazas_disponibles" title="${message(code: 'viaje.plazas_disponibles.label', default: 'Plazas disponibles')}" />
 					
-						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costoplaza')}" />
+						<g:sortableColumn property="costoplaza" title="${message(code: 'viaje.costoplaza.label', default: 'Costo por plaza')}" />
+						
+											<g:sortableColumn property="estado" title="${message(code: 'viaje.estado.label', default: 'Estado')}" />
 					
 <%--						<g:sortableColumn property="comentario" title="${message(code: 'viaje.comentario.label', default: 'Comentario')}" />--%>
 					
@@ -86,6 +88,7 @@
 						<td>${Viaje.plazas_disponibles}</td>
 					
 						<td>${Viaje.costoplaza}</td>
+						<td>${Viaje.estado}</td>
 					
 <%--						<td>${Viaje.comentario}</td>--%>
 					

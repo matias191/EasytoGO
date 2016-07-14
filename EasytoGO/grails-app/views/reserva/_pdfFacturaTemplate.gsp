@@ -32,7 +32,7 @@
         <tbody>
           <tr>
             <td>Viaje</td>
-            <td>Costo de gestion por viaje desde ${origen} Aires a ${destino}</td>
+            <td>Costo de gestion por viaje desde ${origen} a ${destino}</td>
             <td> ${costoGestion}</td>
             <td>${cantidad}</td>
             <td> ${costoGestion}</td>

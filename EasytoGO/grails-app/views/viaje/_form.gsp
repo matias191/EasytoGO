@@ -8,7 +8,7 @@
 			default="Origen" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input id="pac-input2" required="" class="form-control input-md" name="origen"  placeholder="Origen" value="${viajeInstance?.origen}" />
+			<input id="pac-input2" type="text" required="" class="form-control input-md" name="origen"  placeholder="Origen" value="${viajeInstance?.origen}" />
 			
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 			default="Plazas Disponibles" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<g:field name="plazas_disponibles" type="number"  min="1" max="3" value="${viajeInstance.plazas_disponibles}" required=""/>
+			<g:field name="plazas_disponibles" type="number"  min="1" max="3" value="${viajeInstance?.plazas_disponibles}" required=""/>
 		</div>
 		</div>
 	</div>
@@ -59,7 +59,7 @@
 			default="Costo de la Plaza" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input  class="form-control input-md" name="costoplaza" placeholder="Costo de la Plaza" value="${viajeInstance?.costoplaza}" />
+			<g:field type="number" min="1" max="1000" name="costoplaza" placeholder="Costo de la Plaza" value="${viajeInstance?.costoplaza}" />
 			</div>
 		</div>
 	</div>
@@ -69,8 +69,8 @@
 			default="¿Permite Equipaje?" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<g:select id="myselect" name="equipaje" value="${viajeInstance.equipaje}"
-         	 from="${[0: 'NINGUNO', 1: 'CHICO', 2: 'MEDIANO', 3: 'GRANDE']}"
+			<g:select id="myselect" name="equipaje" value="${viajeInstance?.equipaje}"
+         	 from="${[0: 'No', 1: 'Pequeño (bolsa o maletín)', 2: 'Mediano (bolso hasta 15 kg)', 3: 'Grande (valija)']}"
          	 optionKey="key" optionValue="value" />	
          	 </div>
 		</div>
@@ -97,7 +97,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-md-6">
-	<g:select id="myselect" name="mascota" value="${viajeInstance.mascota}"
+	<g:select id="myselect" name="mascota" value="${viajeInstance?.mascota}"
           from="${[0: 'SI', 1: 'NO']}"
           optionKey="key" optionValue="value" />
     </div>

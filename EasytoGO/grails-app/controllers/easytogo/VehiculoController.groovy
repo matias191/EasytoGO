@@ -86,10 +86,7 @@ class VehiculoController {
 
     request.withFormat {
       form multipartForm {
-        flash.message = message(code: 'default.updated.message', args: [
-          message(code: 'Vehiculo.label', default: 'Vehiculo'),
-          vehiculoInstance.id
-        ])
+        flash.message = "Has actualizado tu vehiculo correctamente."
         redirect vehiculoInstance
       }
       '*'{ respond vehiculoInstance, [status: OK] }
@@ -98,6 +95,9 @@ class VehiculoController {
 
   @Transactional
   def delete(Vehiculo vehiculoInstance) {
+    
+    def user = vehiculoInstance.user
+    
 
     if (vehiculoInstance == null) {
       notFound()
@@ -108,12 +108,10 @@ class VehiculoController {
 
     request.withFormat {
       form multipartForm {
-        flash.message = message(code: 'default.deleted.message', args: [
-          message(code: 'Vehiculo.label', default: 'Vehiculo'),
-          vehiculoInstance.id
-        ])
-        redirect action:"index", method:"GET"
-      }
+        flash.message = "Has eliminado tu vehiculo correctamente!"
+       // redirect action:"index", method:"GET"
+      redirect user
+        }
       '*'{ render status: NO_CONTENT }
     }
   }

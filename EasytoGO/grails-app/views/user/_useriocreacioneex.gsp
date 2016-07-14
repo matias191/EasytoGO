@@ -1,4 +1,5 @@
 <%@ page import="easytogo.User"%>
+
 <div class="container">
      <div class="form-group">
        	<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'nombre', 'error')} required controls">
@@ -6,7 +7,7 @@
 			default="Nombre" /> <span class="required-indicator">*</span>
 			</label>
 			<div class="col-md-6">
-			<input name="nombre" required="" value="${userInstance?.nombre}" class="form-control input-md" placeholder="Nombre"/>
+			<input name="nombre"  required="" value="${userInstance?.nombre}" class="form-control input-md" placeholder="Nombre"/>
 			</div>
 		</div>
 	</div>
@@ -122,4 +123,3 @@
 	 </div>	
 	</div>
  </div>
-  

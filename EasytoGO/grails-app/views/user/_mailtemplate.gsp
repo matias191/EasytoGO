@@ -6,6 +6,6 @@
 
     
     
-    <h5>No respondas a este e-mail. Ante cualquier consulta escríbenos a support@easytogo.com.ar</h5>
+    <h5>No respondas a este e-mail. Ante cualquier consulta escríbenos a easytogo.viajescompartidos@gmail.com</h5>
     
 </div>

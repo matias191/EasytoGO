@@ -22,7 +22,7 @@
     		
   		    <input type="submit" class="buttons" value="Añadir" />
   			</g:uploadForm>
-			<h1>Editar mi maquina</h1>
+			<h1>Editar mi vehículo</h1>
 			<g:if test="${flash.message}">
 			<div class="alert alert-success" role="alert">${flash.message}</div>
 			</g:if>

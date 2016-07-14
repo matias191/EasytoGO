@@ -1,6 +1,7 @@
 <%@ page import="easytogo.Calificacion"%>
 <%@ page import="easytogo.Viaje"%>
 <%@ page import="easytogo.Reserva"%>
+<%@ page import="easytogo.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 <body>
 	<div class="container">
 		<div id="show-viaje" class="content scaffold-show" role="main">
-			<h1 class="page-header">Califica tu Compañero</h1>
+			<h1 class="page-header">Califica tu compañero</h1>
 			<g:if test="${flash.message}">
 				<div class="alert alert-success" role="alert">
 					${flash.message}
@@ -29,7 +30,7 @@
 			<div
 				class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'calificado', 'error')} required">
 				<label for="calificado" class=""> <span
-					class="required-indicator">Compañero a Calificar</span>
+					class="required-indicator">Usuario a calificar:</span>
 				</label>
 				<h4>
 					${usuario.username}
@@ -42,8 +43,7 @@
 					url="[resource:calificacionInstance, controller:'calificacion', action:'save']">
 
 
-					<div
-						class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'calificador', 'error')} required">
+					<div class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'calificador', 'error')} required">
 
 						<g:hiddenField name="calificador" required=""
 							value="${sec.loggedInUserInfo(field:'id')}" class="many-to-one" />
@@ -52,6 +52,8 @@
 
 					<g:hiddenField name="calificado.id" required=""
 						value="${usuario.id}" class="many-to-one" />
+						
+						
 					<div class="row">
 						<div class="form-group">
 							<div
@@ -61,15 +63,15 @@
 										default="Comentario" /> <span class="required-indicator">*</span>
 								</label>
 								<div class="col-md-6">
-									<textarea name="comentario" class="form-control"
-										value="${calificacionInstance?.comentario}" rows="4" required="required"> </textarea>
+									<g:textArea name="comentario" class="form-control"
+										value="${calificacionInstance?.comentario}" rows="4" required="required"/> 
 								</div>
 							</div>
 						</div>
 						<br> <br>
 					</div>
 					<div>
-						<g:hiddenField name="reserva.id" required="" value="${reserva.id}" />
+<%--						<g:hiddenField name="reserva.id" required="" value="${reserva.id}" />--%>
 						<g:hiddenField name="calificacion.id" required=""
 							value="${calificacionInstance?.id}" />
 					</div>
@@ -104,12 +106,20 @@
 							class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'viaje_c', 'error')} required">
 
 							<g:hiddenField name="viaje_c.id" required=""
-								value="${reserva.viajes.id}" class="many-to-one" />
-
+								value="${reserva.id}" class="many-to-one" />
+<%--								value="${reserva.viajes.id}" class="many-to-one" />								--%>
+						</div>
+						
+						<%--<div class="fieldcontain ${hasErrors(bean: calificacionInstance, field: 'viaje_c', 'error')} required">
+						<label for="viaje_c">
+						<g:message code="calificacion.viaje_c.label" default="Viajec" />
+						<span class="required-indicator">*</span>
+						</label>
+						<g:textField name="viaje_c.id" required="" value="${calificacionInstance.viaje_c}" class="many-to-one"/>
 
 						</div>
 
-						<div class="row">
+						--%><div class="row">
 							<div class="form-group">
 								<br> <br> <label for="valor"
 									class="col-md-2 control-label"> <span></span>

@@ -14,11 +14,11 @@
 			 <div class="container">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Administracion <small>Reportes</small>
+                            Administración <small>Reportes</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Este Apartado  muestra los reportes relevantes del sistema
+                                <i class="fa fa-dashboard"></i> Este apartado  muestra los reportes relevantes del sistema
                             </li>
                         </ol>
                     </div>
@@ -28,7 +28,7 @@
 <g:if test="${flash.message}">
 <div class="alert alert-success" role="alert">${flash.message}</div>
 </g:if>
-<h3 class="page-header">Selecciona el Rango de fechas</h3>
+<h3 class="page-header">Selecciona el rango de fechas</h3>
 <div class="panel panel-default">
 			<div class="panel-body">
 <fieldset>
@@ -65,8 +65,13 @@
 			<label for="fecha_desde" class="col-md-4 control-label"> <g:message code="fecha_desde"
 			default="Fecha Desde" /> 
 			</label>
-			<div class="col-md-6">
-			<g:datePicker  name="fechadesde" precision="day" class="form-control input-md" value="${params.fechadesde}" />
+<%--			<div class="col-md-6">--%>
+<%--			<g:datePicker name="desde" precision="day" class="form-control input-md" value="${params.desde}"  />  --%>
+<%--			</div>--%>
+			<div class="fieldcontain" style="margin-top:0.3em; padding: 0 25% 0 25%;" >						
+						       <div class="input-group date input-group-sm col-lg-12" >
+      							<input id="date" type="text" class="form-control" name="desde" value="${params.desde}" placeholder="Fecha de Viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+    						   </div>
 			</div>
 		</div>
 		</div>
@@ -75,8 +80,13 @@
 			<label for="fecha_hasta" class="col-md-4 control-label"> <g:message code="fecha_hasta"
 			default="Fecha Hasta" /> 
 			</label>
-			<div class="col-md-6">
-			<g:datePicker  name="fechahasta" precision="day" class="form-control input-md" value="${params.fechahasta}" />
+<%--			<div class="col-md-6">--%>
+<%--			<g:datePicker name="hasta" precision="day" class="form-control input-md" value="${params.hasta}"  />  --%>
+<%--			</div>--%>
+			<div class="fieldcontain" style="margin-top:0.3em; padding: 0 25% 0 25%;" >						
+						       <div class="input-group date input-group-sm col-lg-12" >
+      							<input id="date" type="text" class="form-control" name="hasta" value="${params.hasta}" placeholder="Fecha de Viaje"><span class="input-group-addon" ><i class="glyphicon glyphicon-th"></i></span>
+    						   </div>
 			</div>
 		</div>
 	</div>
@@ -100,6 +110,11 @@
 <h3 class="page-header">Cantidad de viajes con Origen</h3>
 <br>
 <center>
+<div id=piechart4></div>
+<gvisualization:pieCoreChart dynamicLoading="${true}" elementId="piechart4" title="${titulo3}"
+ width="${450}" height="${300}" columns="${columnas3}" data="${datos3}" />
+ </center>
+<center>
 <div id=piechart1></div>
 <gvisualization:pieCoreChart dynamicLoading="${true}" elementId="piechart1" title="${titulo}"
  width="${450}" height="${300}" columns="${columnas}" data="${datos}" />
@@ -117,6 +132,12 @@
 <div id=piechart3></div>
 <gvisualization:pieCoreChart dynamicLoading="${true}" elementId="piechart3" title="${titulo2}"
  width="${450}" height="${300}" columns="${columnas2}" data="${datos2}" />
+</center>
+
+<center>
+<div id=linechart></div>
+<gvisualization:lineCoreChart dynamicLoading="${true}" elementId="linechart" title="${titulo4}"
+ width="${450}" height="${300}" columns="${columnas4}" data="${datos4}" />
 </center>
 
 
